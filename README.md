@@ -7,3 +7,7 @@
 </p>
 
 If you want to learn more about what **Spuddy** is & what it will become in the future, checkout [Meet Spuddy 🥔](https://psimk.dev/posts/meet-spuddy/)
+
+---
+
+[![.github/workflows/deploy.yml](https://github.com/psimk/spuddy/actions/workflows/deploy.yml/badge.svg)](https://github.com/psimk/spuddy/actions/workflows/deploy.yml)
