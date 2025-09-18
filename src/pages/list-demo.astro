@@ -1,0 +1,18 @@
+---
+import ListItem from "../components/ListItem.astro";
+import Root from "../layouts/Root.astro";
+---
+
+<Root>
+  <main class="min-h-screen">
+    <div class="p-4">
+      <ul class="flex flex-col gap-1">
+        {
+          Array.from({ length: 100 }).map((_, i) => (
+            <ListItem value={`Item ${i + 1}`} />
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+</Root>

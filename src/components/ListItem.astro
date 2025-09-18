@@ -1,0 +1,15 @@
+---
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+---
+
+<li>
+  <textarea
+    id="list-item"
+    class="bg-base-200 h-11 w-full resize-none rounded-lg p-2 text-lg"
+    >{value}</textarea
+  >
+</li>
