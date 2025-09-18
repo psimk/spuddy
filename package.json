@@ -15,6 +15,7 @@
   "devDependencies": {
     "@astrojs/cloudflare": "^12.6.8",
     "@astrojs/react": "^4.3.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.13",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
