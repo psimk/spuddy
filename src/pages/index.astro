@@ -3,14 +3,31 @@ import Root from "../layouts/Root.astro";
 ---
 
 <Root>
-  <main class="prose grid min-h-screen place-items-center">
-    <div class="text-center">
-      <h1>Spuddy 🥔 is being built</h1>
-      <p>
+  <main class="prose flex flex-col items-center justify-center min-h-screen mx-auto">
+    <section class="text-center max-w-2xs">
+      <h1 class="m-0">Spuddy 🥔</h1>
+      <p class="mb-0">
         follow the journey in on <a href="https://psimk.dev/tags/spuddy/"
           >psimk.dev</a
+        >,
+        <br />
+        checkout some of the demos:
+      </p>
+      <div class="grid place-items-center">
+        <ul class="text-left !m-0">
+          <li>
+            <a href="/list-demo">List Demo</a>
+          </li>
+          <li>
+            <a href="/emoji-suffix-demo">Automated Emoji Suffix Demo</a>
+          </li>
+        </ul>
+      </div>
+      <p class="!m-0">
+        or clone the code on Github: <a href="https://github.com/psimk/spuddy"
+          >psimk/spuddy</a
         >
       </p>
-    </div>
+    </section>
   </main>
 </Root>
