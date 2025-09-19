@@ -1,14 +1,20 @@
 // @ts-check
-import astroPwa from '@vite-pwa/astro'
+import astroPwa from "@vite-pwa/astro";
 import { defineConfig, fontProviders } from "astro/config";
 
 import react from "@astrojs/react";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import partytown from "@astrojs/partytown";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), astroPwa()],
+  integrations: [
+    react(),
+    astroPwa(),
+    partytown({ config: { forward: ["dataLayer.push"] } }),
+  ],
   experimental: {
     fonts: [
       {
