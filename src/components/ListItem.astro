@@ -1,15 +1,27 @@
 ---
+
 interface Props {
+  id: string;
   value: string;
+  prefix?: string;
 }
 
-const { value } = Astro.props;
+const { id, value, prefix } = Astro.props;
 ---
 
-<li>
+<li class="leading-0 textarea min-h-11 p-2 w-full rounded-lg flex gap-2 text-lg">
+  <div class="flex items-center pointer-events-none">
+    <span class="text-lg">
+      {prefix}
+    </span>
+  </div>
   <textarea
-    id="list-item"
-    class="bg-base-200 h-11 w-full resize-none rounded-lg p-2 text-lg"
-    >{value}</textarea
-  >
+    id={id}
+    class="bg-base-300 w-full resize-none leading-normal field-sizing-content"
+  >{value}</textarea>
+  <div class="flex items-center pointer-events-none">
+    <span class="text-lg">
+      <slot name="suffix" />
+    </span>
+  </div>
 </li>
