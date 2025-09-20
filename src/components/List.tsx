@@ -1,8 +1,11 @@
-import SortableListItem from "./SortableListItem";
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { AnimatePresence } from "motion/react";
-import DragOverlayListItem from "./DragOverlayListItem";
+
 import useLocalStorageDragItems from "../hooks/use-local-storage-drag-items";
+import dragDropManager from "../singletons/drag-drop-manager";
+
+import SortableListItem from "./SortableListItem";
+import DragOverlayListItem from "./DragOverlayListItem";
 
 type Product = {
   id: string;
@@ -19,7 +22,7 @@ export default function List({ products }: Props) {
   );
 
   return (
-    <DragDropProvider {...listeners}>
+    <DragDropProvider manager={dragDropManager} {...listeners}>
       <ul className="flex flex-col gap-3">
         {items.map((product, index) => (
           <SortableListItem

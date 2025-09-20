@@ -29,6 +29,7 @@ export default memo(
     { id, defaultValue, prefix, onChange, suffix, ...props }: Props,
     ref: Ref<HTMLLIElement>,
   ) {
+    const globalDragging = useGlobalDragging();
     const [value, setValue] = useState(defaultValue);
 
     const handleChange = useCallback((newValue: string) => {
@@ -51,7 +52,10 @@ export default memo(
         )}
         <AutoHeightTextArea
           id={id}
-          className="bg-base-300 w-full touch-pan-y resize-none leading-normal whitespace-pre"
+          className={`${
+            // there's a bug in dnd-kit/chrome that causes inputs to focus during drag
+            globalDragging ? "pointer-events-none" : ""
+          } bg-base-300 w-full touch-pan-y resize-none leading-normal whitespace-pre`}
           onChange={handleChange}
           value={value}
         />
