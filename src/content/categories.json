@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "emoji": "🍎",
+    "title": {
+      "en": "Fresh Fruits",
+      "lt": "Šviežūs vaisiai"
+    }
+  },
+  {
+    "id": 2,
+    "emoji": "🥕",
+    "title": {
+      "en": "Fresh Vegetables",
+      "lt": "Šviežios daržovės"
+    }
+  },
+  {
+    "id": 3,
+    "emoji": "🍞",
+    "title": {
+      "en": "Bakery & Bread",
+      "lt": "Kepyklos gaminiai"
+    }
+  },
+  {
+    "id": 4,
+    "emoji": "🥛",
+    "title": {
+      "en": "Dairy & Eggs",
+      "lt": "Pieno produktai ir kiaušiniai"
+    }
+  },
+  {
+    "id": 5,
+    "emoji": "🥩",
+    "title": {
+      "en": "Meat & Poultry",
+      "lt": "Mėsa ir paukštiena"
+    }
+  },
+  {
+    "id": 6,
+    "emoji": "🐟",
+    "title": {
+      "en": "Seafood",
+      "lt": "Jūros gėrybės"
+    }
+  },
+  {
+    "id": 7,
+    "emoji": "🥫",
+    "title": {
+      "en": "Canned & Packaged",
+      "lt": "Konservai ir pakuotė"
+    }
+  },
+  {
+    "id": 8,
+    "emoji": "🍝",
+    "title": {
+      "en": "Pasta & Grains",
+      "lt": "Makaronai ir grūdai"
+    }
+  },
+  {
+    "id": 9,
+    "emoji": "🥜",
+    "title": {
+      "en": "Nuts & Seeds",
+      "lt": "Riešutai ir sėklos"
+    }
+  },
+  {
+    "id": 10,
+    "emoji": "🍯",
+    "title": {
+      "en": "Condiments & Spices",
+      "lt": "Prieskoniai ir padažai"
+    }
+  },
+  {
+    "id": 11,
+    "emoji": "🍰",
+    "title": {
+      "en": "Desserts & Sweets",
+      "lt": "Desertai ir saldumynai"
+    }
+  },
+  {
+    "id": 12,
+    "emoji": "🧊",
+    "title": {
+      "en": "Frozen Foods",
+      "lt": "Šaldyti produktai"
+    }
+  },
+  {
+    "id": 13,
+    "emoji": "☕",
+    "title": {
+      "en": "Beverages",
+      "lt": "Gėrimai"
+    }
+  },
+  {
+    "id": 14,
+    "emoji": "🍽️",
+    "title": {
+      "en": "Ready Meals",
+      "lt": "Paruošti patiekalai"
+    }
+  },
+  {
+    "id": 15,
+    "emoji": "🥣",
+    "title": {
+      "en": "Breakfast & Cereals",
+      "lt": "Pusryčiai ir dribsniai"
+    }
+  },
+  {
+    "id": 16,
+    "emoji": "🧴",
+    "title": {
+      "en": "Oils & Vinegars",
+      "lt": "Aliejai ir actai"
+    }
+  },
+  {
+    "id": 17,
+    "emoji": "🍼",
+    "title": {
+      "en": "Baby Food",
+      "lt": "Kūdikių maistas"
+    }
+  },
+  {
+    "id": 18,
+    "emoji": "🌱",
+    "title": {
+      "en": "Organic & Health",
+      "lt": "Ekologiški ir sveiki produktai"
+    }
+  },
+  {
+    "id": 19,
+    "emoji": "🌍",
+    "title": {
+      "en": "International Foods",
+      "lt": "Tarptautiniai produktai"
+    }
+  },
+  {
+    "id": 20,
+    "emoji": "🥤",
+    "title": {
+      "en": "Snacks & Chips",
+      "lt": "Užkandžiai ir traškučiai"
+    }
+  }
+]

@@ -2,10 +2,11 @@ import { defineCollection, z } from "astro:content";
 
 import { file } from "astro/loaders";
 
-const productsWithEmojis = defineCollection({
-  loader: file("./src/content/products-with-emojis.json"),
+const products = defineCollection({
+  loader: file("./src/content/products.json"),
   schema: z.object({
     emoji: z.string(),
+    categoryId: z.number(),
     variants: z.object({
       en: z.array(z.string()),
       lt: z.array(z.string()),
@@ -13,4 +14,15 @@ const productsWithEmojis = defineCollection({
   }),
 });
 
-export const collections = { productsWithEmojis };
+const categories = defineCollection({
+  loader: file("./src/content/categories.json"),
+  schema: z.object({
+    emoji: z.string(),
+    title: z.object({
+      en: z.string(),
+      lt: z.string(),
+    }),
+  }),
+});
+
+export const collections = { products, categories };
