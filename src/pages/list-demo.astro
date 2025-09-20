@@ -1,26 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import {  Grip } from '@lucide/astro';
+import { getCollection } from "astro:content";
 
-import ListItem from "../components/ListItem.astro";
+import ListItem from "../components/ListItem";
 import Root from "../layouts/Root.astro";
 
-const products = await getCollection('productsWithEmojis');
+const products = await getCollection("productsWithEmojis");
 ---
 
 <Root>
-  <main class="min-h-screen max-w-xl mx-auto">
+  <main class="mx-auto min-h-screen max-w-xl">
     <div class="p-4">
       <ul class="flex flex-col gap-3">
         {
-          products.map(product => (
-            <ListItem 
+          products.map((product) => (
+            <ListItem
               id={product.id}
-              value={product.data.variants.en[0]}
+              defaultValue={product.data.variants.en[0]}
               prefix={product.data.emoji}
-             >
-              <Grip slot="suffix"/>
-            </ListItem>
+            />
           ))
         }
       </ul>

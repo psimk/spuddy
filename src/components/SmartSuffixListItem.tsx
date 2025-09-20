@@ -1,16 +1,17 @@
 import Fuse from "fuse.js";
-import { Grip } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type ComponentProps } from "react";
+import ListItem from "./ListItem";
 
 type Product = {
   emoji: string;
   variants: { en: ReadonlyArray<string>; lt: ReadonlyArray<string> };
 };
 
-type Props = {
-  id: string;
+type Props = Omit<ComponentProps<typeof ListItem>, "prefix" | "onChange"> & {
   products: ReadonlyArray<Product>;
 };
+
+const DEFAULT_EMOJI = "❓";
 
 function findClosestEmoji(
   value: string,
@@ -21,50 +22,29 @@ function findClosestEmoji(
     keys: ["variants.en", "variants.lt"],
     isCaseSensitive: true,
     ignoreDiacritics: true,
+    threshold: 0.3,
   });
 
-  const [result, ...restResults] = fuse.search(value);
-
-  console.log({ result, restResults });
+  const [result] = fuse.search(value);
 
   return result?.item.emoji ?? null;
 }
 
-export default function SmartSuffixListItem({ id, products }: Props) {
-  const [value, setValue] = useState("");
-  const [prefix, setPrefix] = useState<string | null>(null);
+export default function SmartSuffixListItem({ products, ...props }: Props) {
+  const [prefix, setPrefix] = useState<string>(DEFAULT_EMOJI);
 
   const handleChange = useCallback(
     (newValue: string) => {
-      setValue(newValue);
-
       if (newValue.trim() === "") {
-        setPrefix(null);
+        setPrefix(DEFAULT_EMOJI);
         return;
       }
 
       const closestEmoji = findClosestEmoji(newValue, products);
-      setPrefix(closestEmoji);
+      setPrefix(closestEmoji ?? DEFAULT_EMOJI);
     },
     [products],
   );
 
-  console.log({ prefix });
-
-  return (
-    <li className="textarea flex min-h-11 w-full gap-2 rounded-lg p-2 text-lg leading-0">
-      <div className="pointer-events-none flex items-center">
-        <span className="text-lg w-6 h-6 text-center">{prefix}</span>
-      </div>
-      <textarea
-        id={id}
-        className="bg-base-300 field-sizing-content w-full resize-none leading-normal"
-        onChange={(event) => handleChange(event.target.value)}
-        value={value}
-      />
-      <div className="justfiy-center pointer-events-none flex h-auto items-center">
-        <Grip />
-      </div>
-    </li>
-  );
+  return <ListItem prefix={prefix} onChange={handleChange} {...props} />;
 }
