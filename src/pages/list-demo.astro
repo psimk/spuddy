@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 
-import ListItem from "../components/ListItem";
 import Root from "../layouts/Root.astro";
+import List from "../components/List";
+import SortableListItem from "../components/SortableListItem";
 
 const products = await getCollection("productsWithEmojis");
 ---
@@ -10,17 +11,13 @@ const products = await getCollection("productsWithEmojis");
 <Root>
   <main class="mx-auto min-h-screen max-w-xl">
     <div class="p-4">
-      <ul class="flex flex-col gap-3">
-        {
-          products.map((product) => (
-            <ListItem
-              id={product.id}
-              defaultValue={product.data.variants.en[0]}
-              prefix={product.data.emoji}
-            />
-          ))
-        }
-      </ul>
+      <List
+        client:only
+        products={products.map((product) => ({
+          id: product.id,
+          ...product.data,
+        }))}
+      />
     </div>
   </main>
 </Root>
