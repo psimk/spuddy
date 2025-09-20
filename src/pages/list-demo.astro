@@ -3,13 +3,12 @@ import { getCollection } from "astro:content";
 
 import Root from "../layouts/Root.astro";
 import List from "../components/List";
-import SortableListItem from "../components/SortableListItem";
 
 const products = await getCollection("productsWithEmojis");
 ---
 
 <Root>
-  <main class="mx-auto min-h-screen max-w-xl">
+  <main class="mx-auto min-h-screen max-w-xl overflow-x-hidden">
     <div class="p-4">
       <List
         client:only
