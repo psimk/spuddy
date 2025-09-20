@@ -8,6 +8,7 @@ import {
   type ReactNode,
   type Ref,
 } from "react";
+import AutoHeightTextArea from "./AutoHeighTextArea";
 
 type Props = {
   id: string;
@@ -34,9 +35,9 @@ export default memo(
 
     return (
       <motion.li
-        ref={ref}
         {...props}
-        className={`${props.className} textarea flex min-h-11 w-full touch-none gap-2 rounded-lg p-2 text-lg leading-0 data-dragging:shadow-none data-dragging:ring-0 data-dragging:outline-0`}
+        ref={ref}
+        className={`${props.className} textarea flex min-h-11 w-full touch-none gap-2 rounded-lg p-2 text-lg leading-0 disabled:shadow-none disabled:ring-0 disabled:outline-0`}
       >
         {prefix && (
           <div className="pointer-events-none flex items-center">
@@ -45,10 +46,10 @@ export default memo(
             </span>
           </div>
         )}
-        <textarea
+        <AutoHeightTextArea
           id={id}
-          className="bg-base-300 field-sizing-content w-full resize-none leading-normal"
-          onChange={(event) => handleChange(event.target.value)}
+          className="bg-base-300 w-full touch-pan-y resize-none leading-normal whitespace-pre"
+          onChange={handleChange}
           value={value}
         />
         {suffix}

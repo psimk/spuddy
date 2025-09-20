@@ -14,10 +14,10 @@ export default function SortableListItem({ id, index, ...props }: Props) {
 
   return (
     <ListItem
+      {...props}
       id={id}
       ref={ref}
       disabled={isDragging}
-      data-dragging={isDragging || undefined}
       suffix={
         !isDragging && (
           <div
@@ -28,7 +28,6 @@ export default function SortableListItem({ id, index, ...props }: Props) {
           </div>
         )
       }
-      {...props}
     />
   );
 }
