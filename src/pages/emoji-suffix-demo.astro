@@ -1,20 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 import Root from "../layouts/Root.astro";
-import SmartSuffixListItem from '../components/SmartSuffixListItem';
+import SmartSuffixListItem from "../components/SmartSuffixListItem";
 
-const products = await getCollection('productsWithEmojis');
+const products = await getCollection("productsWithEmojis");
 ---
 
 <Root>
-  <main class="min-h-screen p-4 max-w-xl mx-auto grid place-items-center">
+  <main class="mx-auto grid min-h-screen max-w-xl place-items-center p-4">
     <ul class="w-full">
       <SmartSuffixListItem
         client:load
         id="demo-item"
-        products={products.map(product => ({
+        products={products.map((product) => ({
           variants: product.data.variants,
-          emoji: product.data.emoji
+          emoji: product.data.emoji,
         }))}
       />
     </ul>
