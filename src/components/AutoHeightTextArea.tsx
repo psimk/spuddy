@@ -15,10 +15,10 @@ type Props = {
   onChange?: (text: string) => void;
 } & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "style">;
 
-export default function AutoHeightTextArea({
-  onChange,
-  ...rest
-}: Props) {
+/**
+ * A [field-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing) ponyfill
+ */
+export default function AutoHeightTextArea({ onChange, ...rest }: Props) {
   const textElementRef = useRef<HTMLTextAreaElement>(null);
 
   useLayoutEffect(() => {

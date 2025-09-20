@@ -8,7 +8,10 @@ import {
   type ReactNode,
   type Ref,
 } from "react";
-import AutoHeightTextArea from "./AutoHeighTextArea";
+
+import useGlobalDragging from "../hooks/useGlobalDragging";
+
+import AutoHeightTextArea from "./AutoHeightTextArea";
 
 type Props = {
   id: string;
