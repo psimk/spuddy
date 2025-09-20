@@ -9,7 +9,7 @@ const products = await getCollection("products");
 
 <Root>
   <main class="mx-auto min-h-screen max-w-xl overflow-x-hidden">
-    <div class="p-4">
+    <div class="overflow-y-hidden p-4">
       <List
         client:only
         products={products.map((product) => ({
