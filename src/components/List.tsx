@@ -16,7 +16,7 @@ type Product = {
 type Props = { className?: string; products: Array<Product> };
 
 export default function List({ products }: Props) {
-  const { items, listeners } = useLocalStorageDragItems(
+  const { items, removeItem, listeners } = useLocalStorageDragItems(
     "product-order",
     products,
   );
@@ -24,15 +24,19 @@ export default function List({ products }: Props) {
   return (
     <DragDropProvider manager={dragDropManager} {...listeners}>
       <ul className="flex flex-col gap-3">
-        {items.map((product, index) => (
-          <SortableListItem
-            key={product.id}
-            id={product.id}
-            index={index}
-            prefix={product.emoji}
-            defaultValue={product.variants.en[0]}
-          />
-        ))}
+        <AnimatePresence>
+          {items.map((product, index) => (
+            <SortableListItem
+              key={product.id}
+              id={product.id}
+              index={index}
+              prefix={product.emoji}
+              defaultValue={product.variants.en[0]}
+              onSwipeLeft={() => removeItem(product.id)}
+              onSwipeRight={() => removeItem(product.id)}
+            />
+          ))}
+        </AnimatePresence>
       </ul>
 
       <AnimatePresence>

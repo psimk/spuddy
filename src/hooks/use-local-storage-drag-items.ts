@@ -24,8 +24,13 @@ export default function useLocalStorageDragItems<T extends { id: string }>(
     setItems(snapshot.current);
   }, []);
 
+  const removeItem = useCallback((id: string) => {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }, []);
+
   return {
     items,
+    removeItem,
     listeners: { onDragStart, onDragOver, onDragEnd },
   };
 }
