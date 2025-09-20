@@ -3,9 +3,9 @@ import { Grip } from "lucide-react";
 
 import { useSortable } from "@dnd-kit/react/sortable";
 
-import ListItem from "./ListItem";
+import SwipeListItem from "./SwipeListItem";
 
-type Props = Omit<ComponentProps<typeof ListItem>, "suffix"> & {
+type Props = Omit<ComponentProps<typeof SwipeListItem>, "suffix"> & {
   index: number;
 };
 
@@ -13,7 +13,7 @@ export default function SortableListItem({ id, index, ...props }: Props) {
   const { ref, isDragging, handleRef } = useSortable({ id, index });
 
   return (
-    <ListItem
+    <SwipeListItem
       {...props}
       id={id}
       ref={ref}
