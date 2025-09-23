@@ -12,7 +12,7 @@ type Props = {
 export default function Navigation({ posts }: Props) {
   return (
     <div className="flex flex-1 flex-col">
-      <section>
+      <section className="mx-auto">
         <ul className="flex">
           {[posts[0]].map(({ id, content = "" }) => (
             <li

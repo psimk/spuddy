@@ -8,7 +8,7 @@ const posts = await getCollection("posts");
 ---
 
 <Root>
-  <main class="mx-auto flex min-h-screen max-w-xl">
+  <main class="flex min-h-screen">
     <Navigation
       client:only
       posts={posts.map((post) => ({

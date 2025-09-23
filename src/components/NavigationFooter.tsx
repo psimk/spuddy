@@ -1,69 +1,25 @@
+import { useCallback, useMemo, useRef, useState } from "react";
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
 import {
+  animate,
   motion,
   MotionConfig,
-  useMotionValueEvent,
-  useScroll,
-  type Transition,
+  useMotionValue,
+  type PanInfo,
 } from "motion/react";
-import { useCallback, useState } from "react";
 
-const TRANSITION_CONFIG = {
-  type: "spring",
-  stiffness: 300,
-  damping: 30,
-  mass: 0.8,
-} satisfies Transition;
-
-const FOOTER_VARIANTS = {
-  up: { y: 0 },
-  down: { y: 90, backgroundColor: "#f8f8f8" },
-};
-
-const INPUT_WRAPPER_VARIANTS = {
-  up: {},
-  down: { paddingTop: 0 },
-};
-
-const INPUT_VARIANTS = {
-  up: { fontSize: "1.875rem" },
-  down: {
-    height: "4rem",
-    fontSize: "1.25rem",
-    border: "none",
-    backgroundColor: "transparent",
-    boxShadow: "none",
-  },
-};
-
-const NAV_VARIANTS = {
-  up: { y: 0 },
-  down: { y: 100 },
-};
+import useScrollDirection from "../hooks/useScrollDirection";
+import {
+  TRANSITION_CONFIG,
+  FOOTER_VARIANTS,
+  INPUT_WRAPPER_VARIANTS,
+  INPUT_VARIANTS,
+  NAV_VARIANTS,
+} from "./NavigationFooter.motion";
 
 export default function NavigationFooter() {
-  const { scrollY } = useScroll();
-
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
-  const [scrollDirectionLock, setScrollDirectionLock] = useState(false);
-
-  useMotionValueEvent(scrollY, "change", (current) => {
-    if (scrollDirectionLock) return;
-    const previous = scrollY?.getPrevious() ?? 0;
-    const diff = current - previous;
-
-    // Configuration
-    const minDistance = 15; // Minimum pixels to scroll before changing direction
-    const minVelocity = 10; // Minimum velocity threshold
-
-    // Calculate velocity (you might want to smooth this over multiple frames)
-    const velocity = Math.abs(diff);
-
-    // Only update direction if we meet the thresholds
-    if (Math.abs(diff) > minDistance || velocity > minVelocity) {
-      setScrollDirection(diff > 0 ? "down" : "up");
-    }
-  });
+  const { scrollDirection, setScrollDirection, setScrollDirectionLock } =
+    useScrollDirection();
 
   const handleFocus = useCallback(() => {
     setScrollDirection("up");
@@ -74,35 +30,94 @@ export default function NavigationFooter() {
     setScrollDirectionLock(false);
   }, []);
 
+  const x = useMotionValue(0);
+
+  const [firstInputWrapperElement, setFirstInputWrapperElement] =
+    useState<HTMLLIElement | null>(null);
+
+  const firstInputWrapperWidth = useMemo(() => {
+    if (!firstInputWrapperElement) return 0;
+
+    return firstInputWrapperElement.getBoundingClientRect().width;
+  }, [firstInputWrapperElement]);
+
+  const currentIndex = useRef(0);
+
+  const move = useCallback(
+    (index: number, velocity: number) =>
+      animate(x, -(index * (firstInputWrapperWidth + 16)), {
+        ...TRANSITION_CONFIG,
+        velocity,
+      }),
+    [x, firstInputWrapperWidth],
+  );
+
+  const handleDragEnd = useCallback(
+    (_: unknown, { velocity, delta, offset }: PanInfo) => {
+      console.log(offset);
+      if (Math.abs(offset.x) < 50) return;
+      if (Math.sign(offset.x) === 1) {
+        currentIndex.current = Math.max(0, currentIndex.current - 1);
+      } else {
+        currentIndex.current = Math.min(4, currentIndex.current + 1);
+      }
+      move(currentIndex.current, velocity.x);
+    },
+    [x, firstInputWrapperWidth],
+  );
+
   return (
     <MotionConfig transition={TRANSITION_CONFIG}>
       <motion.footer
         variants={FOOTER_VARIANTS}
         animate={scrollDirection}
-        className="bg-base-200/5 sticky bottom-0 backdrop-blur-2xl"
+        className="bg-base-200/5 sticky bottom-0 flex flex-col items-center justify-center overflow-hidden pt-24 backdrop-blur-2xl"
       >
-        <motion.div
-          variants={INPUT_WRAPPER_VARIANTS}
+        <div className="mx-auto w-full max-w-2xl">
+          <motion.ul
+            drag="x"
+            style={{ x }}
+            dragDirectionLock
+            dragConstraints={{
+              left: -(firstInputWrapperWidth * 4) - 48,
+              right: 0,
+            }}
+            onDragEnd={handleDragEnd}
+            className="absolute bottom-20 flex gap-4"
+          >
+            {Array.from({ length: 5 }).map((_, index) => (
+              <motion.li
+                key={index}
+                variants={INPUT_WRAPPER_VARIANTS}
+                animate={scrollDirection}
+                ref={setFirstInputWrapperElement}
+                className={`grid place-items-center pt-4 pb-2 ${index === 0 ? "pl-13" : ""}`}
+              >
+                <motion.input
+                  type="text"
+                  placeholder="Type something"
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  initial={false}
+                  variants={INPUT_VARIANTS}
+                  className="input bg-base-300/50 h-18 w-142 rounded-2xl text-center text-3xl shadow-xl"
+                />
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
+        <motion.nav
+          variants={NAV_VARIANTS}
           animate={scrollDirection}
-          className="px-12 pt-4 pb-2"
+          className="mx-auto w-full max-w-2xl"
         >
-          <motion.input
-            type="text"
-            placeholder="Type something"
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            variants={INPUT_VARIANTS}
-            className="input bg-base-300/50 h-18 w-full max-w-2xl rounded-2xl text-center text-3xl shadow-xl"
-          />
-        </motion.div>
-        <motion.nav variants={NAV_VARIANTS} animate={scrollDirection}>
           <ul className="flex justify-between gap-4 p-4 px-8">
             <li>
               <button
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <ChevronLeft size={48} className="text-secondary/75" />
+                <ChevronLeft size={40} className="text-secondary/75" />
               </button>
             </li>
 
@@ -111,7 +126,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <ChevronRight size={48} className="text-secondary/75" />
+                <ChevronRight size={40} className="text-secondary/75" />
               </button>
             </li>
 
