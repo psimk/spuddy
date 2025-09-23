@@ -25,4 +25,11 @@ const categories = defineCollection({
   }),
 });
 
-export const collections = { products, categories };
+const websites = defineCollection({
+  loader: file("./src/content/websites.json"),
+  schema: z.object({
+    url: z.string(),
+  }),
+});
+
+export const collections = { products, categories, websites };

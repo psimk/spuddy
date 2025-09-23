@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+
+import Root from "../layouts/Root.astro";
+import Navigation from "../components/Navigation";
+
+const websites = await getCollection("websites");
+---
+
+<Root>
+  <main class="mx-auto min-h-screen max-w-xl overflow-x-hidden">
+    <div class="overflow-y-hidden p-4">
+      <Navigation
+        client:only
+        websites={websites.map((website) => ({
+          id: website.id,
+          ...website.data,
+        }))}
+      />
+    </div>
+  </main>
+</Root>
