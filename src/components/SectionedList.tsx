@@ -45,9 +45,13 @@ export default function SectionedList({ categories, products }: Props) {
                   {categoryProducts.map((product, index) => (
                     <SortableListItem
                       key={product.id}
+                      defaultValue={product.variants.en[0]}
                       id={product.id}
                       index={index}
-                      defaultValue={product.variants.en[0]}
+                      accept="item"
+                      type="item"
+                      feedback="clone"
+                      group={category.id}
                     />
                   ))}
                 </ul>
