@@ -1,5 +1,6 @@
-import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { AnimatePresence } from "motion/react";
+import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
+import { useMemo } from "react";
 
 import dragDropManager from "../singletons/drag-drop-manager";
 
@@ -22,42 +23,43 @@ type Category = {
 type Props = { categories: Array<Category>; products: Array<Product> };
 
 export default function SectionedList({ categories, products }: Props) {
+  const data = useMemo(
+    () =>
+      categories
+        .map((category) => ({
+          ...category,
+          products: products.filter(
+            (product) => String(product.categoryId) === category.id,
+          ),
+        }))
+        .filter((category) => category.products.length > 0),
+    [categories, products],
+  );
+
   return (
     <DragDropProvider manager={dragDropManager}>
       <ul className="flex flex-col gap-6">
-        {categories
-          .filter(
-            (category) =>
-              products.filter(
-                (product) => String(product.categoryId) === category.id,
-              ).length > 0,
-          )
-          .map((category) => {
-            const categoryProducts = products.filter(
-              (product) => String(product.categoryId) === category.id,
-            );
-            return (
-              <section key={category.id}>
-                <h2 className="text-md mb-3 text-center">
-                  ------ {category.title.en} ------
-                </h2>
-                <ul className="flex flex-col gap-3">
-                  {categoryProducts.map((product, index) => (
-                    <SortableListItem
-                      key={product.id}
-                      defaultValue={product.variants.en[0]}
-                      id={product.id}
-                      index={index}
-                      accept="item"
-                      type="item"
-                      feedback="clone"
-                      group={category.id}
-                    />
-                  ))}
-                </ul>
-              </section>
-            );
-          })}
+        {data.map((category) => (
+          <section key={category.id}>
+            <h2 className="text-md mb-3 text-center">
+              ------ {category.title.en} ------
+            </h2>
+            <ul className="flex flex-col gap-3">
+              {category.products.map((product, index) => (
+                <SortableListItem
+                  key={product.id}
+                  defaultValue={product.variants.en[0]}
+                  id={product.id}
+                  index={index}
+                  accept="item"
+                  type="item"
+                  feedback="clone"
+                  group={category.id}
+                />
+              ))}
+            </ul>
+          </section>
+        ))}
       </ul>
 
       <AnimatePresence>
