@@ -3,14 +3,14 @@ import { getCollection } from "astro:content";
 import Root from "../layouts/Root.astro";
 import SmartSuffixListItem from "../components/SmartSuffixListItem";
 
-const products = await getCollection("productsWithEmojis");
+const products = await getCollection("products");
 ---
 
 <Root>
   <main class="mx-auto grid min-h-screen max-w-xl place-items-center p-4">
     <ul class="w-full">
       <SmartSuffixListItem
-        client:load
+        client:only
         id="demo-item"
         products={products.map((product) => ({
           variants: product.data.variants,

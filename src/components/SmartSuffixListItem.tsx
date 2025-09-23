@@ -7,7 +7,10 @@ type Product = {
   variants: { en: ReadonlyArray<string>; lt: ReadonlyArray<string> };
 };
 
-type Props = Omit<ComponentProps<typeof ListItem>, "prefix" | "onChange"> & {
+type Props = Omit<
+  ComponentProps<typeof ListItem>,
+  "prefix" | "defaultValue" | "onChange"
+> & {
   products: ReadonlyArray<Product>;
 };
 
@@ -46,5 +49,12 @@ export default function SmartSuffixListItem({ products, ...props }: Props) {
     [products],
   );
 
-  return <ListItem prefix={prefix} onChange={handleChange} {...props} />;
+  return (
+    <ListItem
+      prefix={prefix}
+      defaultValue=""
+      onChange={handleChange}
+      {...props}
+    />
+  );
 }
