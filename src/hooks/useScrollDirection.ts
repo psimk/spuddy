@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, type RefObject } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 
-export default function useScrollDirection() {
-  const { scrollY } = useScroll();
+type Props = {
+  scrollContainer?: RefObject<HTMLElement | null>;
+};
+
+export default function useScrollDirection({
+  scrollContainer: container,
+}: Props) {
+  const { scrollY } = useScroll({ container });
 
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [scrollDirectionLock, setScrollDirectionLock] = useState(false);

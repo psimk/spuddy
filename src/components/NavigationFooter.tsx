@@ -1,10 +1,10 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState, type RefObject } from "react";
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
 import {
   animate,
   motion,
   MotionConfig,
-  useMotionValue,
+  MotionValue,
   type PanInfo,
 } from "motion/react";
 
@@ -17,9 +17,14 @@ import {
   NAV_VARIANTS,
 } from "./NavigationFooter.motion";
 
-export default function NavigationFooter() {
+type Props = {
+  scrollContainer: RefObject<HTMLElement | null>;
+  x: MotionValue<number>;
+};
+
+export default function NavigationFooter({ scrollContainer, x }: Props) {
   const { scrollDirection, setScrollDirection, setScrollDirectionLock } =
-    useScrollDirection();
+    useScrollDirection({ scrollContainer });
 
   const handleFocus = useCallback(() => {
     setScrollDirection("up");
@@ -29,8 +34,6 @@ export default function NavigationFooter() {
   const handleBlur = useCallback(() => {
     setScrollDirectionLock(false);
   }, []);
-
-  const x = useMotionValue(0);
 
   const [firstInputWrapperElement, setFirstInputWrapperElement] =
     useState<HTMLLIElement | null>(null);
@@ -53,8 +56,7 @@ export default function NavigationFooter() {
   );
 
   const handleDragEnd = useCallback(
-    (_: unknown, { velocity, delta, offset }: PanInfo) => {
-      console.log(offset);
+    (_: unknown, { velocity, offset }: PanInfo) => {
       if (Math.abs(offset.x) < 50) return;
       if (Math.sign(offset.x) === 1) {
         currentIndex.current = Math.max(0, currentIndex.current - 1);
@@ -71,7 +73,7 @@ export default function NavigationFooter() {
       <motion.footer
         variants={FOOTER_VARIANTS}
         animate={scrollDirection}
-        className="bg-base-200/5 sticky bottom-0 flex flex-col items-center justify-center overflow-hidden pt-24 backdrop-blur-2xl"
+        className="bg-base-200/5 fixed bottom-0 flex w-full flex-col items-center justify-center overflow-hidden pt-22 backdrop-blur-2xl"
       >
         <div className="mx-auto w-full max-w-2xl">
           <motion.ul
@@ -83,7 +85,7 @@ export default function NavigationFooter() {
               right: 0,
             }}
             onDragEnd={handleDragEnd}
-            className="absolute bottom-20 flex gap-4"
+            className="absolute bottom-16 flex gap-4"
           >
             {Array.from({ length: 5 }).map((_, index) => (
               <motion.li
@@ -100,7 +102,7 @@ export default function NavigationFooter() {
                   onBlur={handleBlur}
                   initial={false}
                   variants={INPUT_VARIANTS}
-                  className="input bg-base-300/50 h-18 w-142 rounded-2xl text-center text-3xl shadow-xl"
+                  className="input bg-base-300/50 h-16 w-84 rounded-2xl text-center text-3xl shadow-xl"
                 />
               </motion.li>
             ))}
@@ -117,7 +119,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <ChevronLeft size={40} className="text-secondary/75" />
+                <ChevronLeft size={32} className="text-secondary/75" />
               </button>
             </li>
 
@@ -126,7 +128,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <ChevronRight size={40} className="text-secondary/75" />
+                <ChevronRight size={32} className="text-secondary/75" />
               </button>
             </li>
 
@@ -135,7 +137,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <Share size={40} className="text-secondary/75" />
+                <Share size={32} className="text-secondary/75" />
               </button>
             </li>
 
@@ -144,7 +146,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <BookOpen size={40} className="text-secondary/75" />
+                <BookOpen size={32} className="text-secondary/75" />
               </button>
             </li>
 
@@ -153,7 +155,7 @@ export default function NavigationFooter() {
                 type="button"
                 className="btn btn-ghost btn-circle h-full w-full"
               >
-                <Copy size={40} className="text-secondary/75" />
+                <Copy size={32} className="text-secondary/75" />
               </button>
             </li>
           </ul>
