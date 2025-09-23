@@ -1,935 +1,935 @@
 [
   {
-    "id": 1,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
     "emoji": "🍎",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["red apple", "red apples"],
       "lt": ["raudonas obuolys", "raudoni obuoliai"]
     }
   },
   {
-    "id": 2,
+    "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍏",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["green apple", "green apples"],
       "lt": ["žalias obuolys", "žali obuoliai"]
     }
   },
   {
-    "id": 3,
+    "id": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍊",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["orange", "oranges"],
       "lt": ["apelsinas", "apelsinai"]
     }
   },
   {
-    "id": 4,
+    "id": "6ba7b812-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍋",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["lemon", "lemons"],
       "lt": ["citrina", "citrinos"]
     }
   },
   {
-    "id": 5,
+    "id": "6ba7b813-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍌",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["banana", "bananas"],
       "lt": ["bananas", "bananai"]
     }
   },
   {
-    "id": 6,
+    "id": "6ba7b814-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍉",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["watermelon", "watermelons"],
       "lt": ["arbūzas", "arbūzai"]
     }
   },
   {
-    "id": 7,
+    "id": "6ba7b815-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍇",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["grapes", "grape bunches"],
       "lt": ["vynuogės", "vynuogių kekės"]
     }
   },
   {
-    "id": 8,
+    "id": "6ba7b816-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍓",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["strawberry", "strawberries"],
       "lt": ["žemuogė", "žemuogės"]
     }
   },
   {
-    "id": 9,
+    "id": "6ba7b817-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🫐",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["blueberry", "blueberries"],
       "lt": ["mėlynė", "mėlynės"]
     }
   },
   {
-    "id": 10,
+    "id": "6ba7b818-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍈",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["melon", "melons"],
       "lt": ["melionas", "melionai"]
     }
   },
   {
-    "id": 11,
+    "id": "6ba7b819-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍑",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["cherries", "cherry pairs"],
       "lt": ["vyšnios", "vyšnių poros"]
     }
   },
   {
-    "id": 12,
+    "id": "6ba7b81a-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍒",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["cherry", "cherries"],
       "lt": ["vyšnia", "vyšnios"]
     }
   },
   {
-    "id": 13,
+    "id": "6ba7b81b-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🥭",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["mango", "mangos", "mangoes"],
       "lt": ["mangas", "mangai"]
     }
   },
   {
-    "id": 14,
+    "id": "6ba7b81c-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🍍",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["pineapple", "pineapples"],
       "lt": ["ananasas", "ananasai"]
     }
   },
   {
-    "id": 15,
+    "id": "6ba7b81d-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🥥",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["coconut", "coconuts"],
       "lt": ["kokosas", "kokosai"]
     }
   },
   {
-    "id": 16,
+    "id": "6ba7b81e-9dad-11d1-80b4-00c04fd430c8",
     "emoji": "🥝",
-    "categoryId": 1,
+    "categoryId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "variants": {
       "en": ["kiwi", "kiwi fruit", "kiwis"],
       "lt": ["kivis", "kiviai"]
     }
   },
   {
-    "id": 17,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
     "emoji": "🍅",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["tomato", "tomatoes"],
       "lt": ["pomidoras", "pomidorai"]
     }
   },
   {
-    "id": 18,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12",
     "emoji": "🍆",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["eggplant", "eggplants", "aubergine", "aubergines"],
       "lt": ["baklažanas", "baklažanai"]
     }
   },
   {
-    "id": 19,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a13",
     "emoji": "🥑",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["avocado", "avocados"],
       "lt": ["avokadas", "avokadai"]
     }
   },
   {
-    "id": 20,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a14",
     "emoji": "🥦",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["broccoli", "broccoli heads"],
       "lt": ["brokoliai", "brokolių galvutės"]
     }
   },
   {
-    "id": 21,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a15",
     "emoji": "🥬",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["leafy greens", "lettuce", "cabbage"],
       "lt": ["lapinės daržovės", "salotos", "kopūstai"]
     }
   },
   {
-    "id": 22,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a16",
     "emoji": "🥒",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["cucumber", "cucumbers"],
       "lt": ["agurkas", "agurkai"]
     }
   },
   {
-    "id": 23,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a17",
     "emoji": "🌶️",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["hot pepper", "hot peppers", "chili", "chilies"],
       "lt": ["aitrusis pipiras", "aitrieji pipiprai", "čili"]
     }
   },
   {
-    "id": 24,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a18",
     "emoji": "🫑",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["bell pepper", "bell peppers", "sweet pepper", "sweet peppers"],
       "lt": ["saldžiasis pipiras", "saldžieji pipirai"]
     }
   },
   {
-    "id": 25,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a19",
     "emoji": "🌽",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["corn", "corn cob", "corn cobs", "sweet corn"],
       "lt": ["kukurūzas", "kukurūzų burbuolė", "kukurūzų burbuolės"]
     }
   },
   {
-    "id": 26,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a20",
     "emoji": "🥕",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["carrot", "carrots"],
       "lt": ["morka", "morkos"]
     }
   },
   {
-    "id": 27,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21",
     "emoji": "🫒",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["olive", "olives"],
       "lt": ["alyva", "alyvos"]
     }
   },
   {
-    "id": 28,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
     "emoji": "🧄",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["garlic", "garlic bulb", "garlic bulbs"],
       "lt": ["česnakas", "česnako galvutė", "česnako galvutės"]
     }
   },
   {
-    "id": 29,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a23",
     "emoji": "🧅",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["onion", "onions"],
       "lt": ["svogūnas", "svogūnai"]
     }
   },
   {
-    "id": 30,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a24",
     "emoji": "🥔",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["potato", "potatoes"],
       "lt": ["bulvė", "bulvės"]
     }
   },
   {
-    "id": 31,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a25",
     "emoji": "🍠",
-    "categoryId": 2,
+    "categoryId": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
     "variants": {
       "en": ["sweet potato", "sweet potatoes"],
       "lt": ["saldžioji bulvė", "saldžiosios bulvės"]
     }
   },
   {
-    "id": 32,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a26",
     "emoji": "🥐",
-    "categoryId": 3,
+    "categoryId": "c3d4e5f6-g7h8-9012-cdef-345678901234",
     "variants": {
       "en": ["croissant", "croissants"],
       "lt": ["kruasanas", "kruasanai"]
     }
   },
   {
-    "id": 33,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a27",
     "emoji": "🥖",
-    "categoryId": 3,
+    "categoryId": "c3d4e5f6-g7h8-9012-cdef-345678901234",
     "variants": {
       "en": ["baguette", "baguettes", "french bread"],
       "lt": ["batonas", "batonai", "prancūziška duona"]
     }
   },
   {
-    "id": 34,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a28",
     "emoji": "🍞",
-    "categoryId": 3,
+    "categoryId": "c3d4e5f6-g7h8-9012-cdef-345678901234",
     "variants": {
       "en": ["bread", "bread loaf", "bread loaves"],
       "lt": ["duona", "duonos kepalas", "duonos kepalai"]
     }
   },
   {
-    "id": 35,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a29",
     "emoji": "🥨",
-    "categoryId": 3,
+    "categoryId": "c3d4e5f6-g7h8-9012-cdef-345678901234",
     "variants": {
       "en": ["pretzel", "pretzels"],
       "lt": ["precelis", "preceliai"]
     }
   },
   {
-    "id": 36,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a30",
     "emoji": "🥯",
-    "categoryId": 3,
+    "categoryId": "c3d4e5f6-g7h8-9012-cdef-345678901234",
     "variants": {
       "en": ["bagel", "bagels"],
       "lt": ["bagelis", "bageliai"]
     }
   },
   {
-    "id": 37,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a31",
     "emoji": "🥞",
-    "categoryId": 15,
+    "categoryId": "o5p6q7r8-s9t0-bcde-f012-3456789abcde",
     "variants": {
       "en": ["pancake", "pancakes"],
       "lt": ["blynai", "blynas"]
     }
   },
   {
-    "id": 38,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a32",
     "emoji": "🧇",
-    "categoryId": 15,
+    "categoryId": "o5p6q7r8-s9t0-bcde-f012-3456789abcde",
     "variants": {
       "en": ["waffle", "waffles"],
       "lt": ["vaflis", "vafliai"]
     }
   },
   {
-    "id": 39,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
     "emoji": "🧀",
-    "categoryId": 4,
+    "categoryId": "d4e5f6g7-h8i9-0123-def4-56789012345a",
     "variants": {
       "en": ["cheese", "cheese wedge", "cheese wedges"],
       "lt": ["sūris", "sūrio gabalas", "sūrio gabalai"]
     }
   },
   {
-    "id": 40,
+    "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a34",
     "emoji": "🥛",
-    "categoryId": 4,
+    "categoryId": "d4e5f6g7-h8i9-0123-def4-56789012345a",
     "variants": {
       "en": ["milk", "glass of milk", "glasses of milk"],
       "lt": ["pienas", "pieno stiklinė", "pieno stiklinės"]
     }
   },
   {
-    "id": 41,
+    "id": "b47ac10b-58cc-4372-a567-0e02b2c3d479",
     "emoji": "🍼",
-    "categoryId": 17,
+    "categoryId": "q7r8s9t0-u1v2-def0-1234-56789abcdef0",
     "variants": {
       "en": ["baby bottle", "baby bottles"],
       "lt": ["buteliukas kūdikiui", "buteliukai kūdikiui"]
     }
   },
   {
-    "id": 42,
+    "id": "c47ac10b-58cc-4372-a567-0e02b2c3d479",
     "emoji": "🥚",
-    "categoryId": 4,
+    "categoryId": "d4e5f6g7-h8i9-0123-def4-56789012345a",
     "variants": {
       "en": ["egg", "eggs"],
       "lt": ["kiaušinis", "kiaušiniai"]
     }
   },
   {
-    "id": 43,
+    "id": "d47ac10b-58cc-4372-a567-0e02b2c3d479",
     "emoji": "🍳",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["fried egg", "fried eggs"],
       "lt": ["keptas kiaušinis", "kepti kiaušiniai"]
     }
   },
   {
-    "id": 44,
+    "id": "e47ac10b-58cc-4372-a567-0e02b2c3d479",
     "emoji": "🥓",
-    "categoryId": 5,
+    "categoryId": "e5f6g7h8-i9j0-1234-ef56-789012345abc",
     "variants": {
       "en": ["bacon", "bacon strips"],
       "lt": ["bekonas", "bekono juostelės"]
     }
   },
   {
-    "id": 45,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d470",
     "emoji": "🥩",
-    "categoryId": 5,
+    "categoryId": "e5f6g7h8-i9j0-1234-ef56-789012345abc",
     "variants": {
       "en": ["meat", "raw meat", "steak", "steaks"],
       "lt": ["mėsa", "žalia mėsa", "bifšteksas", "bifšteksai"]
     }
   },
   {
-    "id": 46,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d471",
     "emoji": "🍗",
-    "categoryId": 5,
+    "categoryId": "e5f6g7h8-i9j0-1234-ef56-789012345abc",
     "variants": {
       "en": ["chicken leg", "chicken legs", "poultry leg"],
       "lt": ["vištienos kojelė", "vištienos kojelės"]
     }
   },
   {
-    "id": 47,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d472",
     "emoji": "🍖",
-    "categoryId": 5,
+    "categoryId": "e5f6g7h8-i9j0-1234-ef56-789012345abc",
     "variants": {
       "en": ["meat on bone", "ribs"],
       "lt": ["mėsa su kaulu", "šonkauliai"]
     }
   },
   {
-    "id": 48,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d473",
     "emoji": "🌭",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["hot dog", "hot dogs", "sausage"],
       "lt": ["dešrelė", "dešrelės", "dešra"]
     }
   },
   {
-    "id": 49,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d474",
     "emoji": "🍔",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["hamburger", "hamburgers", "burger", "burgers"],
       "lt": ["hamburgeris", "hamburgeriai", "burgeris", "burgeriai"]
     }
   },
   {
-    "id": 50,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d475",
     "emoji": "🍟",
-    "categoryId": 12,
+    "categoryId": "l2m3n4o5-p6q7-89ab-cdef-0123456789ab",
     "variants": {
       "en": ["french fries", "fries", "chips"],
       "lt": ["bulvytės fri", "traškučiai"]
     }
   },
   {
-    "id": 51,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d476",
     "emoji": "🍕",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["pizza", "pizza slice", "pizza slices"],
       "lt": ["pica", "picos gabalas", "picos gabalai"]
     }
   },
   {
-    "id": 52,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d477",
     "emoji": "🌮",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["taco", "tacos"],
       "lt": ["takas", "takai"]
     }
   },
   {
-    "id": 53,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d478",
     "emoji": "🌯",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["burrito", "burritos", "wrap", "wraps"],
       "lt": ["burito", "buritai", "lavašas", "lavašai"]
     }
   },
   {
-    "id": 54,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d480",
     "emoji": "🥙",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["stuffed flatbread", "pita", "pitas", "kebab"],
       "lt": ["įdarytas plokščias duonos", "pita", "pitos", "kebabas"]
     }
   },
   {
-    "id": 55,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d481",
     "emoji": "🧆",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["falafel", "falafels"],
       "lt": ["falafelas", "falafeliai"]
     }
   },
   {
-    "id": 56,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d482",
     "emoji": "🥗",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["salad", "salads", "green salad"],
       "lt": ["salotos", "žaliosios salotos"]
     }
   },
   {
-    "id": 57,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d483",
     "emoji": "🥘",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["pan of food", "paella", "stew"],
       "lt": ["keptuvės patiekalas", "paelija", "troškinys"]
     }
   },
   {
-    "id": 58,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d484",
     "emoji": "🫕",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["fondue", "hot pot"],
       "lt": ["fondiu", "karštas puodas"]
     }
   },
   {
-    "id": 59,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d485",
     "emoji": "🥫",
-    "categoryId": 7,
+    "categoryId": "g7h8i9j0-k1l2-3456-789a-bcdef0123456",
     "variants": {
       "en": ["canned food", "can", "cans", "tin", "tins"],
       "lt": ["konservai", "skardinė", "skardinės"]
     }
   },
   {
-    "id": 60,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d486",
     "emoji": "🍝",
-    "categoryId": 8,
+    "categoryId": "h8i9j0k1-l2m3-4567-89ab-cdef01234567",
     "variants": {
       "en": ["pasta", "spaghetti", "noodles"],
       "lt": ["makaronai", "spagečiai", "vėrgeliai"]
     }
   },
   {
-    "id": 61,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d487",
     "emoji": "🍜",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["soup", "ramen", "noodle soup"],
       "lt": ["sriuba", "ramenas", "vėrgelių sriuba"]
     }
   },
   {
-    "id": 62,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d488",
     "emoji": "🍲",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["pot of food", "stew", "casserole"],
       "lt": ["puodo patiekalas", "troškinys", "kepsnys"]
     }
   },
   {
-    "id": 63,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d489",
     "emoji": "🍥",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["fish cake", "fish cakes"],
       "lt": ["žuvies pyragaitis", "žuvies pyragaičiai"]
     }
   },
   {
-    "id": 64,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d490",
     "emoji": "🥟",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["dumpling", "dumplings"],
       "lt": ["koldūnas", "koldūnai"]
     }
   },
   {
-    "id": 65,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d491",
     "emoji": "🦐",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["shrimp", "shrimps", "prawn", "prawns"],
       "lt": ["krevetė", "krevetės"]
     }
   },
   {
-    "id": 66,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d492",
     "emoji": "🦞",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["lobster", "lobsters"],
       "lt": ["omaras", "omarai"]
     }
   },
   {
-    "id": 67,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d493",
     "emoji": "🦀",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["crab", "crabs"],
       "lt": ["krabas", "krabai"]
     }
   },
   {
-    "id": 68,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d494",
     "emoji": "🐙",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["octopus", "octopi", "octopuses"],
       "lt": ["aštuonkojis", "aštuonkojai"]
     }
   },
   {
-    "id": 69,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d495",
     "emoji": "🦑",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["squid", "squids"],
       "lt": ["kalmaras", "kalmarai"]
     }
   },
   {
-    "id": 70,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d496",
     "emoji": "🐠",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["tropical fish", "tropical fishes", "fish"],
       "lt": ["tropinė žuvis", "tropinės žuvys", "žuvis"]
     }
   },
   {
-    "id": 71,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d497",
     "emoji": "🐟",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["fish", "fishes"],
       "lt": ["žuvis", "žuvys"]
     }
   },
   {
-    "id": 72,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d498",
     "emoji": "🎣",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["fishing pole", "fishing rod", "fishing gear"],
       "lt": ["meškerė", "meškerės", "žūklės įrankiai"]
     }
   },
   {
-    "id": 73,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d499",
     "emoji": "🍣",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["sushi", "sushi pieces"],
       "lt": ["sušis", "sušiai"]
     }
   },
   {
-    "id": 74,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d500",
     "emoji": "🍤",
-    "categoryId": 6,
+    "categoryId": "f6g7h8i9-j0k1-2345-f678-90123456abcd",
     "variants": {
       "en": ["fried shrimp", "fried prawns", "tempura"],
       "lt": ["keptos krevetės", "tempura"]
     }
   },
   {
-    "id": 75,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d501",
     "emoji": "🍱",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["bento box", "bento boxes", "lunch box"],
       "lt": ["bento dėžutė", "bento dėžutės", "pietų dėžutė"]
     }
   },
   {
-    "id": 76,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d502",
     "emoji": "🍘",
-    "categoryId": 20,
+    "categoryId": "t0u1v2w3-x4y5-0123-4567-89abcdef0123",
     "variants": {
       "en": ["rice cracker", "rice crackers"],
       "lt": ["ryžių traškučiai", "ryžių traškutis"]
     }
   },
   {
-    "id": 77,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d503",
     "emoji": "🍙",
-    "categoryId": 8,
+    "categoryId": "h8i9j0k1-l2m3-4567-89ab-cdef01234567",
     "variants": {
       "en": ["rice ball", "rice balls", "onigiri"],
       "lt": ["ryžių kamuoliukas", "ryžių kamuoliukai", "onigiri"]
     }
   },
   {
-    "id": 78,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d504",
     "emoji": "🍚",
-    "categoryId": 8,
+    "categoryId": "h8i9j0k1-l2m3-4567-89ab-cdef01234567",
     "variants": {
       "en": ["cooked rice", "rice", "steamed rice"],
       "lt": ["virinti ryžiai", "ryžiai"]
     }
   },
   {
-    "id": 79,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d505",
     "emoji": "🍛",
-    "categoryId": 14,
+    "categoryId": "n4o5p6q7-r8s9-abcd-ef01-23456789abcd",
     "variants": {
       "en": ["curry rice", "curry"],
       "lt": ["karis su ryžiais", "karis"]
     }
   },
   {
-    "id": 80,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d506",
     "emoji": "🥜",
-    "categoryId": 9,
+    "categoryId": "i9j0k1l2-m3n4-5678-9abc-def012345678",
     "variants": {
       "en": ["peanut", "peanuts", "nuts"],
       "lt": ["žemės riešutas", "žemės riešutai", "riešutai"]
     }
   },
   {
-    "id": 81,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d507",
     "emoji": "🌰",
-    "categoryId": 9,
+    "categoryId": "i9j0k1l2-m3n4-5678-9abc-def012345678",
     "variants": {
       "en": ["chestnut", "chestnuts"],
       "lt": ["kaštonas", "kaštonai"]
     }
   },
   {
-    "id": 82,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d508",
     "emoji": "🍯",
-    "categoryId": 10,
+    "categoryId": "j0k1l2m3-n4o5-6789-abcd-ef0123456789",
     "variants": {
       "en": ["honey", "honey pot", "honey jars"],
       "lt": ["medus", "medaus puodelis", "medaus stiklainiai"]
     }
   },
   {
-    "id": 83,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d509",
     "emoji": "🍰",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["cake", "shortcake", "cakes"],
       "lt": ["tortas", "pyragas", "tortai"]
     }
   },
   {
-    "id": 84,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d510",
     "emoji": "🧁",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["cupcake", "cupcakes", "muffin", "muffins"],
       "lt": ["keksiukas", "keksiukai", "mafinas", "mafinai"]
     }
   },
   {
-    "id": 85,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d511",
     "emoji": "🥧",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["pie", "pies"],
       "lt": ["pyragas", "pyragai"]
     }
   },
   {
-    "id": 86,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d512",
     "emoji": "🍫",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["chocolate", "chocolate bar", "chocolate bars"],
       "lt": ["šokoladas", "šokolado plytelė", "šokolado plytelės"]
     }
   },
   {
-    "id": 87,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d513",
     "emoji": "🍬",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["candy", "candies", "sweet", "sweets"],
       "lt": ["saldainis", "saldainiai"]
     }
   },
   {
-    "id": 88,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d514",
     "emoji": "🍭",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["lollipop", "lollipops"],
       "lt": ["ledinukas", "ledinukai"]
     }
   },
   {
-    "id": 89,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d515",
     "emoji": "🍮",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["custard", "pudding", "flan"],
       "lt": ["kremas", "pudingas"]
     }
   },
   {
-    "id": 90,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d516",
     "emoji": "🍩",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["doughnut", "doughnuts", "donut", "donuts"],
       "lt": ["spurgos", "spurga"]
     }
   },
   {
-    "id": 91,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d517",
     "emoji": "🍪",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["cookie", "cookies", "biscuit", "biscuits"],
       "lt": ["sausainis", "sausainiai"]
     }
   },
   {
-    "id": 92,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d518",
     "emoji": "🎂",
-    "categoryId": 11,
+    "categoryId": "k1l2m3n4-o5p6-789a-bcde-f0123456789a",
     "variants": {
       "en": ["birthday cake", "birthday cakes", "celebration cake"],
       "lt": ["gimtadieno tortas", "gimtadieno tortai", "šventės tortas"]
     }
   },
   {
-    "id": 93,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d519",
     "emoji": "🧈",
-    "categoryId": 4,
+    "categoryId": "d4e5f6g7-h8i9-0123-def4-56789012345a",
     "variants": {
       "en": ["butter", "butter stick", "butter sticks"],
       "lt": ["sviestas", "sviesto gabaliukas", "sviesto gabaliukai"]
     }
   },
   {
-    "id": 94,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d520",
     "emoji": "🍦",
-    "categoryId": 12,
+    "categoryId": "l2m3n4o5-p6q7-89ab-cdef-0123456789ab",
     "variants": {
       "en": ["soft ice cream", "ice cream cone", "ice cream cones"],
       "lt": ["minkštas ledas", "ledų kūgelis", "ledų kūgeliai"]
     }
   },
   {
-    "id": 95,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d521",
     "emoji": "🍨",
-    "categoryId": 12,
+    "categoryId": "l2m3n4o5-p6q7-89ab-cdef-0123456789ab",
     "variants": {
       "en": ["ice cream", "ice cream bowl", "ice cream bowls"],
       "lt": ["ledai", "ledų dubenėlis", "ledų dubenėliai"]
     }
   },
   {
-    "id": 96,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d522",
     "emoji": "🍧",
-    "categoryId": 12,
+    "categoryId": "l2m3n4o5-p6q7-89ab-cdef-0123456789ab",
     "variants": {
       "en": ["shaved ice", "snow cone", "snow cones"],
       "lt": ["tarkuoti ledai", "ledo kūgelis"]
     }
   },
   {
-    "id": 97,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d523",
     "emoji": "🥤",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["drink", "beverage", "cup with straw", "soft drink"],
       "lt": ["gėrimas", "gėrimai", "puodelis su šiaudeliu", "gaiviųjų gėrimų"]
     }
   },
   {
-    "id": 98,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d524",
     "emoji": "🧋",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["bubble tea", "boba tea", "milk tea"],
       "lt": ["burbulinė arbata", "boba arbata", "pieno arbata"]
     }
   },
   {
-    "id": 99,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d525",
     "emoji": "🧃",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["juice box", "juice boxes", "drink box"],
       "lt": ["sulčių dėžutė", "sulčių dėžutės", "gėrimo dėžutė"]
     }
   },
   {
-    "id": 100,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d526",
     "emoji": "☕",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["coffee", "hot beverage", "tea", "hot drink"],
       "lt": ["kava", "karštas gėrimas", "arbata"]
     }
   },
   {
-    "id": 101,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d527",
     "emoji": "🫖",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["teapot", "teapots"],
       "lt": ["arbatinukas", "arbatinukai"]
     }
   },
   {
-    "id": 102,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d528",
     "emoji": "🍵",
-    "categoryId": 13,
+    "categoryId": "m3n4o5p6-q7r8-9abc-def0-123456789abc",
     "variants": {
       "en": ["tea", "green tea", "tea cup"],
       "lt": ["arbata", "žalioji arbata", "arbatos puodelis"]
     }
   },
   {
-    "id": 103,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d529",
     "emoji": "🧊",
-    "categoryId": 12,
+    "categoryId": "l2m3n4o5-p6q7-89ab-cdef-0123456789ab",
     "variants": {
       "en": ["ice", "ice cube", "ice cubes"],
       "lt": ["ledas", "ledo kubelis", "ledo kubeliai"]
     }
   },
   {
-    "id": 104,
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d530",
     "emoji": "🧂",
-    "categoryId": 10,
+    "categoryId": "j0k1l2m3-n4o5-6789-abcd-ef0123456789",
     "variants": {
       "en": ["salt", "salt shaker"],
       "lt": ["druska", "druskos barstytuvas"]

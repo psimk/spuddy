@@ -6,7 +6,7 @@ const products = defineCollection({
   loader: file("./src/content/products.json"),
   schema: z.object({
     emoji: z.string(),
-    categoryId: z.number(),
+    categoryId: z.string(),
     variants: z.object({
       en: z.array(z.string()),
       lt: z.array(z.string()),
