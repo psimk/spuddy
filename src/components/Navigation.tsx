@@ -1,12 +1,29 @@
-type Website = {
+import NavigationFooter from "./NavigationFooter";
+
+type Post = {
   id: string;
-  url: string;
+  content?: string;
 };
 
 type Props = {
-  websites: ReadonlyArray<Website>;
+  posts: ReadonlyArray<Post>;
 };
 
-export default function Navigation({ websites }: Props) {
-  return <code>{JSON.stringify(websites, null, 2)}</code>;
+export default function Navigation({ posts }: Props) {
+  return (
+    <div className="flex flex-1 flex-col">
+      <section>
+        <ul className="flex">
+          {[posts[0]].map(({ id, content = "" }) => (
+            <li
+              key={id}
+              className="prose h-full w-dvh max-w-2xl p-4"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          ))}
+        </ul>
+      </section>
+      <NavigationFooter />
+    </div>
+  );
 }

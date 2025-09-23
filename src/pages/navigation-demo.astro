@@ -4,19 +4,17 @@ import { getCollection } from "astro:content";
 import Root from "../layouts/Root.astro";
 import Navigation from "../components/Navigation";
 
-const websites = await getCollection("websites");
+const posts = await getCollection("posts");
 ---
 
 <Root>
-  <main class="mx-auto min-h-screen max-w-xl overflow-x-hidden">
-    <div class="overflow-y-hidden p-4">
-      <Navigation
-        client:only
-        websites={websites.map((website) => ({
-          id: website.id,
-          ...website.data,
-        }))}
-      />
-    </div>
+  <main class="mx-auto flex min-h-screen max-w-xl">
+    <Navigation
+      client:only
+      posts={posts.map((post) => ({
+        id: post.id,
+        content: post.rendered?.html,
+      }))}
+    />
   </main>
 </Root>
