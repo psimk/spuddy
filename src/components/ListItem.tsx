@@ -1,4 +1,4 @@
-import { motion, type HTMLMotionProps } from "motion/react";
+import { motion, type HTMLMotionProps, type MotionStyle } from "motion/react";
 import {
   forwardRef,
   memo,
