@@ -61,6 +61,7 @@ export default function SectionedList({ categories, products }: Props) {
           {(source) => (
             <DragOverlayListItem
               {...products.find((p) => p.id === source.id)!}
+              emoji=""
             />
           )}
         </DragOverlay>
