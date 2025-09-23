@@ -89,7 +89,7 @@ export default function SectionedList({ categories, products }: Props) {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <ul className="flex flex-col gap-6">
+      <ul className="flex flex-col gap-3">
         {categoryPositions.map((category, categoryIndex) => (
           <SortableSection
             key={category.id}
