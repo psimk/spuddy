@@ -8,32 +8,15 @@ export const TRANSITION_CONFIG = {
 } satisfies Transition;
 
 export const FOOTER_VARIANTS = {
-  up: { y: 0 },
-  down: { y: 90 },
-} satisfies Variants;
-
-export const INPUT_WRAPPER_VARIANTS = {
-  up: {},
-  down: { paddingTop: 0 },
-} satisfies Variants;
-
-export const INPUT_VARIANTS = {
-  up: { fontSize: "1.875rem" },
+  up: { y: 0, paddingTop: 60 },
   down: {
-    height: "4rem",
-    fontSize: "1.25rem",
-    border: "none",
-    backgroundColor: "transparent",
-    boxShadow: "none",
+    y: 60,
+    paddingTop: 50,
+    backgroundColor: "#f8f8f8",
   },
 } satisfies Variants;
 
 export const NAV_VARIANTS = {
   up: { y: 0 },
   down: { y: 100 },
-} satisfies Variants;
-
-export const BACKDROP_VARIANTS = {
-  up: {},
-  down: { backgroundColor: "#f8f8f8" },
 } satisfies Variants;
