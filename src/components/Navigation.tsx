@@ -20,8 +20,8 @@ export default function Navigation({ posts }: Props) {
   const adjustedX = useTransform(x, [-1408, 0], [-(posts.length - 1) * 414, 0]);
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
-      <section className="relative mx-auto w-full max-w-2xl flex-1">
+    <div className="flex flex-1 flex-col">
+      <section className="relative mx-auto w-full max-w-2xl flex-1 overflow-x-hidden">
         <motion.ul style={{ x: adjustedX }} className="flex w-full">
           {posts.map(({ id, content = "" }, index) => (
             <div key={id}>
