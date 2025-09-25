@@ -1,5 +1,13 @@
 ---
 import { Font } from "astro:assets";
+
+interface Props {
+  subtitle?: string;
+}
+
+const title = Astro.props.subtitle
+  ? `Spuddy | ${Astro.props.subtitle}`
+  : "Spuddy";
 ---
 
 <head>
@@ -11,7 +19,7 @@ import { Font } from "astro:assets";
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <Font cssVariable="--font-geist" preload />
-  <title>Spuddy</title>
+  <title>{title}</title>
   <script
     is:inline
     type="text/partytown"

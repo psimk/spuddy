@@ -2,10 +2,14 @@
 import Head from "../components/Head.astro";
 
 import "../styles/global.css";
+
+interface Props {
+  subtitle?: string;
+}
 ---
 
 <html lang="en">
-  <Head />
+  <Head {...Astro.props} />
   <body>
     <slot />
   </body>
