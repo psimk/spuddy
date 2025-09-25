@@ -11,7 +11,7 @@ import useLocalStorage from "../hooks/use-local-storage";
 type Product = {
   id: string;
   emoji: string;
-  categoryId: number;
+  categoryId: string;
   variants: { en: ReadonlyArray<string>; lt: ReadonlyArray<string> };
 };
 
