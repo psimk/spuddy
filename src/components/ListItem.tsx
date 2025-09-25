@@ -10,7 +10,7 @@ import {
   type Ref,
 } from "react";
 
-import useGlobalDragging from "../hooks/useGlobalDragging";
+import useGlobalDragging from "../hooks/use-global-dragging";
 
 import AutoHeightTextArea from "./AutoHeightTextArea";
 
