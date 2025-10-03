@@ -13,6 +13,7 @@
     "@dnd-kit/dom": "^0.1.21",
     "@dnd-kit/helpers": "^0.1.21",
     "@dnd-kit/react": "^0.1.21",
+    "@instantdb/react": "^0.22.1",
     "@lucide/astro": "^0.544.0",
     "fuse.js": "^7.1.0",
     "lucide-react": "^0.544.0",
