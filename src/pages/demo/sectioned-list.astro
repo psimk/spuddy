@@ -1,20 +1,25 @@
 ---
 import { getCollection } from "astro:content";
 
-import Root from "../layouts/Root.astro";
-import List from "../components/List";
+import Root from "../../layouts/Root.astro";
+import SectionedListComponent from "../../components/demo/SectionedList";
 
 const products = await getCollection("products");
+const categories = await getCollection("categories");
 ---
 
-<Root subtitle="List Demo">
+<Root subtitle="Sectioned List Demo">
   <main class="mx-auto min-h-screen max-w-xl overflow-x-hidden">
     <div class="overflow-y-hidden p-4">
-      <List
+      <SectionedListComponent
         client:only
         products={products.map((product) => ({
           id: product.id,
           ...product.data,
+        }))}
+        categories={categories.map((category) => ({
+          id: category.id,
+          ...category.data,
         }))}
       />
     </div>

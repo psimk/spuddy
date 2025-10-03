@@ -1,12 +1,12 @@
 import { DragDropProvider, type DragDropEventHandlers } from "@dnd-kit/react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { move } from "@dnd-kit/helpers";
 
-import dragDropManager from "../singletons/drag-drop-manager";
+import dragDropManager from "../../singletons/drag-drop-manager";
+import useLocalStorage from "../../hooks/use-local-storage";
 
-import SortableListItem from "./SortableListItem";
-import SortableSection from "./SortableSection";
-import useLocalStorage from "../hooks/use-local-storage";
+import SortableListItem from "../SortableListItem";
+import SortableSection from "../SortableSection";
 
 type Product = {
   id: string;

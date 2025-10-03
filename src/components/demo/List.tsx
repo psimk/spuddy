@@ -1,11 +1,12 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { AnimatePresence } from "motion/react";
+import { Grip } from "lucide-react";
 
-import useLocalStorageDragItems from "../hooks/use-local-storage-drag-items";
-import dragDropManager from "../singletons/drag-drop-manager";
+import useLocalStorageDragItems from "../../hooks/use-local-storage-drag-items";
+import dragDropManager from "../../singletons/drag-drop-manager";
 
-import SortableListItem from "./SortableListItem";
-import DragOverlayListItem from "./DragOverlayListItem";
+import SortableListItem from "../SortableListItem";
+import ListItem from "../ListItem";
 
 type Product = {
   id: string;
@@ -41,11 +42,29 @@ export default function List({ products }: Props) {
 
       <AnimatePresence>
         <DragOverlay>
-          {(source) => (
-            <DragOverlayListItem
-              {...products.find((p) => p.id === source.id)!}
-            />
-          )}
+          {(source) => {
+            const { id, emoji, variants } = products.find(
+              (p) => p.id === source.id,
+            )!;
+
+            return (
+              <ListItem
+                id={id}
+                prefix={emoji}
+                defaultValue={variants.en[0] || ""}
+                initial={{ scale: 1, boxShadow: "0 0px 0px rgba(0,0,0,0)" }}
+                animate={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 10px #00000040",
+                }}
+                suffix={
+                  <div className="flex h-auto cursor-grab items-center justify-center">
+                    <Grip />
+                  </div>
+                }
+              />
+            );
+          }}
         </DragOverlay>
       </AnimatePresence>
     </DragDropProvider>
