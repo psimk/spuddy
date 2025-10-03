@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { animate } from "motion";
 import { useMotionValue, useTransform, type PanInfo } from "motion/react";
 
-import useElements from "./use-elements";
+import useElements from "@hooks//use-elements";
 
 function useWidthSum(elements: ReadonlyArray<HTMLElement | null>): number {
   return useMemo(

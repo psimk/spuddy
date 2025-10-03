@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 
 import { move } from "@dnd-kit/helpers";
-import useLocalStorage from "../hooks/use-local-storage";
+import useLocalStorage from "@hooks/use-local-storage";
 
 export default function useLocalStorageDragItems<T extends { id: string }>(
   key: string,

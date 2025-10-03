@@ -5,14 +5,9 @@ import {
   type ComponentProps,
   type Ref,
 } from "react";
-import {
-  animate,
-  AnimatePresence,
-  useMotionValue,
-  type PanInfo,
-} from "motion/react";
+import { animate, useMotionValue, type PanInfo } from "motion/react";
 
-import ListItem from "./ListItem";
+import ListItem from "@components/ListItem";
 
 type Props = Omit<
   ComponentProps<typeof ListItem>,

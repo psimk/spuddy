@@ -1,7 +1,7 @@
 import Fuse from "fuse.js";
 import { useCallback, useState, type ComponentProps } from "react";
 
-import ListItem from "../ListItem";
+import ListItem from "@components/ListItem";
 
 type Product = {
   emoji: string;

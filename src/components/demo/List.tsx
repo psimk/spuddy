@@ -2,11 +2,11 @@ import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { AnimatePresence } from "motion/react";
 import { Grip } from "lucide-react";
 
-import useLocalStorageDragItems from "../../hooks/use-local-storage-drag-items";
-import dragDropManager from "../../singletons/drag-drop-manager";
+import useLocalStorageDragItems from "@hooks/use-local-storage-drag-items";
+import dragDropManager from "@singletons/drag-drop-manager";
 
-import SortableListItem from "../SortableListItem";
-import ListItem from "../ListItem";
+import SortableListItem from "@components/SortableListItem";
+import ListItem from "@components/ListItem";
 
 type Product = {
   id: string;
