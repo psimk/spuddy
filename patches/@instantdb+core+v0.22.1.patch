@@ -1,0 +1,12 @@
+diff --git a/node_modules/@instantdb/core/dist/esm/index.d.ts b/node_modules/@instantdb/core/dist/esm/index.d.ts
+index 7ad09a9..d2c1028 100644
+--- a/node_modules/@instantdb/core/dist/esm/index.d.ts
++++ b/node_modules/@instantdb/core/dist/esm/index.d.ts
+@@ -40,6 +40,7 @@ export type InstantConfig<S extends InstantSchemaDef<any, any, any>, UseDates ex
+     queryCacheLimit?: number;
+     useDateObjects?: UseDates;
+     disableValidation?: boolean;
++    NetworkListener?: WindowNetworkListener;
+ };
+ export type ConfigWithSchema<S extends InstantGraph<any, any>> = Config & {
+     schema: S;
