@@ -25,6 +25,7 @@ export default forwardRef(function NavigationInput(
       variants={INPUT_WRAPPER_VARIANTS}
     >
       <motion.input
+        name="item"
         animate={animate}
         className="input bg-base-300/50 w-[calc(100vw*0.8)] max-w-xl rounded-2xl text-center shadow-xl"
         initial={false}
