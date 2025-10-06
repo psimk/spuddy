@@ -2,6 +2,9 @@ import { i } from "@instantdb/react";
 
 export default i.schema({
   entities: {
+    $users: i.entity({
+      email: i.string().unique().indexed(),
+    }),
     items: i.entity({
       text: i.string(),
       done: i.boolean(),
