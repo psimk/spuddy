@@ -11,7 +11,7 @@ type Props = {
 
 export default function CollectedList({ items, onRemove, onUnCollect }: Props) {
   return (
-    <ul className="flex flex-col gap-3">
+    <ul className="list">
       <AnimatePresence>
         {items.map((item) => (
           <SwipeListItem
@@ -22,8 +22,10 @@ export default function CollectedList({ items, onRemove, onUnCollect }: Props) {
             onSwipeLeft={() => onRemove(item.id)}
             onSwipeRight={() => onUnCollect(item.id)}
           >
-            <li className="bg-error text-error-content">remove</li>
-            <li className="bg-warning text-warning-content">return</li>
+            <li className="bg-error text-error-content rounded-l-sm">remove</li>
+            <li className="bg-warning text-warning-content rounded-r-sm">
+              return
+            </li>
           </SwipeListItem>
         ))}
       </AnimatePresence>

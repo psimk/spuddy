@@ -8,7 +8,7 @@ export default forwardRef(function Section(
   ref: Ref<HTMLHeadingElement>,
 ) {
   return (
-    <section className="bg-base-200 collapse px-2 py-4 shadow-sm" ref={ref}>
+    <section className="bg-base-200 collapse py-4 shadow-sm" ref={ref}>
       <input type="checkbox" defaultChecked className="peer" />
       <h2 className="collapse-title border-base-content/20 relative rounded-lg p-2 text-center font-bold transition-all peer-checked:border-0 peer-checked:[&_span]:pointer-events-none peer-checked:[&_span]:opacity-0">
         {title}

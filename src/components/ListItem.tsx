@@ -25,7 +25,7 @@ type Props = {
   prefix?: ReactNode;
   suffix?: ReactNode;
   onChange?: (value: string) => void;
-} & HTMLMotionProps<"li">;
+} & HTMLMotionProps<"div">;
 
 export default memo(
   forwardRef(function ListItem(
@@ -47,7 +47,7 @@ export default memo(
       wrapperClassName = "",
       ...props
     }: PropsWithChildren<Props>,
-    ref: Ref<HTMLLIElement>,
+    ref: Ref<HTMLDivElement>,
   ) {
     const globalDragging = useGlobalDragging();
     const [value, setValue] = useState(defaultValue);
@@ -58,14 +58,12 @@ export default memo(
     }, []);
 
     return (
-      <motion.li
-        {...props}
-        layout={!globalDragging}
-        ref={ref}
-        className={`${wrapperClassName} relative !touch-none list-none rounded-lg`}
-      >
+      <li className={`${wrapperClassName} relative`}>
         <motion.div
-          className={`${className} textarea flex min-h-11 w-full touch-none gap-2 rounded-lg p-2 text-lg leading-0`}
+          {...props}
+          layout={!globalDragging}
+          ref={ref}
+          className={`${className} bg-base-200 list-row rounded-none p-2 shadow-md`}
           drag={drag}
           onDragEnd={onDragEnd}
           dragDirectionLock={dragDirectionLock}
@@ -74,7 +72,7 @@ export default memo(
           style={motionStyle}
         >
           {prefix && (
-            <div className="pointer-events-none flex items-center">
+            <div className="pointer-events-none flex items-center pl-4">
               <span className="h-6 w-6 text-center text-lg leading-6">
                 {prefix}
               </span>
@@ -86,16 +84,14 @@ export default memo(
             className={`${
               // there's a bug in dnd-kit/chrome that causes inputs to focus during drag
               globalDragging ? "pointer-events-none" : ""
-            } bg-base-300 w-full touch-pan-y resize-none leading-normal whitespace-pre disabled:opacity-50`}
+            } textarea list-col-grow textarea-ghost min-h-12 w-full touch-pan-y resize-none text-lg leading-normal whitespace-pre disabled:opacity-50`}
             onChange={handleChange}
             value={value}
           />
           {suffix}
         </motion.div>
-        <div className="absolute top-0 left-0 -z-1 h-full w-full overflow-hidden rounded-lg">
-          {children}
-        </div>
-      </motion.li>
+        {children}
+      </li>
     );
   }),
 );

@@ -6,7 +6,7 @@ import {
   type PropsWithChildren,
   type Ref,
 } from "react";
-import { animate, useMotionValue, type PanInfo } from "motion/react";
+import { animate, motion, useMotionValue, type PanInfo } from "motion/react";
 
 import ListItem from "@components/ListItem";
 
@@ -31,9 +31,9 @@ const ANIMATION_CONFIG = {
 };
 
 export default memo(
-  forwardRef(function SwipableListItem(
+  forwardRef(function SwipeListItem(
     { onSwipeLeft, onSwipeRight, children, ...props }: PropsWithChildren<Props>,
-    ref: Ref<HTMLLIElement>,
+    ref: Ref<HTMLDivElement>,
   ) {
     const x = useMotionValue(0);
 
@@ -58,9 +58,9 @@ export default memo(
         dragConstraints={{ left: -ACTION_WIDTH, right: ACTION_WIDTH }}
         dragElastic={0.5}
       >
-        <ul className="m-0 flex h-full w-full list-none items-center justify-between rounded-lg p-0 [&_li]:flex-1 [&_li]:p-4 [&_li]:font-bold [&>li:first-child]:text-left [&>li:last-child]:text-right">
+        <motion.ul className="absolute top-0 left-0 -z-1 m-0 flex h-full w-full overflow-hidden p-0 p-0.5 text-lg [&_li]:flex-1 [&_li]:p-4 [&_li]:font-bold [&>li:first-child]:text-left [&>li:last-child]:text-right">
           {children}
-        </ul>
+        </motion.ul>
       </ListItem>
     );
   }),

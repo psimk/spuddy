@@ -24,7 +24,7 @@ export default function List({ products }: Props) {
 
   return (
     <DragDropProvider manager={dragDropManager} {...listeners}>
-      <ul className="flex flex-col gap-3">
+      <ul className="list">
         <AnimatePresence>
           {items.map((product, index) => (
             <SortableListItem
@@ -36,40 +36,40 @@ export default function List({ products }: Props) {
               onSwipeLeft={() => removeItem(product.id)}
               onSwipeRight={() => removeItem(product.id)}
             >
-              <li className="bg-success">done</li>
-              <li className="bg-success">done</li>
+              <li className="bg-success rounded-l-sm">done</li>
+              <li className="bg-success rounded-r-sm">done</li>
             </SortableListItem>
           ))}
         </AnimatePresence>
+
+        <AnimatePresence>
+          <DragOverlay>
+            {(source) => {
+              const { id, emoji, variants } = products.find(
+                (p) => p.id === source.id,
+              )!;
+
+              return (
+                <ListItem
+                  id={id}
+                  prefix={emoji}
+                  defaultValue={variants.en[0] || ""}
+                  initial={{ scale: 1, boxShadow: "0 0px 0px rgba(0,0,0,0)" }}
+                  animate={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 10px #00000040",
+                  }}
+                  suffix={
+                    <div className="flex h-auto cursor-grab items-center justify-center">
+                      <Grip />
+                    </div>
+                  }
+                />
+              );
+            }}
+          </DragOverlay>
+        </AnimatePresence>
       </ul>
-
-      <AnimatePresence>
-        <DragOverlay>
-          {(source) => {
-            const { id, emoji, variants } = products.find(
-              (p) => p.id === source.id,
-            )!;
-
-            return (
-              <ListItem
-                id={id}
-                prefix={emoji}
-                defaultValue={variants.en[0] || ""}
-                initial={{ scale: 1, boxShadow: "0 0px 0px rgba(0,0,0,0)" }}
-                animate={{
-                  scale: 1.05,
-                  boxShadow: "0 10px 10px #00000040",
-                }}
-                suffix={
-                  <div className="flex h-auto cursor-grab items-center justify-center">
-                    <Grip />
-                  </div>
-                }
-              />
-            );
-          }}
-        </DragOverlay>
-      </AnimatePresence>
     </DragDropProvider>
   );
 }

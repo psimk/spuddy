@@ -27,11 +27,12 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
         )
       }
     >
-      <ul className="flex h-auto min-h-full flex-col gap-3">
+      <ul className="list h-auto min-h-full">
         <AnimatePresence>
           {items.map((item, index) => (
             <SortableListItem
               wrapperClassName={`${index === 0 ? "mt-auto" : ""} scroll-mb-30`}
+              className={` ${items.length - 1 === index ? "rounded-b-box" : ""} ${index === 0 ? "rounded-t-box" : ""}`}
               key={item.id}
               id={item.id}
               index={index}
@@ -39,8 +40,12 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
               onSwipeLeft={() => onRemove(item.id)}
               onSwipeRight={() => onCollect(item.id)}
             >
-              <li className="bg-error text-error-content">remove</li>
-              <li className="bg-success text-success-content">collect</li>
+              <li className="bg-error text-error-content rounded-l-sm">
+                remove
+              </li>
+              <li className="bg-success text-success-content rounded-r-sm">
+                collect
+              </li>
             </SortableListItem>
           ))}
         </AnimatePresence>

@@ -26,7 +26,9 @@ export default function List({ id }: Props) {
   if (toGetItems.length === 0 && collectedItems.length === 0) {
     return (
       <div className="grid h-full place-items-center text-center">
-        <p className="text-base-content max-w-xs">Use the input below, to add some items.</p>
+        <p className="text-base-content max-w-xs">
+          Use the input below, to add some items.
+        </p>
       </div>
     );
   }

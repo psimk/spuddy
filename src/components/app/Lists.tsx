@@ -59,7 +59,7 @@ export default function Main({ lists }: Props) {
             <div key={id} className="w-full">
               <li
                 ref={setContentElementFromRef(index)}
-                className="h-dvh overflow-y-scroll p-4 pb-29"
+                className="h-dvh overflow-x-hidden p-4 pb-29"
               >
                 <ListComponent id={id} />
               </li>

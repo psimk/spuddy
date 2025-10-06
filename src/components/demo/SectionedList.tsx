@@ -99,7 +99,7 @@ export default function SectionedList({ categories, products }: Props) {
             accept={["category", "item"]}
             type="category"
           >
-            <ul className="flex flex-col gap-3 px-1">
+            <ul className="list p-0">
               {data[category.id].map((product, productIndex) => (
                 <SortableListItem
                   key={product.id}
