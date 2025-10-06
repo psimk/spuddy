@@ -41,6 +41,16 @@ export default function Main({ lists }: Props) {
   const { scrollDirection, setScrollDirection, scrollDirectionLockRef } =
     useScrollDirection(currentContentElement);
 
+  const scrollToBottom = () =>
+    requestAnimationFrame(() => {
+      currentContentElement?.firstElementChild?.lastElementChild?.previousElementSibling?.scrollIntoView(
+        {
+          behavior: "instant",
+          block: "nearest",
+        },
+      );
+    });
+
   return (
     <div className="flex flex-1 flex-col">
       <section className="relative mx-auto w-dvw max-w-2xl flex-1 overflow-x-hidden">
@@ -73,7 +83,9 @@ export default function Main({ lists }: Props) {
 
                   event.currentTarget.reset();
 
-                  createItem(item, id);
+                  createItem(item, id).finally(() => {
+                    scrollToBottom();
+                  });
                 }}
                 key={id}
               >

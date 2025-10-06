@@ -27,11 +27,11 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
         )
       }
     >
-      <ul className="flex h-full flex-col gap-3">
+      <ul className="flex h-auto min-h-full flex-col gap-3">
         <AnimatePresence>
           {items.map((item, index) => (
             <SortableListItem
-              wrapperClassName={index === 0 ? "mt-auto" : ""}
+              wrapperClassName={`${index === 0 ? "mt-auto" : ""} scroll-mb-30`}
               key={item.id}
               id={item.id}
               index={index}
