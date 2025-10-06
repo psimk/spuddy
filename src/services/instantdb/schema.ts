@@ -15,4 +15,18 @@ export default i.schema({
       updatedAt: i.date(),
     }),
   },
+  links: {
+    listOwner: {
+      forward: { on: "lists", has: "one", label: "owner", onDelete: "cascade" },
+      reverse: { on: "$users", has: "many", label: "lists" },
+    },
+    listItems: {
+      forward: { on: "lists", has: "many", label: "items" },
+      reverse: { on: "items", has: "one", label: "list" },
+    },
+    itemOwner: {
+      forward: { on: "items", has: "one", label: "owner" },
+      reverse: { on: "$users", has: "many", label: "items" },
+    },
+  },
 });
