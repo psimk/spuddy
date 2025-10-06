@@ -27,7 +27,7 @@ export default forwardRef(function NavigationInput(
       <motion.input
         name="item"
         animate={animate}
-        className="input bg-base-300/50 w-[calc(100vw*0.8)] max-w-xl rounded-2xl text-center shadow-xl"
+        className="input bg-base-300/80 w-[calc(100vw*0.91)] max-w-xl rounded-xl text-center shadow-xl"
         initial={false}
         onBlur={onBlur}
         onFocus={onFocus}
