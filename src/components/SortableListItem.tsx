@@ -41,7 +41,7 @@ export default function SortableListItem({
         !isDragging && (
           <div
             ref={handleRef}
-            className="flex h-auto cursor-grab items-center justify-center"
+            className="flex h-auto cursor-grab items-center justify-center pr-3"
           >
             <Grip />
           </div>

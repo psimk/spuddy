@@ -65,7 +65,7 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
                     boxShadow: "0 10px 10px #00000040",
                   }}
                   suffix={
-                    <div className="flex h-auto cursor-grab items-center justify-center">
+                    <div className="flex h-auto cursor-grab items-center justify-center pr-3">
                       <Grip />
                     </div>
                   }
