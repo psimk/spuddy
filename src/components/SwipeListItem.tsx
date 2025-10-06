@@ -3,6 +3,7 @@ import {
   memo,
   useCallback,
   type ComponentProps,
+  type PropsWithChildren,
   type Ref,
 } from "react";
 import { animate, useMotionValue, type PanInfo } from "motion/react";
@@ -30,7 +31,8 @@ const ANIMATION_CONFIG = {
 };
 
 export default memo(
-  forwardRef(function SwipableListItem( { onSwipeLeft, onSwipeRight, ...props }: Props,
+  forwardRef(function SwipableListItem(
+    { onSwipeLeft, onSwipeRight, children, ...props }: PropsWithChildren<Props>,
     ref: Ref<HTMLLIElement>,
   ) {
     const x = useMotionValue(0);
@@ -56,9 +58,8 @@ export default memo(
         dragConstraints={{ left: -ACTION_WIDTH, right: ACTION_WIDTH }}
         dragElastic={0.5}
       >
-        <ul className="bg-success m-0 flex h-full w-full list-none items-center justify-between rounded-lg p-0">
-          <li className="p-2 text-lg font-bold">done</li>
-          <li className="p-2 text-right text-lg font-bold">done</li>
+        <ul className="m-0 flex h-full w-full list-none items-center justify-between rounded-lg p-0 [&_li]:flex-1 [&_li]:p-4 [&_li]:font-bold [&>li:first-child]:text-left [&>li:last-child]:text-right">
+          {children}
         </ul>
       </ListItem>
     );

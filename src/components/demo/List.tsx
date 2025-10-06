@@ -35,7 +35,10 @@ export default function List({ products }: Props) {
               defaultValue={product.variants.en[0]}
               onSwipeLeft={() => removeItem(product.id)}
               onSwipeRight={() => removeItem(product.id)}
-            />
+            >
+              <li className="bg-success">done</li>
+              <li className="bg-success">done</li>
+            </SortableListItem>
           ))}
         </AnimatePresence>
       </ul>
