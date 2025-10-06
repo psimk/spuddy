@@ -1,30 +1,24 @@
-import { id } from "@instantdb/react";
 import { useEffect } from "react";
 
 import db from "@services/instantdb/db";
 
 import MainSkeleton from "./MainSkeleton";
 import Lists from "./Lists";
+import { createList } from "@services/instantdb/actions";
+import { listsQuery } from "@services/instantdb/queries";
 
-function createList() {
-  db.transact(
-    db.tx.lists[id()].create({
-      title: "unknown",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  );
+function useInstantLists() {
+  const { data, isLoading, error } = db.useQuery(listsQuery());
+
+  useEffect(() => {
+    if (data?.lists.length === 0) createList();
+  }, [data]);
+
+  return { data, isLoading, error };
 }
 
 export default function Main() {
-  const { data, isLoading, error } = db.useQuery({ lists: {} });
-
-  const listLength = data?.lists.length;
-
-  useEffect(() => {
-    if (typeof listLength === "undefined") return;
-    if (!listLength) createList();
-  }, [listLength]);
+  const { data, isLoading, error } = useInstantLists();
 
   if (isLoading) return <MainSkeleton />;
 

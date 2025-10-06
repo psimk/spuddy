@@ -1,0 +1,30 @@
+import { type ValidQuery } from "@instantdb/react";
+
+import type { Schema } from "./types";
+
+function query<Q extends ValidQuery<Q, Schema>>(query: Q): Q {
+  return query;
+}
+
+export function listsQuery() {
+  return query({
+    lists: {},
+  });
+}
+
+export function itemsQuery({
+  list,
+  completed,
+}: {
+  list: string;
+  completed?: boolean;
+}) {
+  return query({
+    items: {
+      $: {
+        where: { done: completed ?? false, list },
+        order: { position: "asc" },
+      },
+    },
+  });
+}

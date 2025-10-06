@@ -1,101 +1,48 @@
-import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
-import { AnimatePresence } from "motion/react";
-import { Grip } from "lucide-react";
-import { useCallback } from "react";
-import { move } from "@dnd-kit/helpers";
-
-import dragDropManager from "@singletons/drag-drop-manager";
 import db from "@services/instantdb/db";
 
-import SortableListItem from "@components/SortableListItem";
-import ListItem from "@components/ListItem";
+import { itemsQuery } from "@services/instantdb/queries";
+import CollectedList from "./CollectedList";
+import ToGetList from "./ToGetList";
+import {
+  collectItem,
+  removeItem,
+  unCollectItem,
+  updateItemPositions,
+} from "@services/instantdb/actions";
 
 type Props = {
   id: string;
 };
 
 export default function List({ id }: Props) {
-  const { data, isLoading, error } = db.useQuery({
-    items: {
-      $: {
-        where: {
-          list: id,
-          done: false,
-        },
-        order: {
-          position: "asc",
-        },
-      },
-    },
-  });
+  const { data: toGetData } = db.useQuery(itemsQuery({ list: id }));
+  const { data: collectedData } = db.useQuery(
+    itemsQuery({ list: id, completed: true }),
+  );
 
-  const items = data?.items ?? [];
-
-  const onDragOver = (event: Parameters<typeof move>[1]) => {
-    const newPositions = move(items, event);
-
-    const updates = [];
-
-    for (const [index, item] of newPositions.entries()) {
-      if (index === item.position) continue;
-
-      updates.push(
-        db.tx.items[item.id].update({
-          ...item,
-          position: index,
-          updatedAt: Date.now(),
-        }),
-      );
-    }
-
-    db.transact(updates);
-  };
-
-  const removeItem = useCallback((id: string) => {
-    db.transact(db.tx.items[id].update({ done: true, updatedAt: new Date() }));
-  }, []);
+  const toGetItems = toGetData?.items ?? [];
+  const collectedItems = collectedData?.items ?? [];
 
   return (
-    <DragDropProvider manager={dragDropManager} onDragOver={onDragOver}>
-      <ul className="flex flex-col gap-3">
-        <AnimatePresence>
-          {items.map((item, index) => (
-            <SortableListItem
-              key={item.id}
-              id={item.id}
-              index={index}
-              defaultValue={item.text}
-              onSwipeLeft={() => removeItem(item.id)}
-              onSwipeRight={() => removeItem(item.id)}
-            />
-          ))}
-        </AnimatePresence>
-      </ul>
-
-      <AnimatePresence>
-        <DragOverlay>
-          {(source) => {
-            const { id, text } = items.find((p) => p.id === source.id)!;
-
-            return (
-              <ListItem
-                id={id + 3}
-                defaultValue={text}
-                initial={{ scale: 1, boxShadow: "0 0px 0px rgba(0,0,0,0)" }}
-                animate={{
-                  scale: 1.05,
-                  boxShadow: "0 10px 10px #00000040",
-                }}
-                suffix={
-                  <div className="flex h-auto cursor-grab items-center justify-center">
-                    <Grip />
-                  </div>
-                }
-              />
-            );
-          }}
-        </DragOverlay>
-      </AnimatePresence>
-    </DragDropProvider>
+    <>
+      {toGetItems.length === 0 && collectedItems.length > 0 ? (
+        <div className="grid h-full place-items-center text-center">
+          <p className="text-base-content">All items have been collected.</p>
+        </div>
+      ) : (
+        <ToGetList
+          items={toGetItems}
+          onReorder={updateItemPositions}
+          onRemove={removeItem}
+          onCollect={collectItem}
+        />
+      )}
+      <div className="divider text-base-content/30">collected</div>
+      <CollectedList
+        items={collectedData?.items ?? []}
+        onRemove={removeItem}
+        onUnCollect={unCollectItem}
+      />
+    </>
   );
 }

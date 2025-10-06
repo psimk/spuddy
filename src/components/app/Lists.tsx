@@ -1,8 +1,6 @@
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
 import { motion } from "motion/react";
 
-import { id as instantId } from "@instantdb/react";
-
 import useSyncedDrag from "@hooks/use-synced-drag";
 import useScrollDirection from "@hooks/use-scroll-direction";
 
@@ -13,7 +11,7 @@ import ListComponent from "./List";
 
 import type { List } from "@services/instantdb/types";
 import { useEffect } from "react";
-import db from "@services/instantdb/db";
+import { createItem } from "@services/instantdb/actions";
 
 const ICON_SIZE = 24;
 
@@ -51,7 +49,7 @@ export default function Main({ lists }: Props) {
             <div key={id} className="w-full">
               <li
                 ref={setContentElementFromRef(index)}
-                className="h-dvh overflow-y-scroll p-4 pb-8"
+                className="h-dvh overflow-y-scroll p-4 pb-29"
               >
                 <ListComponent id={id} />
               </li>
@@ -65,7 +63,7 @@ export default function Main({ lists }: Props) {
           <motion.ul {...inputListProps} className="absolute bottom-12 flex">
             {lists.map(({ id }, index) => (
               <form
-                onSubmit={async (event) => {
+                onSubmit={(event) => {
                   event.preventDefault();
 
                   const formData = new FormData(event.currentTarget);
@@ -73,34 +71,9 @@ export default function Main({ lists }: Props) {
                   const item = formData.get("item")?.toString() ?? "";
                   if (!item.trim()) return;
 
-                  const itemId = instantId();
-
                   event.currentTarget.reset();
 
-                  const { data } = await db.queryOnce({
-                    items: {
-                      $: {
-                        where: {
-                          list: id,
-                          done: false,
-                        },
-                        order: {
-                          position: "asc",
-                        },
-                      },
-                    },
-                  });
-
-                  db.transact([
-                    db.tx.items[itemId].create({
-                      text: item,
-                      done: false,
-                      updatedAt: new Date(),
-                      createdAt: new Date(),
-                      position: data.items.length,
-                    }),
-                    db.tx.lists[id].link({ items: itemId }),
-                  ]);
+                  createItem(item, id);
                 }}
                 key={id}
               >
