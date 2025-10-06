@@ -48,10 +48,10 @@ export default function Main({ lists }: Props) {
       <section className="relative mx-auto w-dvw max-w-2xl flex-1 overflow-x-hidden">
         <motion.ul {...contentListProps} className="flex w-full">
           {lists.map(({ id }, index) => (
-            <div key={id}>
+            <div key={id} className="w-full">
               <li
                 ref={setContentElementFromRef(index)}
-                className="h-dvh w-dvw overflow-y-scroll p-4 pb-8"
+                className="h-dvh overflow-y-scroll p-4 pb-8"
               >
                 <ListComponent id={id} />
               </li>
