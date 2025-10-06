@@ -37,12 +37,16 @@ export default function List({ id }: Props) {
           onCollect={collectItem}
         />
       )}
-      <div className="divider text-base-content/30">collected</div>
-      <CollectedList
-        items={collectedData?.items ?? []}
-        onRemove={removeItem}
-        onUnCollect={unCollectItem}
-      />
+      {collectedItems.length > 0 && (
+        <>
+          <div className="divider text-base-content/30">collected</div>
+          <CollectedList
+            items={collectedItems}
+            onRemove={removeItem}
+            onUnCollect={unCollectItem}
+          />
+        </>
+      )}
     </>
   );
 }
