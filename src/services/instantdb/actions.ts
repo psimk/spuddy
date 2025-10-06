@@ -14,34 +14,23 @@ export function createList(title: string = "") {
   );
 }
 
-let newItemPosition = 100_0000;
-
-function getOptimisticNewItemPosition() {
-  newItemPosition++;
-  return newItemPosition;
-}
-
 export async function createItem(text: string, listId: string) {
   const itemId = id();
 
-  const itemsQueryPromise = db.queryOnce(itemsQuery(listId));
+  const {
+    data: { items },
+  } = await db.queryOnce(itemsQuery({ list: listId }));
 
-  await db.transact([
+  return db.transact([
     db.tx.items[itemId].create({
       text: text,
       done: false,
       updatedAt: new Date(),
       createdAt: new Date(),
-      position: getOptimisticNewItemPosition(),
+      position: items.length,
     }),
     db.tx.lists[listId].link({ items: itemId }),
   ]);
-
-  const { data } = await itemsQueryPromise;
-
-  return db.transact(
-    db.tx.items[itemId].update({ position: data.items.length - 1 }),
-  );
 }
 
 export function collectItem(itemId: string) {
