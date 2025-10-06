@@ -7,7 +7,6 @@
     "build": "astro build",
     "dev": "astro dev",
     "dev:clean": "rm -rf node_modules/{.astro, .vite} ; node --run dev",
-    "postinstall": "patch-package",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -33,7 +32,6 @@
     "@vite-pwa/astro": "^1.1.0",
     "astro": "^5.14.1",
     "daisyui": "^5.1.13",
-    "patch-package": "^8.0.1",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
