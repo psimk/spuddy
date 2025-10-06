@@ -1,0 +1,10 @@
+---
+import Root from "@layouts/Root.astro";
+import AppComponent from "@components/app/App";
+---
+
+<Root subtitle="App">
+  <main class="flex min-h-screen">
+    <AppComponent client:only />
+  </main>
+</Root>
