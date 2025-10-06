@@ -8,7 +8,7 @@ export const TRANSITION_CONFIG = {
 } satisfies Transition;
 
 export const FOOTER_VARIANTS = {
-  up: { y: 0, paddingTop: 60 },
+  up: { y: 0, paddingTop: 66 },
   down: {
     y: 60,
     paddingTop: 50,
