@@ -18,6 +18,7 @@ type Props = {
   id: string;
   defaultValue: string;
   className?: string;
+  wrapperClassName?: string;
   disabled?: boolean;
   style?: CSSProperties;
   motionStyle?: MotionStyle;
@@ -43,6 +44,7 @@ export default memo(
       dragDirectionLock,
       dragConstraints,
       dragElastic,
+      wrapperClassName = "",
       ...props
     }: PropsWithChildren<Props>,
     ref: Ref<HTMLLIElement>,
@@ -60,7 +62,7 @@ export default memo(
         {...props}
         layout={!globalDragging}
         ref={ref}
-        className="relative !touch-none list-none rounded-lg"
+        className={`${wrapperClassName} relative !touch-none list-none rounded-lg`}
       >
         <motion.div
           className={`${className} textarea flex min-h-11 w-full touch-none gap-2 rounded-lg p-2 text-lg leading-0`}
