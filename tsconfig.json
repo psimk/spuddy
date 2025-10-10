@@ -6,10 +6,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "paths": {
-      "@demo/*": ["src/demo/*"],
-      "@app/*": ["src/app/*"],
-      "@shared/*": ["src/shared/*"],
-      "@layouts/*": ["src/layouts/*"]
+      "@demo/*": ["./src/demo/*"],
+      "@app/*": ["./src/app/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@layouts/*": ["./src/layouts/*"]
     }
   }
 }

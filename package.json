@@ -7,9 +7,11 @@
     "build": "astro build",
     "dev": "astro dev",
     "dev:clean": "rm -rf node_modules/{.astro, .vite} ; node --run dev",
-    "preview": "astro preview",
+    "format": "prettier --write .",
     "instant:login": "instant-cli login",
-    "instant:push": "instant-cli push"
+    "instant:push": "instant-cli push",
+    "preview": "astro preview",
+    "typecheck": "tsc --noEmit --incremental"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
