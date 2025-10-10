@@ -28,11 +28,14 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
       }
     >
       <ul className="list h-auto min-h-full">
+        <li className="rounded-t-box bg-base-200 mt-auto grid w-full place-items-center shadow-md">
+          <div className="divider my-2 w-1/2" />
+        </li>
         <AnimatePresence>
           {items.map((item, index) => (
             <SortableListItem
-              wrapperClassName={`${index === 0 ? "mt-auto" : ""} scroll-mb-30`}
-              className={` ${items.length - 1 === index ? "rounded-b-box" : ""} ${index === 0 ? "rounded-t-box" : ""}`}
+              wrapperClassName={`scroll-mb-30`}
+              className={`${items.length - 1 === index ? "rounded-b-box" : ""}`}
               key={item.id}
               id={item.id}
               index={index}
