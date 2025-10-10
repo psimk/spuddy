@@ -27,7 +27,7 @@
     "react-router": "^7.9.4"
   },
   "devDependencies": {
-    "@astrojs/cloudflare": "^12.6.9",
+    "@astrojs/cloudflare": "^12.6.10",
     "@astrojs/react": "^4.4.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.13",

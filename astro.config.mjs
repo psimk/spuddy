@@ -8,6 +8,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import partytown from "@astrojs/partytown";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
@@ -36,4 +38,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
