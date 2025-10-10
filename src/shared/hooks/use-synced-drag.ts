@@ -2,9 +2,8 @@ import { useCallback, useMemo } from "react";
 import { animate } from "motion";
 import { useMotionValue, useTransform } from "motion/react";
 
-import useElements from "@hooks/use-elements";
-
-import useWidthSum from "./use-element-width-sum";
+import useElements from "@shared/hooks/use-elements";
+import useWidthSum from "@shared/hooks/use-element-width-sum";
 
 type Props = {
   listLength: number;

@@ -1,4 +1,4 @@
-import db from "@services/instantdb/db";
+import db from "@app/services/instantdb/db";
 
 import Main from "./Main";
 import GuestLogin from "./GuestLogin";

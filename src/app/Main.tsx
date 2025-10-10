@@ -8,10 +8,10 @@ import {
   type PropsWithChildren,
 } from "react";
 
-import db from "@services/instantdb/db";
-import { createList } from "@services/instantdb/actions";
-import { listsQuery } from "@services/instantdb/queries";
-import type { Item, List } from "@services/instantdb/types";
+import db from "@app/services/instantdb/db";
+import { createList } from "@app/services/instantdb/actions";
+import { listsQuery } from "@app/services/instantdb/queries";
+import type { Item, List } from "@app/services/instantdb/types";
 
 import MainSkeleton from "./MainSkeleton";
 import Lists from "./Lists";

@@ -1,5 +1,6 @@
 import { createRef, useMemo, type RefObject } from "react";
-import useEventListener from "@hooks/use-event-listener";
+
+import useEventListener from "@shared/hooks/use-event-listener";
 
 export default function useScrollEvent<T extends HTMLElement>(
   handler: (event: Event) => void,

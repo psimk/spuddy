@@ -4,7 +4,7 @@ import { forwardRef, type Ref } from "react";
 import {
   INPUT_VARIANTS,
   INPUT_WRAPPER_VARIANTS,
-} from "@components/NavigationInput.motion";
+} from "@shared/components/NavigationInput.motion";
 
 type Props = {
   animate?: "up" | "down";

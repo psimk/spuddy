@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import dragDropManager from "@singletons/drag-drop-manager";
+import dragDropManager from "@shared/singletons/drag-drop-manager";
 
 export default function useGlobalDragging() {
   const [isDragging, setIsDragging] = useState(false);

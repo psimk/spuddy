@@ -3,7 +3,7 @@ import { Grip } from "lucide-react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { FeedbackType } from "@dnd-kit/dom";
 
-import SwipeListItem from "@components/SwipeListItem";
+import SwipeListItem from "@shared/components/SwipeListItem";
 
 type Props = Omit<ComponentProps<typeof SwipeListItem>, "suffix"> & {
   index: number;

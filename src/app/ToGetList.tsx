@@ -3,11 +3,11 @@ import { AnimatePresence } from "motion/react";
 import { Grip } from "lucide-react";
 import { move } from "@dnd-kit/helpers";
 
-import dragDropManager from "@singletons/drag-drop-manager";
+import dragDropManager from "@shared/singletons/drag-drop-manager";
+import SortableListItem from "@shared/components/SortableListItem";
+import ListItem from "@shared/components/ListItem";
 
-import SortableListItem from "@components/SortableListItem";
-import ListItem from "@components/ListItem";
-import type { Item } from "@services/instantdb/types";
+import type { Item } from "@app/services/instantdb/types";
 
 type Props = {
   items: ReadonlyArray<Item>;

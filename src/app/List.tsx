@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
-import db from "@services/instantdb/db";
-import { itemsQuery } from "@services/instantdb/queries";
+import db from "@app/services/instantdb/db";
+import { itemsQuery } from "@app/services/instantdb/queries";
 import {
   collectItem,
   removeItem,
   unCollectItem,
   updateItemPositions,
-} from "@services/instantdb/actions";
+} from "@app/services/instantdb/actions";
 
 import { useMainContext } from "./Main";
 import CollectedList from "./CollectedList";

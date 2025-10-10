@@ -5,7 +5,7 @@ import {
   TRANSITION_CONFIG,
   FOOTER_VARIANTS,
   NAV_VARIANTS,
-} from "@components/NavigationFooter.motion";
+} from "@shared/components/NavigationFooter.motion";
 
 type Props = {
   animate?: "up" | "down";

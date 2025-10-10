@@ -8,7 +8,7 @@ import {
 } from "react";
 import { animate, motion, useMotionValue, type PanInfo } from "motion/react";
 
-import ListItem from "@components/ListItem";
+import ListItem from "@shared/components/ListItem";
 
 type Props = Omit<
   ComponentProps<typeof ListItem>,

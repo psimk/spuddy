@@ -2,11 +2,10 @@ import { motion, type PanInfo } from "motion/react";
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
 import { useCallback, useState } from "react";
 
-import useSyncedDrag from "@hooks/use-synced-drag";
-import useScrollDirection from "@hooks/use-scroll-direction";
-
-import NavigationFooter from "@components/NavigationFooter";
-import NavigationInput from "@components/NavigationInput";
+import useSyncedDrag from "@shared/hooks/use-synced-drag";
+import useScrollDirection from "@shared/hooks/use-scroll-direction";
+import NavigationFooter from "@shared/components/NavigationFooter";
+import NavigationInput from "@shared/components/NavigationInput";
 
 type Post = {
   id: string;

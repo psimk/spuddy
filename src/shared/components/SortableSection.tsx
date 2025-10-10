@@ -3,7 +3,7 @@ import type { ComponentProps, PropsWithChildren } from "react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { CollisionPriority } from "@dnd-kit/abstract";
 
-import Section from "@components/Section";
+import Section from "@shared/components/Section";
 
 type Props = ComponentProps<typeof Section> & {
   id: string;
