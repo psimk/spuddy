@@ -1,8 +1,7 @@
-import db from "@services/instantdb/db";
+import { useEffect } from "react";
 
+import db from "@services/instantdb/db";
 import { itemsQuery } from "@services/instantdb/queries";
-import CollectedList from "./CollectedList";
-import ToGetList from "./ToGetList";
 import {
   collectItem,
   removeItem,
@@ -10,15 +9,30 @@ import {
   updateItemPositions,
 } from "@services/instantdb/actions";
 
+import { useMainContext } from "./Main";
+import CollectedList from "./CollectedList";
+import ToGetList from "./ToGetList";
+
 type Props = {
   id: string;
 };
 
 export default function List({ id }: Props) {
-  const { data: toGetData } = db.useQuery(itemsQuery({ list: id }));
+  const { data: allData } = db.useQuery(itemsQuery({ list: id }));
+  const { data: toGetData } = db.useQuery(
+    itemsQuery({ list: id, completed: false }),
+  );
   const { data: collectedData } = db.useQuery(
     itemsQuery({ list: id, completed: true }),
   );
+
+  const { setListContent } = useMainContext();
+
+  useEffect(() => {
+    if (!allData?.items) return;
+
+    setListContent(id, allData.items);
+  }, [allData, setListContent, id]);
 
   const toGetItems = toGetData?.items ?? [];
   const collectedItems = collectedData?.items ?? [];

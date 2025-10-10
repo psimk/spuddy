@@ -10,7 +10,7 @@ export default i.schema({
       done: i.boolean(),
       createdAt: i.date(),
       updatedAt: i.date(),
-      position: i.number().indexed(),
+      order: i.string().indexed(),
     }),
     lists: i.entity({
       title: i.string(),

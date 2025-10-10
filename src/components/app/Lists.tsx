@@ -1,5 +1,6 @@
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
-import { motion } from "motion/react";
+import { useCallback, useEffect } from "react";
+import { motion, type PanInfo } from "motion/react";
 
 import useSyncedDrag from "@hooks/use-synced-drag";
 import useScrollDirection from "@hooks/use-scroll-direction";
@@ -7,39 +8,56 @@ import useScrollDirection from "@hooks/use-scroll-direction";
 import NavigationFooter from "@components/NavigationFooter";
 import NavigationInput from "@components/NavigationInput";
 
-import ListComponent from "./List";
-
-import type { List } from "@services/instantdb/types";
-import { useEffect } from "react";
 import { createItem } from "@services/instantdb/actions";
+
+import ListComponent from "./List";
+import { useMainContext } from "./Main";
 
 const ICON_SIZE = 24;
 
-type Props = {
-  lists: ReadonlyArray<List>;
-};
-
-export default function Main({ lists }: Props) {
+export default function Main() {
+  const { lists, activeListIndex, setActiveListIndex, listContent } =
+    useMainContext();
   const {
     move,
-    setCurrentPage,
     setContentElementFromRef,
     setInputWrapperElementFromRef,
-    currentContentElement,
     inputListProps,
+    contentElements,
     contentListProps,
-    currentPage,
-  } = useSyncedDrag(lists.length);
+  } = useSyncedDrag({
+    listLength: lists.length,
+    inputWrapperGap: 16,
+    contentGap: 32,
+  });
 
   useEffect(() => {
-    const list = lists[currentPage];
+    const list = lists[activeListIndex];
     if (!list) return;
 
     document.title = `Spuddy | ${list.title}`;
-  }, [currentPage, lists]);
+  }, [activeListIndex, lists]);
+
+  const currentContentElement = contentElements[activeListIndex] ?? null;
 
   const { scrollDirection, setScrollDirection, scrollDirectionLockRef } =
     useScrollDirection(currentContentElement);
+
+  const listLength = lists.length;
+
+  const handleDragEnd = useCallback(
+    (_: unknown, { velocity, offset }: PanInfo) => {
+      const newIndex =
+        Math.sign(offset.x) === 1
+          ? Math.max(0, activeListIndex - 1)
+          : Math.min(listLength - 1, activeListIndex + 1);
+
+      move(newIndex, velocity.x);
+
+      setActiveListIndex(newIndex);
+    },
+    [move, setActiveListIndex, activeListIndex, listLength],
+  );
 
   const scrollToBottom = () =>
     requestAnimationFrame(() => {
@@ -70,7 +88,13 @@ export default function Main({ lists }: Props) {
       <NavigationFooter
         animate={scrollDirection}
         inputs={
-          <motion.ul {...inputListProps} className="absolute bottom-12 flex">
+          <motion.ul
+            {...inputListProps}
+            onDragEnd={handleDragEnd}
+            dragDirectionLock
+            drag="x"
+            className="absolute bottom-12 flex"
+          >
             {lists.map(({ id }, index) => (
               <form
                 onSubmit={(event) => {
@@ -83,9 +107,8 @@ export default function Main({ lists }: Props) {
 
                   event.currentTarget.reset();
 
-                  createItem(item, id).finally(() => {
-                    scrollToBottom();
-                  });
+                  createItem(item, id, listContent[id]);
+                  scrollToBottom();
                 }}
                 key={id}
               >
@@ -93,7 +116,7 @@ export default function Main({ lists }: Props) {
                   ref={setInputWrapperElementFromRef(index)}
                   animate={scrollDirection}
                   onFocus={() => {
-                    setCurrentPage(index);
+                    setActiveListIndex(index);
                     setScrollDirection("up");
                     scrollDirectionLockRef.current = true;
                     move(index, 0);

@@ -22,8 +22,8 @@ export function itemsQuery({
   return query({
     items: {
       $: {
-        where: { done: completed ?? false, list },
-        order: { position: "asc" },
+        where: { done: completed, list },
+        order: { order: "asc" },
       },
     },
   });

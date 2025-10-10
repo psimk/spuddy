@@ -1,23 +1,23 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { animate } from "motion";
-import { useMotionValue, useTransform, type PanInfo } from "motion/react";
+import { useMotionValue, useTransform } from "motion/react";
 
-import useElements from "@hooks//use-elements";
+import useElements from "@hooks/use-elements";
 
-function useWidthSum(elements: ReadonlyArray<HTMLElement | null>): number {
-  return useMemo(
-    () =>
-      elements.reduce((acc, element) => acc + (element?.offsetWidth ?? 0), 0),
-    [elements],
-  );
-}
+import useWidthSum from "./use-element-width-sum";
 
-const INPUT_WRAPPER_GAP = 16;
-const CONTENT_GAP = 32;
+type Props = {
+  listLength: number;
+  inputWrapperGap: number;
+  contentGap: number;
+};
 
-export default function useSyncedDrag(listLength: number) {
+export default function useSyncedDrag({
+  listLength,
+  inputWrapperGap,
+  contentGap,
+}: Props) {
   const x = useMotionValue(0);
-  const [currentPage, setCurrentPage] = useState(0);
   const {
     elements: contentElements,
     setElementFromRef: setContentElementFromRef,
@@ -32,9 +32,9 @@ export default function useSyncedDrag(listLength: number) {
   const inputWrapperElementsWidth = useWidthSum(inputWrapperElements);
 
   const inputWrapperElementsBound =
-    inputWrapperElementsWidth + INPUT_WRAPPER_GAP * (listLength - 1);
+    inputWrapperElementsWidth + inputWrapperGap * (listLength - 1);
 
-  const contentListBound = contentListWidth + CONTENT_GAP * (listLength - 1);
+  const contentListBound = contentListWidth + contentGap * (listLength - 1);
 
   const contentX = useTransform(
     x,
@@ -53,7 +53,7 @@ export default function useSyncedDrag(listLength: number) {
     (index: number, velocity: number) => {
       animate(
         x,
-        -(index * inputWrapperElementWidth + index * INPUT_WRAPPER_GAP),
+        -(index * inputWrapperElementWidth + index * inputWrapperGap),
         {
           type: "spring",
           stiffness: 300,
@@ -66,47 +66,23 @@ export default function useSyncedDrag(listLength: number) {
     [x, inputWrapperElementWidth],
   );
 
-  const handleDragEnd = useCallback(
-    (_: unknown, { velocity, offset }: PanInfo) => {
-      setCurrentPage((page) => {
-        const newPage =
-          Math.sign(offset.x) === 1
-            ? Math.max(0, page - 1)
-            : Math.min(listLength - 1, page + 1);
-
-        move(newPage, velocity.x);
-
-        return newPage;
-      });
-    },
-    [x, move, listLength],
-  );
-
-  const currentContentElement = contentElements[currentPage];
-
   return {
     move,
-    currentPage,
-    setCurrentPage,
+    contentElements,
     setContentElementFromRef,
     setInputWrapperElementFromRef,
-    currentContentElement,
     contentListProps: {
       style: {
         x: contentX,
-        gap: CONTENT_GAP,
+        gap: contentGap,
       },
     },
     inputListProps: {
-      drag: "x" as const,
       style: {
         x,
-        gap: INPUT_WRAPPER_GAP,
+        gap: inputWrapperGap,
         left: `calc(50% - ${inputWrapperElementWidth / 2}px)`,
       },
-      dragDirectionLock: true,
-      // dragConstraints: { left: -inputWrapperElementsWidth, right: 0 },
-      onDragEnd: handleDragEnd,
     },
   };
 }

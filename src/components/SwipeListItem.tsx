@@ -33,7 +33,7 @@ const ANIMATION_CONFIG = {
 export default memo(
   forwardRef(function SwipeListItem(
     { onSwipeLeft, onSwipeRight, children, ...props }: PropsWithChildren<Props>,
-    ref: Ref<HTMLDivElement>,
+    ref: Ref<HTMLLIElement>,
   ) {
     const x = useMotionValue(0);
 

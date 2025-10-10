@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
+import { motion, type PanInfo } from "motion/react";
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
+import { useCallback, useState } from "react";
 
 import useSyncedDrag from "@hooks/use-synced-drag";
 import useScrollDirection from "@hooks/use-scroll-direction";
@@ -19,16 +20,38 @@ type Props = {
 const ICON_SIZE = 24;
 
 export default function Navigation({ posts }: Props) {
+  const [activeListIndex, setActiveListIndex] = useState(0);
+
   const {
     move,
-    setCurrentPage,
     setContentElementFromRef,
     setInputWrapperElementFromRef,
-    currentContentElement,
+    contentElements,
     inputListProps,
     contentListProps,
-    currentPage,
-  } = useSyncedDrag(posts.length);
+  } = useSyncedDrag({
+    listLength: posts.length,
+    inputWrapperGap: 16,
+    contentGap: 32,
+  });
+
+  const listLength = posts.length;
+
+  const handleDragEnd = useCallback(
+    (_: unknown, { velocity, offset }: PanInfo) => {
+      const newIndex =
+        Math.sign(offset.x) === 1
+          ? Math.max(0, activeListIndex - 1)
+          : Math.min(listLength - 1, activeListIndex + 1);
+
+      move(newIndex, velocity.x);
+
+      setActiveListIndex(newIndex);
+    },
+    [move, setActiveListIndex, activeListIndex, listLength],
+  );
+
+  const currentContentElement = contentElements[activeListIndex] ?? null;
 
   const { scrollDirection, setScrollDirection, scrollDirectionLockRef } =
     useScrollDirection(currentContentElement);
@@ -51,14 +74,20 @@ export default function Navigation({ posts }: Props) {
       <NavigationFooter
         animate={scrollDirection}
         inputs={
-          <motion.ul {...inputListProps} className="absolute bottom-12 flex">
+          <motion.ul
+            {...inputListProps}
+            onDragEnd={handleDragEnd}
+            dragDirectionLock
+            drag="x"
+            className="absolute bottom-12 flex"
+          >
             {posts.map((post, index) => (
               <NavigationInput
                 key={post.id}
                 ref={setInputWrapperElementFromRef(index)}
                 animate={scrollDirection}
                 onFocus={() => {
-                  setCurrentPage(index);
+                  setActiveListIndex(index);
                   setScrollDirection("up");
                   scrollDirectionLockRef.current = true;
                   move(index, 0);
@@ -74,13 +103,11 @@ export default function Navigation({ posts }: Props) {
           <button
             type="button"
             className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled={currentPage === 0}
+            disabled={activeListIndex === 0}
             onClick={() => {
-              setCurrentPage((page) => {
-                const newPage = Math.max(0, page - 1);
-                move(newPage, 0);
-                return newPage;
-              });
+              const newPage = Math.max(0, activeListIndex - 1);
+              move(newPage, 0);
+              setActiveListIndex(newPage);
             }}
           >
             <ChevronLeft size={ICON_SIZE} />
@@ -88,13 +115,11 @@ export default function Navigation({ posts }: Props) {
           <button
             type="button"
             className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled={currentPage === posts.length - 1}
+            disabled={activeListIndex === posts.length - 1}
             onClick={() => {
-              setCurrentPage((page) => {
-                const newPage = Math.min(posts.length - 1, page + 1);
-                move(newPage, 0);
-                return newPage;
-              });
+              const newPage = Math.min(posts.length - 1, activeListIndex + 1);
+              move(newPage, 0);
+              setActiveListIndex(newPage);
             }}
           >
             <ChevronRight size={ICON_SIZE} />

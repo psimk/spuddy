@@ -1,7 +1,8 @@
+import type { move } from "@dnd-kit/helpers";
+import { IndexGenerator } from "fractional-indexing-jittered";
 import { id } from "@instantdb/react";
 
 import db from "./db";
-import { itemsQuery } from "./queries";
 import type { Item } from "./types";
 
 export function createList(title: string = "") {
@@ -14,12 +15,14 @@ export function createList(title: string = "") {
   );
 }
 
-export async function createItem(text: string, listId: string) {
-  const itemId = id();
+const USER_JITTER = true;
 
-  const {
-    data: { items },
-  } = await db.queryOnce(itemsQuery({ list: listId }));
+export function createItem(
+  text: string,
+  listId: string,
+  existingItems: ReadonlyArray<Item>,
+) {
+  const itemId = id();
 
   return db.transact([
     db.tx.items[itemId].create({
@@ -27,7 +30,10 @@ export async function createItem(text: string, listId: string) {
       done: false,
       updatedAt: new Date(),
       createdAt: new Date(),
-      position: items.length,
+      order: new IndexGenerator(
+        existingItems.map((item) => item.order),
+        { useJitter: USER_JITTER },
+      ).keyEnd(),
     }),
     db.tx.lists[listId].link({ items: itemId }),
   ]);
@@ -49,20 +55,44 @@ export function removeItem(itemId: string) {
   return db.transact(db.tx.items[itemId].delete());
 }
 
-export async function updateItemPositions(items: ReadonlyArray<Item>) {
-  const updates = [];
+export function updateItemPositions(
+  items: ReadonlyArray<Item>,
+  event: Parameters<typeof move>[1],
+) {
+  const {
+    operation: { source, target },
+  } = event;
 
-  for (const [index, item] of items.entries()) {
-    if (index === item.position) continue;
+  if (!target || !source) return;
+  if (source.id === target.id) return;
 
-    updates.push(
-      db.tx.items[item.id].update({
-        ...item,
-        position: index,
-        updatedAt: Date.now(),
-      }),
-    );
+  let sourceItem = null;
+  let targetItem = null;
+
+  for (const item of items) {
+    if (item.id === source.id) {
+      sourceItem = item;
+      continue;
+    }
+
+    if (item.id === target.id) {
+      targetItem = item;
+      continue;
+    }
+
+    if (sourceItem && targetItem) break;
   }
 
-  return db.transact(updates);
+  if (!sourceItem || !targetItem) return;
+
+  return db.transact([
+    db.tx.items[source.id].update({
+      order: targetItem.order,
+      updatedAt: Date.now(),
+    }),
+    db.tx.items[target.id].update({
+      order: sourceItem.order,
+      updatedAt: Date.now(),
+    }),
+  ]);
 }

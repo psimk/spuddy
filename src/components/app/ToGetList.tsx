@@ -11,7 +11,10 @@ import type { Item } from "@services/instantdb/types";
 
 type Props = {
   items: ReadonlyArray<Item>;
-  onReorder: (items: ReadonlyArray<Item>) => void;
+  onReorder: (
+    items: ReadonlyArray<Item>,
+    event: Parameters<typeof move>[1],
+  ) => void;
   onRemove: (id: string) => void;
   onCollect: (id: string) => void;
 };
@@ -20,12 +23,15 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
   return (
     <DragDropProvider
       manager={dragDropManager}
-      onDragOver={(event) =>
+      onDragOver={(event) => {
+        event.preventDefault();
+        // event.operation.target?.accept
         onReorder(
-          // @ts-expect-error ids are always strings
-          move(items, event),
-        )
-      }
+          items,
+          event,
+          // move(items, event),
+        );
+      }}
     >
       <ul className="list h-auto min-h-full">
         <li className="rounded-t-box bg-base-200 mt-auto grid w-full place-items-center shadow-md">
@@ -51,9 +57,7 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
               </li>
             </SortableListItem>
           ))}
-        </AnimatePresence>
 
-        <AnimatePresence>
           <DragOverlay>
             {(source) => {
               const { id, text } = items.find((p) => p.id === source.id)!;

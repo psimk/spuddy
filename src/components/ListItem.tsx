@@ -47,7 +47,7 @@ export default memo(
       wrapperClassName = "",
       ...props
     }: PropsWithChildren<Props>,
-    ref: Ref<HTMLDivElement>,
+    ref: Ref<HTMLLIElement>,
   ) {
     const globalDragging = useGlobalDragging();
     const [value, setValue] = useState(defaultValue);
@@ -57,13 +57,14 @@ export default memo(
       onChange?.(newValue);
     }, []);
 
+    console.log({ globalDragging });
+
     return (
-      <li className={`${wrapperClassName} relative touch-none `}>
+      <li ref={ref} className={`${wrapperClassName} relative touch-none`}>
         <motion.div
           {...props}
-          layout={!globalDragging}
-          ref={ref}
-          className={`${className} bg-base-200 list-row rounded-none p-2 shadow-md touch-pan-y`}
+          // TODO: add layout so we have a nice exit animation when deleting
+          className={`${className} bg-base-200 list-row touch-pan-y rounded-none p-2 shadow-md`}
           drag={drag}
           onDragEnd={onDragEnd}
           dragDirectionLock={dragDirectionLock}
