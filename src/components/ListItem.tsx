@@ -58,12 +58,12 @@ export default memo(
     }, []);
 
     return (
-      <li className={`${wrapperClassName} relative`}>
+      <li className={`${wrapperClassName} relative touch-none `}>
         <motion.div
           {...props}
           layout={!globalDragging}
           ref={ref}
-          className={`${className} bg-base-200 list-row rounded-none p-2 shadow-md`}
+          className={`${className} bg-base-200 list-row rounded-none p-2 shadow-md touch-pan-y`}
           drag={drag}
           onDragEnd={onDragEnd}
           dragDirectionLock={dragDirectionLock}
@@ -90,7 +90,8 @@ export default memo(
           />
           {suffix}
         </motion.div>
-        {children}
+
+        {!globalDragging && children}
       </li>
     );
   }),
