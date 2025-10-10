@@ -12,6 +12,16 @@ export function listsQuery() {
   });
 }
 
+export function listQuery(id: string) {
+  return query({
+    lists: {
+      $: {
+        where: { id },
+      },
+    },
+  });
+}
+
 export function itemsQuery({
   list,
   completed,

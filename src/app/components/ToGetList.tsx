@@ -1,6 +1,5 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { AnimatePresence } from "motion/react";
-import { Grip } from "lucide-react";
 import { move } from "@dnd-kit/helpers";
 
 import dragDropManager from "@shared/singletons/drag-drop-manager";
@@ -8,6 +7,17 @@ import SortableListItem from "@shared/components/SortableListItem";
 import ListItem from "@shared/components/ListItem";
 
 import type { Item } from "@app/services/instantdb/types";
+import {
+  Accessibility,
+  AutoScroller,
+  Cursor,
+  defaultPreset,
+  Feedback,
+  PreventSelection,
+  Scroller,
+  ScrollListener,
+} from "@dnd-kit/dom";
+import { Grip } from "lucide-react";
 
 type Props = {
   items: ReadonlyArray<Item>;
@@ -17,20 +27,27 @@ type Props = {
   ) => void;
   onRemove: (id: string) => void;
   onCollect: (id: string) => void;
+  disableAutoScroll?: boolean;
 };
 
-export default function List({ items, onReorder, onCollect, onRemove }: Props) {
+export default function List({
+  items,
+  onReorder,
+  onCollect,
+  onRemove,
+  disableAutoScroll,
+}: Props) {
   return (
     <DragDropProvider
-      manager={dragDropManager}
+      plugins={
+        // TODO: investigate how to disable horizontal auto-scroll AutoScroller
+        disableAutoScroll
+          ? defaultPreset.plugins.filter((plugin) => plugin !== AutoScroller)
+          : defaultPreset.plugins
+      }
       onDragOver={(event) => {
         event.preventDefault();
-        // event.operation.target?.accept
-        onReorder(
-          items,
-          event,
-          // move(items, event),
-        );
+        onReorder(items, event);
       }}
     >
       <ul className="list h-auto min-h-full">
@@ -64,7 +81,7 @@ export default function List({ items, onReorder, onCollect, onRemove }: Props) {
 
               return (
                 <ListItem
-                  id={id}
+                  id={id + "drag-overlay"}
                   defaultValue={text}
                   initial={{ scale: 1, boxShadow: "0 0px 0px rgba(0,0,0,0)" }}
                   animate={{

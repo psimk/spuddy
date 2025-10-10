@@ -1,4 +1,12 @@
-import { BookOpen, ChevronLeft, ChevronRight, Copy, Share } from "lucide-react";
+import {
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Minus,
+  Plus,
+  Share,
+} from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { motion, type PanInfo } from "motion/react";
 
@@ -8,7 +16,11 @@ import useScrollDirection from "@shared/hooks/use-scroll-direction";
 import NavigationFooter from "@shared/components/NavigationFooter";
 import NavigationInput from "@shared/components/NavigationInput";
 
-import { createItem } from "@app/services/instantdb/actions";
+import {
+  createItem,
+  createList,
+  removeList,
+} from "@app/services/instantdb/actions";
 import { useListContext } from "@app/contexts/list-context";
 import ListComponent from "@app/components/List";
 
@@ -27,7 +39,7 @@ export default function ListId() {
   } = useSyncedDrag({
     listLength: lists.length,
     inputWrapperGap: 16,
-    contentGap: 32,
+    contentGap: 16,
   });
 
   useEffect(() => {
@@ -68,19 +80,23 @@ export default function ListId() {
       );
     });
 
+  const hasMoreThanOneList = lists.length > 1;
+
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex w-dvw flex-col">
       <section className="relative mx-auto w-dvw max-w-2xl flex-1 overflow-x-hidden">
-        <motion.ul {...contentListProps} className="flex w-full">
+        <motion.ul
+          {...contentListProps}
+          className="relative flex h-full w-dvw max-w-2xl"
+        >
           {lists.map(({ id }, index) => (
-            <div key={id} className="w-full">
-              <li
-                ref={setContentElementFromRef(index)}
-                className="h-dvh overflow-x-hidden p-4 pb-29"
-              >
-                <ListComponent id={id} />
-              </li>
-            </div>
+            <li
+              key={id}
+              ref={setContentElementFromRef(index)}
+              className="h-full w-full max-w-full shrink-0 overflow-x-hidden overflow-y-scroll p-4 pb-29"
+            >
+              <ListComponent disableAutoScroll={hasMoreThanOneList} id={id} />
+            </li>
           ))}
         </motion.ul>
       </section>
@@ -112,8 +128,10 @@ export default function ListId() {
                 key={id}
               >
                 <NavigationInput
+                  className="pt-4 pb-2"
                   ref={setInputWrapperElementFromRef(index)}
                   animate={scrollDirection}
+                  placeholder={`Add to ${lists[index].title ? `"${lists[index].title}"` : "list"}`}
                   onFocus={() => {
                     setActiveListIndex(index);
                     setScrollDirection("up");
@@ -160,16 +178,20 @@ export default function ListId() {
           <button
             type="button"
             className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
+            onClick={() => {
+              createList();
+            }}
           >
-            <BookOpen size={ICON_SIZE} />
+            <Plus size={ICON_SIZE} />
           </button>,
           <button
             type="button"
             className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
+            onClick={() => {
+              removeList(lists[activeListIndex].id);
+            }}
           >
-            <Copy size={ICON_SIZE} />
+            <Minus size={ICON_SIZE} />
           </button>,
         ]}
       />

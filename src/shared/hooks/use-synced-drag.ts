@@ -25,7 +25,7 @@ export default function useSyncedDrag({
   const {
     elements: inputWrapperElements,
     setElementFromRef: setInputWrapperElementFromRef,
-  } = useElements<HTMLLIElement>();
+  } = useElements<HTMLDivElement>();
 
   const contentListWidth = useWidthSum(contentElements);
   const inputWrapperElementsWidth = useWidthSum(inputWrapperElements);

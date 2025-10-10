@@ -1,5 +1,12 @@
 import { motion } from "motion/react";
-import { forwardRef, type Ref } from "react";
+import {
+  forwardRef,
+  type FocusEvent,
+  useEffect,
+  useState,
+  type Ref,
+  type HTMLAttributes,
+} from "react";
 
 import {
   INPUT_VARIANTS,
@@ -8,33 +15,35 @@ import {
 
 type Props = {
   animate?: "up" | "down";
-  onFocus?: () => void;
-  onBlur?: () => void;
-};
+  className?: string;
+  value?: string;
+  placeholder?: string;
+} & Omit<
+  HTMLAttributes<HTMLInputElement>,
+  "onDrag" | "onDragEnd" | "onDragStart" | "onAnimationStart"
+>;
 
 export default forwardRef(function NavigationInput(
-  { animate, onFocus, onBlur }: Props,
-  ref: Ref<HTMLLIElement>,
+  { animate, className = "", ...props }: Props,
+  ref: Ref<HTMLDivElement>,
 ) {
   return (
-    <motion.li
+    <motion.div
       animate={animate}
-      className="grid place-items-center pt-4 pb-2"
+      className={`${className} grid place-items-center`}
       initial={false}
       ref={ref}
       variants={INPUT_WRAPPER_VARIANTS}
     >
       <motion.input
+        {...props}
         name="item"
         animate={animate}
-        className="input bg-base-300/80 w-[calc(100vw*0.91)] max-w-xl rounded-xl text-center shadow-xl"
+        className="input bg-base-300/80 w-[calc(100vw*0.92)] max-w-xl rounded-xl text-center shadow-xl"
         initial={false}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        placeholder="Type something"
         type="text"
         variants={INPUT_VARIANTS}
       />
-    </motion.li>
+    </motion.div>
   );
 });

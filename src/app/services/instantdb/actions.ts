@@ -15,6 +15,16 @@ export function createList(title: string = "") {
   );
 }
 
+export function removeList(listId: string) {
+  return db.transact(db.tx.lists[listId].delete());
+}
+
+export function renameList(listId: string, title: string) {
+  return db.transact(
+    db.tx.lists[listId].update({ title, updatedAt: new Date() }),
+  );
+}
+
 const USER_JITTER = true;
 
 export function createItem(

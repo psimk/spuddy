@@ -25,7 +25,7 @@ type Props = {
   prefix?: ReactNode;
   suffix?: ReactNode;
   onChange?: (value: string) => void;
-} & HTMLMotionProps<"div">;
+} & Omit<HTMLMotionProps<"div">, "onChange">;
 
 export default memo(
   forwardRef(function ListItem(
