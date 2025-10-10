@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 export default function useWidthSum(
-  elements: ReadonlyArray<HTMLElement | null>,
+  elements: ReadonlyArray<Nullable<HTMLElement>>,
 ): number {
   return useMemo(
     () =>

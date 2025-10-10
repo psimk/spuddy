@@ -12,7 +12,7 @@ type ListContextType = {
   setListContent: (id: List["id"], items: ReadonlyArray<Item>) => void;
 };
 
-const listContext = createContext<ListContextType | null>(null);
+const listContext = createContext<Nullable<ListContextType>>(null);
 
 const { Provider } = listContext;
 

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import useScrollEvent from "@shared/hooks/use-scroll-event";
 
-export default function useScrollDirection(target: HTMLElement | null) {
+export default function useScrollDirection(target: Nullable<HTMLElement>) {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const scrollDirectionLockRef = useRef(false);
 

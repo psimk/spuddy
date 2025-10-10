@@ -4,7 +4,7 @@ import useEventListener from "@shared/hooks/use-event-listener";
 
 export default function useScrollEvent<T extends HTMLElement>(
   handler: (event: Event) => void,
-  element: T | null,
+  element: Nullable<T>,
 ) {
   useEventListener(
     "scroll",

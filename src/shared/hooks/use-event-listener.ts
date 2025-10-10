@@ -32,7 +32,7 @@ export default function useEventListener<
 export default function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
   handler: (event: DocumentEventMap[K]) => void,
-  element: RefObject<Document | null>,
+  element: RefObject<Nullable<Document>>,
   options?: boolean | AddEventListenerOptions,
 ): void;
 export default function useEventListener<

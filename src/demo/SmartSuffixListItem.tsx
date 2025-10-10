@@ -20,7 +20,7 @@ const DEFAULT_EMOJI = "❓";
 function findClosestEmoji(
   value: string,
   products: ReadonlyArray<Product>,
-): string | null {
+): Nullable<string> {
   const fuse = new Fuse(products, {
     includeScore: true,
     keys: ["variants.en", "variants.lt"],

@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 
 export default function useElements<T extends HTMLElement>() {
-  const [elements, setElements] = useState<Array<T | null>>([]);
+  const [elements, setElements] = useState<Array<Nullable<T>>>([]);
 
   const setElementFromRef = useCallback(
-    (index: number) => (element: T | null) => {
+    (index: number) => (element: Nullable<T>) => {
       setElements((prev) => {
         if (element) {
           if (prev[index] === element) return prev;

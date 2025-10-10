@@ -66,8 +66,8 @@ export function updateItemPositions(
   if (!target || !source) return;
   if (source.id === target.id) return;
 
-  let sourceItem = null;
-  let targetItem = null;
+  let sourceItem: Nullable<Item> = null;
+  let targetItem: Nullable<Item> = null;
 
   for (const item of items) {
     if (item.id === source.id) {
