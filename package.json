@@ -7,7 +7,9 @@
     "build": "astro build",
     "dev": "astro dev",
     "dev:clean": "rm -rf node_modules/{.astro, .vite} ; node --run dev",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "instant:login": "instant-cli login",
+    "instant:push": "instant-cli push"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
@@ -32,6 +34,7 @@
     "@vite-pwa/astro": "^1.1.0",
     "astro": "^5.14.1",
     "daisyui": "^5.1.13",
+    "instant-cli": "^0.22.13",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
