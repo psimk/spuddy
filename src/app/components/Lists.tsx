@@ -4,20 +4,18 @@ import { motion, type PanInfo } from "motion/react";
 
 import useSyncedDrag from "@shared/hooks/use-synced-drag";
 import useScrollDirection from "@shared/hooks/use-scroll-direction";
-
 import NavigationFooter from "@shared/components/NavigationFooter";
 import NavigationInput from "@shared/components/NavigationInput";
 
 import { createItem } from "@app/services/instantdb/actions";
-
-import ListComponent from "./List";
-import { useMainContext } from "./Main";
+import { useListContext } from "@app/contexts/list-context";
+import ListComponent from "@app/components/List";
 
 const ICON_SIZE = 24;
 
 export default function Main() {
   const { lists, activeListIndex, setActiveListIndex, listContent } =
-    useMainContext();
+    useListContext();
   const {
     move,
     setContentElementFromRef,

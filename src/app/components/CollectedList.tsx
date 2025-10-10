@@ -1,7 +1,8 @@
 import { AnimatePresence } from "motion/react";
 
-import type { Item } from "@app/services/instantdb/types";
 import SwipeListItem from "@shared/components/SwipeListItem";
+
+import type { Item } from "@app/services/instantdb/types";
 
 type Props = {
   items: ReadonlyArray<Item>;

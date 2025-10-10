@@ -1,6 +1,6 @@
 const SKELETON_COUNT = 20;
 
-export default function MainSkeleton() {
+export default function ListSkeleton() {
   return (
     <div className="flex flex-1 flex-col">
       <section className="relative mx-auto w-dvw max-w-2xl flex-1 overflow-x-hidden">

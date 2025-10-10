@@ -8,10 +8,9 @@ import {
   unCollectItem,
   updateItemPositions,
 } from "@app/services/instantdb/actions";
-
-import { useMainContext } from "./Main";
-import CollectedList from "./CollectedList";
-import ToGetList from "./ToGetList";
+import { useListContext } from "@app/contexts/list-context";
+import CollectedList from "@app/components/CollectedList";
+import ToGetList from "@app/components/ToGetList";
 
 type Props = {
   id: string;
@@ -26,7 +25,7 @@ export default function List({ id }: Props) {
     itemsQuery({ list: id, completed: true }),
   );
 
-  const { setListContent } = useMainContext();
+  const { setListContent } = useListContext();
 
   useEffect(() => {
     if (!allData?.items) return;

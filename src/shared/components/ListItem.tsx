@@ -57,8 +57,6 @@ export default memo(
       onChange?.(newValue);
     }, []);
 
-    console.log({ globalDragging });
-
     return (
       <li ref={ref} className={`${wrapperClassName} relative touch-none`}>
         <motion.div
