@@ -70,15 +70,42 @@ export default function ListId() {
     [move, setActiveListIndex, activeListIndex, listLength],
   );
 
-  const scrollToBottom = () =>
-    requestAnimationFrame(() => {
-      currentContentElement?.firstElementChild?.lastElementChild?.previousElementSibling?.scrollIntoView(
-        {
-          behavior: "instant",
-          block: "nearest",
-        },
-      );
-    });
+  const createHandleSubmit = useCallback(
+    (index: number) => (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.currentTarget);
+
+      const item = formData.get("item")?.toString() ?? "";
+      if (!item.trim()) return;
+
+      event.currentTarget.reset();
+
+      const list = lists[index];
+      if (!list) return;
+
+      const content = listContent[list.id];
+
+      if (!content) return;
+
+      createItem(item, list.id, content);
+
+      requestAnimationFrame(() => {
+        const contentElement = contentElements[index];
+
+        if (!contentElement) return;
+
+        const lastListItem =
+          contentElement.querySelector("ul")?.lastElementChild
+            ?.previousElementSibling;
+
+        if (!lastListItem) return;
+
+        lastListItem.scrollIntoView({ behavior: "instant", block: "end" });
+      });
+    },
+    [lists, listContent, contentElements],
+  );
 
   const hasMoreThanOneList = lists.length > 1;
 
@@ -113,22 +140,7 @@ export default function ListId() {
             className="absolute bottom-12 flex"
           >
             {lists.map(({ id }, index) => (
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-
-                  const formData = new FormData(event.currentTarget);
-
-                  const item = formData.get("item")?.toString() ?? "";
-                  if (!item.trim()) return;
-
-                  event.currentTarget.reset();
-
-                  createItem(item, id, listContent[id]);
-                  scrollToBottom();
-                }}
-                key={id}
-              >
+              <form onSubmit={createHandleSubmit(index)} key={id}>
                 <NavigationInput
                   className="pt-4 pb-2"
                   ref={setInputWrapperElementFromRef(index)}
