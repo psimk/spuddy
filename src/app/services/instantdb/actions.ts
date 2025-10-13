@@ -2,17 +2,26 @@ import type { move } from "@dnd-kit/helpers";
 import { IndexGenerator } from "fractional-indexing-jittered";
 import { id } from "@instantdb/react";
 
+import invariant from "@shared/utils/invariant";
+
 import db from "./db";
 import type { Item } from "./types";
 
-export function createList(title: string = "") {
-  return db.transact(
-    db.tx.lists[id()].create({
-      title,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  );
+export async function createList(title: string = "") {
+  const userId = (await db.getAuth())?.id;
+  invariant(userId, "User must be authenticated to create a list");
+
+  const listId = id();
+
+  return db.transact([
+    db.tx.lists[listId]
+      .create({
+        title,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+      .link({ owner: userId }),
+  ]);
 }
 
 export function removeList(listId: string) {
@@ -27,26 +36,38 @@ export function renameList(listId: string, title: string) {
 
 const USER_JITTER = true;
 
-export function createItem(
+export async function createItem(
   text: string,
   listId: string,
   existingItems: ReadonlyArray<Item>,
 ) {
   const itemId = id();
+  const userId = (await db.getAuth())?.id;
+  invariant(userId, "User must be authenticated to create a list");
 
-  return db.transact([
-    db.tx.items[itemId].create({
-      text: text,
-      done: false,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-      order: new IndexGenerator(
-        existingItems.map((item) => item.order),
-        { useJitter: USER_JITTER },
-      ).keyEnd(),
-    }),
-    db.tx.lists[listId].link({ items: itemId }),
-  ]);
+  const promise = db.transact(
+    db.tx.items[itemId]
+      .create({
+        text: text,
+        done: false,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        order: new IndexGenerator(
+          existingItems.map((item) => item.order),
+          { useJitter: USER_JITTER },
+        ).keyEnd(),
+      })
+      .link({
+        list: listId,
+        owner: userId,
+      }),
+  );
+
+  promise.catch((e) => {
+    console.error("Failed to create item", e);
+  });
+
+  return promise;
 }
 
 export function collectItem(itemId: string) {
