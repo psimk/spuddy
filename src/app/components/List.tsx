@@ -89,6 +89,7 @@ export default function List({ id, disableAutoScroll }: Props) {
     <>
       <div className="sticky top-0 z-10 pb-4">
         <NavigationInput
+          className="backdrop-blur-md"
           value={listTitle}
           onChange={(event) => setListTitle(event.currentTarget.value)}
           onBlur={(event) => {

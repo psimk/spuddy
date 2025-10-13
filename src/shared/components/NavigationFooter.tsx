@@ -24,7 +24,7 @@ export default function NavigationFooter({
         variants={FOOTER_VARIANTS}
         animate={animate}
         initial={false}
-        className="fixed bottom-0 flex w-dvw flex-col items-center justify-center overflow-hidden inset-shadow-sm backdrop-blur-lg"
+        className="fixed bottom-0 flex w-dvw flex-col items-center justify-center overflow-hidden inset-shadow-sm backdrop-blur-md"
       >
         <div className="mx-auto w-full max-w-2xl">{inputs}</div>
         <motion.nav
