@@ -99,6 +99,8 @@ export default function ListId() {
             </li>
           ))}
         </motion.ul>
+        <div className="to-base-100 absolute top-0 left-[-1px] h-full w-4 bg-linear-to-l from-transparent" />
+        <div className="to-base-100 absolute top-0 right-[-1px] h-full w-4 bg-linear-to-r from-transparent" />
       </section>
       <NavigationFooter
         animate={scrollDirection}
