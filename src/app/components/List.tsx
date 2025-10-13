@@ -60,7 +60,7 @@ export default function List({ id, disableAutoScroll }: Props) {
 
   return (
     <>
-      <div className="sticky top-0">
+      <div className="sticky top-0 z-10 pb-4">
         <NavigationInput
           value={listTitle}
           onChange={(event) => setListTitle(event.currentTarget.value)}
