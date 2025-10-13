@@ -1,4 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ChangeEvent,
+  type FocusEvent,
+} from "react";
 
 import db from "@app/services/instantdb/db";
 import { itemsQuery, listQuery } from "@app/services/instantdb/queries";
@@ -75,6 +82,21 @@ export default function List({ id, disableAutoScroll }: Props) {
     setListTitle(queriedListTitle);
   }, [queriedListTitle]);
 
+  const handleTitleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) =>
+      setListTitle(event.currentTarget.value),
+    [],
+  );
+
+  const handleTitleInputBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      const title = event.currentTarget.value.trim();
+
+      renameList(id, title);
+    },
+    [id],
+  );
+
   if (toGetItems.length === 0 && collectedItems.length === 0) {
     return (
       <div className="grid h-full place-items-center text-center">
@@ -91,15 +113,9 @@ export default function List({ id, disableAutoScroll }: Props) {
         <NavigationInput
           className="backdrop-blur-md"
           value={listTitle}
-          onChange={(event) => setListTitle(event.currentTarget.value)}
-          onBlur={(event) => {
-            if (!listTitle) return;
-
-            const title = event.currentTarget.value.trim();
-
-            renameList(id, title);
-          }}
-          placeholder="list title"
+          onChange={handleTitleInputChange}
+          onBlur={handleTitleInputBlur}
+          placeholder="untitled list"
         />
       </div>
       {toGetItems.length === 0 && collectedItems.length > 0 ? (
