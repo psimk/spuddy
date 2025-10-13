@@ -46,7 +46,7 @@ export default function ListId() {
     const list = lists[activeListIndex];
     if (!list) return;
 
-    document.title = `Spuddy | ${list.title}`;
+    document.title = `Spuddy | ${list.title || "Untitled List"}`;
   }, [activeListIndex, lists]);
 
   const currentContentElement = contentElements[activeListIndex] ?? null;
