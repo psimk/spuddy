@@ -114,7 +114,7 @@ export default function ListId() {
       <section className="relative mx-auto w-dvw max-w-2xl flex-1 overflow-x-hidden">
         <motion.ul
           {...contentListProps}
-          className="relative flex h-full w-dvw max-w-2xl"
+          className="relative flex h-screen w-dvw max-w-2xl"
         >
           {lists.map(({ id }, index) => (
             <li

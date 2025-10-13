@@ -50,7 +50,7 @@ export default function List({
         onReorder(items, event);
       }}
     >
-      <ul className="list h-auto min-h-full">
+      <ul className="list min-h-full">
         <li className="rounded-t-box bg-base-200 mt-auto grid w-full place-items-center shadow-md">
           <div className="divider my-2 w-1/2" />
         </li>
