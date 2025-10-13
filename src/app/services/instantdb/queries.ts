@@ -33,7 +33,6 @@ export function itemsQuery({
     items: {
       $: {
         where: { done: completed, list },
-        order: { order: "asc" },
       },
     },
   });

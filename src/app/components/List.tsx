@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import db from "@app/services/instantdb/db";
 import { itemsQuery, listQuery } from "@app/services/instantdb/queries";
@@ -31,11 +31,41 @@ export default function List({ id, disableAutoScroll }: Props) {
 
   const { setListContent } = useListContext();
 
-  useEffect(() => {
-    if (!allData?.items) return;
+  const allItems = useMemo(
+    () =>
+      allData?.items?.toSorted((a, b) => {
+        if (a.order < b.order) return -1;
+        if (a.order > b.order) return 1;
+        return 0;
+      }),
+    [allData],
+  );
 
-    setListContent(id, allData.items);
-  }, [allData, setListContent, id]);
+  const toGetItems = useMemo(
+    () =>
+      toGetData?.items?.toSorted((a, b) => {
+        if (a.order < b.order) return -1;
+        if (a.order > b.order) return 1;
+        return 0;
+      }) ?? [],
+    [toGetData],
+  );
+
+  const collectedItems = useMemo(
+    () =>
+      collectedData?.items?.toSorted((a, b) => {
+        if (a.order < b.order) return -1;
+        if (a.order > b.order) return 1;
+        return 0;
+      }) ?? [],
+    [collectedData],
+  );
+
+  useEffect(() => {
+    if (!allItems) return;
+
+    setListContent(id, allItems);
+  }, [allItems, setListContent, id]);
 
   const queriedListTitle = listsData?.lists?.[0].title ?? "";
 
@@ -44,9 +74,6 @@ export default function List({ id, disableAutoScroll }: Props) {
   useEffect(() => {
     setListTitle(queriedListTitle);
   }, [queriedListTitle]);
-
-  const toGetItems = toGetData?.items ?? [];
-  const collectedItems = collectedData?.items ?? [];
 
   if (toGetItems.length === 0 && collectedItems.length === 0) {
     return (
