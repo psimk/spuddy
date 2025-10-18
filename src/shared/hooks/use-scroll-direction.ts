@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import useScrollEvent from "@shared/hooks/use-scroll-event";
+import useDebounce from "@shared/hooks/use-debounce";
 
 export default function useScrollDirection(target: Nullable<HTMLElement>) {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
@@ -8,20 +9,31 @@ export default function useScrollDirection(target: Nullable<HTMLElement>) {
 
   let previousScrollTop = target?.scrollTop ?? 0;
 
-  useScrollEvent(() => {
-    if (scrollDirectionLockRef.current) return;
-    if (!target) return;
+  useScrollEvent(
+    useDebounce(() => {
+      if (scrollDirectionLockRef.current) return;
+      if (!target) return;
 
-    const scrollTop = target.scrollTop ?? 0;
+      const scrollTop = target.scrollTop ?? 0;
 
-    const diff = scrollTop - previousScrollTop;
+      const diff = scrollTop - previousScrollTop;
 
-    const direction = Math.sign(diff) > 0 ? "down" : "up";
+      const direction = Math.sign(diff) > 0 ? "down" : "up";
+      const progress = target.scrollHeight - target.clientHeight - scrollTop;
 
-    setScrollDirection(direction);
+      // TODO: how to configure this threshold?
+      if (progress <= 20) {
+        setScrollDirection("up");
+        previousScrollTop = scrollTop;
+        return;
+      }
 
-    previousScrollTop = scrollTop;
-  }, target);
+      setScrollDirection(direction);
+
+      previousScrollTop = scrollTop;
+    }, 10),
+    target,
+  );
 
   return { scrollDirection, setScrollDirection, scrollDirectionLockRef };
 }
