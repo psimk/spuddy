@@ -13,9 +13,9 @@ export default function App() {
       <db.SignedIn>
         <BrowserRouter basename="/app">
           <Routes>
-            <Route element={<ListLayout />}>
-              <Route index element={<ListRedirect />} />
-              <Route path=":listId" element={<ListId />} />
+            <Route index element={<ListRedirect />} />
+            <Route path=":listId" element={<ListLayout />}>
+              <Route index element={<ListId />} />
             </Route>
           </Routes>
         </BrowserRouter>

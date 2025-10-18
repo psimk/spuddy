@@ -34,19 +34,17 @@ export default function ListId() {
     contentGap: 16,
   });
 
-  useEffect(() => {
-    const list = lists[activeListIndex];
-    if (!list) return;
-
-    document.title = `Spuddy | ${list.title || "Untitled List"}`;
-  }, [activeListIndex, lists]);
-
   const currentContentElement = contentElements[activeListIndex] ?? null;
 
   const { scrollDirection, setScrollDirection, scrollDirectionLockRef } =
     useScrollDirection(currentContentElement);
 
   const listLength = lists.length;
+
+  useEffect(() => {
+    // TODO: not sure if this is legal
+    move(activeListIndex, 0);
+  }, [activeListIndex, move]);
 
   const handleDragEnd = useCallback(
     (_: unknown, { velocity, offset }: PanInfo) => {
