@@ -23,6 +23,7 @@ import {
 } from "@app/services/instantdb/actions";
 import { useListContext } from "@app/contexts/list-context";
 import ListComponent from "@app/components/List";
+import ListContentSetter from "@app/components/ListContentSetter";
 
 const ICON_SIZE = 24;
 
@@ -123,6 +124,7 @@ export default function ListId() {
               className="h-full w-full max-w-full shrink-0 overflow-x-hidden overflow-y-scroll p-4 pb-29"
             >
               <ListComponent disableAutoScroll={hasMoreThanOneList} id={id} />
+              <ListContentSetter list={id} />
             </li>
           ))}
         </motion.ul>
