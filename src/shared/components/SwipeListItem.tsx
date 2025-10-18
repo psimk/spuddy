@@ -58,7 +58,11 @@ export default memo(
         dragConstraints={{ left: -ACTION_WIDTH, right: ACTION_WIDTH }}
         dragElastic={0.5}
       >
-        <motion.ul className="absolute top-0 left-0 -z-1 m-0 flex h-full w-full overflow-hidden p-0 p-0.5 text-lg [&_li]:flex-1 [&_li]:p-4 [&_li]:font-bold [&>li:first-child]:text-left [&>li:last-child]:text-right">
+        <motion.ul
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0 }}
+          className="absolute top-0 left-0 -z-1 m-0 flex h-full w-full overflow-hidden p-0.5 text-lg [&_li]:flex-1 [&_li]:p-4 [&_li]:font-bold [&>li:first-child]:text-left [&>li:last-child]:text-right"
+        >
           {children}
         </motion.ul>
       </ListItem>
