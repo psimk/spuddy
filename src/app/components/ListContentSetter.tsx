@@ -1,9 +1,10 @@
 import { memo, useEffect, useMemo } from "react";
 
+import orderSorter from "@shared/utils/order-sorter";
+
+import { useListContext } from "@app/contexts/list-context";
 import db from "@app/services/instantdb/db";
 import { itemsQuery } from "@app/services/instantdb/queries";
-import { useListContext } from "@app/contexts/list-context";
-import orderSorter from "@shared/utils/order-sorter";
 
 export default memo(function ListContentSetter({ list }: { list: string }) {
   const { data: allData } = db.useQuery(itemsQuery({ list }));

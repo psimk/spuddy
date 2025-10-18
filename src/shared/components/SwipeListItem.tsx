@@ -1,12 +1,12 @@
+import { type PanInfo, animate, motion, useMotionValue } from "motion/react";
 import {
-  forwardRef,
-  memo,
-  useCallback,
   type ComponentProps,
   type PropsWithChildren,
   type Ref,
+  forwardRef,
+  memo,
+  useCallback,
 } from "react";
-import { animate, motion, useMotionValue, type PanInfo } from "motion/react";
 
 import ListItem from "@shared/components/ListItem";
 

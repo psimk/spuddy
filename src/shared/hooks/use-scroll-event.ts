@@ -1,4 +1,4 @@
-import { createRef, useMemo, type RefObject } from "react";
+import { type RefObject, createRef, useMemo } from "react";
 
 import useEventListener from "@shared/hooks/use-event-listener";
 

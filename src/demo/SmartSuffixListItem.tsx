@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { useCallback, useState, type ComponentProps } from "react";
+import { type ComponentProps, useCallback, useState } from "react";
 
 import ListItem from "@shared/components/ListItem";
 

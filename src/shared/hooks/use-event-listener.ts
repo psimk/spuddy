@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-
 import type { RefObject } from "react";
 
 export default function useEventListener<

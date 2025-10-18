@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { Outlet } from "react-router";
 
-import type { Item, List } from "@app/services/instantdb/types";
-import useInstantLists from "@app/hooks/use-instant-lists";
 import { ListContextProvider } from "@app/contexts/list-context";
+import useInstantLists from "@app/hooks/use-instant-lists";
+import type { Item, List } from "@app/services/instantdb/types";
 
 import MainSkeleton from "./ListSkeleton";
 

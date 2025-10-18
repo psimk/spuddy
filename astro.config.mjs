@@ -1,14 +1,10 @@
 // @ts-check
+import cloudflare from "@astrojs/cloudflare";
+import partytown from "@astrojs/partytown";
+import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
 import astroPwa from "@vite-pwa/astro";
 import { defineConfig, fontProviders } from "astro/config";
-
-import react from "@astrojs/react";
-
-import tailwindcss from "@tailwindcss/vite";
-
-import partytown from "@astrojs/partytown";
-
-import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({

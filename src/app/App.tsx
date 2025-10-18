@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import db from "@app/services/instantdb/db";
 import ListLayout from "@app/layouts/ListLayout";
 import GuestLogin from "@app/routes/guest-login";
 import ListId from "@app/routes/list-id";
+import db from "@app/services/instantdb/db";
+
 import ListRedirect from "./routes/list-redirect";
 
 export default function App() {

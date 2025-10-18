@@ -1,6 +1,6 @@
 import type { move } from "@dnd-kit/helpers";
-import { IndexGenerator } from "fractional-indexing-jittered";
 import { id } from "@instantdb/react";
+import { IndexGenerator } from "fractional-indexing-jittered";
 
 import invariant from "@shared/utils/invariant";
 

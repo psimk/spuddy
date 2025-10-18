@@ -1,7 +1,7 @@
-import type { FeedbackType } from "@dnd-kit/dom";
-import type { ComponentProps, PropsWithChildren } from "react";
-import { useSortable } from "@dnd-kit/react/sortable";
 import { CollisionPriority } from "@dnd-kit/abstract";
+import type { FeedbackType } from "@dnd-kit/dom";
+import { useSortable } from "@dnd-kit/react/sortable";
+import type { ComponentProps, PropsWithChildren } from "react";
 
 import Section from "@shared/components/Section";
 

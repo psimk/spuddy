@@ -1,18 +1,17 @@
-import { motion, type HTMLMotionProps, type MotionStyle } from "motion/react";
+import { type HTMLMotionProps, type MotionStyle, motion } from "motion/react";
 import {
-  forwardRef,
-  memo,
-  useCallback,
-  useState,
   type CSSProperties,
   type PropsWithChildren,
   type ReactNode,
   type Ref,
+  forwardRef,
+  memo,
+  useCallback,
+  useState,
 } from "react";
 
-import useGlobalDragging from "@shared/hooks/use-global-dragging";
-
 import AutoHeightTextArea from "@shared/components/AutoHeightTextArea";
+import useGlobalDragging from "@shared/hooks/use-global-dragging";
 
 type Props = {
   id: string;

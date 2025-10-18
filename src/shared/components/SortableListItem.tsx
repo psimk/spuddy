@@ -1,7 +1,7 @@
-import { type ComponentProps } from "react";
-import { Grip } from "lucide-react";
-import { useSortable } from "@dnd-kit/react/sortable";
 import type { FeedbackType } from "@dnd-kit/dom";
+import { useSortable } from "@dnd-kit/react/sortable";
+import { Grip } from "lucide-react";
+import { type ComponentProps } from "react";
 
 import SwipeListItem from "@shared/components/SwipeListItem";
 

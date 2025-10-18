@@ -1,23 +1,23 @@
-import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
-import { AnimatePresence } from "motion/react";
-import { move } from "@dnd-kit/helpers";
-
-import dragDropManager from "@shared/singletons/drag-drop-manager";
-import SortableListItem from "@shared/components/SortableListItem";
-import ListItem from "@shared/components/ListItem";
-
-import type { Item } from "@app/services/instantdb/types";
 import {
   Accessibility,
   AutoScroller,
   Cursor,
-  defaultPreset,
   Feedback,
   PreventSelection,
-  Scroller,
   ScrollListener,
+  Scroller,
+  defaultPreset,
 } from "@dnd-kit/dom";
+import { move } from "@dnd-kit/helpers";
+import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { Grip } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+
+import ListItem from "@shared/components/ListItem";
+import SortableListItem from "@shared/components/SortableListItem";
+import dragDropManager from "@shared/singletons/drag-drop-manager";
+
+import type { Item } from "@app/services/instantdb/types";
 
 type Props = {
   items: ReadonlyArray<Item>;

@@ -1,16 +1,17 @@
 import {
+  type ChangeEvent,
+  type FocusEvent,
   memo,
   useCallback,
   useEffect,
   useState,
-  type ChangeEvent,
-  type FocusEvent,
 } from "react";
 
+import NavigationInput from "@shared/components/NavigationInput";
+
+import { renameList } from "@app/services/instantdb/actions";
 import db from "@app/services/instantdb/db";
 import { listQuery } from "@app/services/instantdb/queries";
-import { renameList } from "@app/services/instantdb/actions";
-import NavigationInput from "@shared/components/NavigationInput";
 
 export default memo(function ListTitleInput({ list }: { list: string }) {
   const { data: listsData } = db.useQuery(listQuery(list));

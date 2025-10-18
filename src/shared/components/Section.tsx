@@ -1,5 +1,5 @@
 import { Grip } from "lucide-react";
-import { forwardRef, type PropsWithChildren, type Ref } from "react";
+import { type PropsWithChildren, type Ref, forwardRef } from "react";
 
 type Props = { title: string; handleRef?: Ref<HTMLElement> };
 

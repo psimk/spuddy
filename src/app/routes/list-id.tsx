@@ -1,29 +1,20 @@
-import {
-  BookOpen,
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  Minus,
-  Plus,
-  Share,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, Share } from "lucide-react";
+import { type PanInfo, motion } from "motion/react";
 import { useCallback, useEffect } from "react";
-import { motion, type PanInfo } from "motion/react";
-
-import useSyncedDrag from "@shared/hooks/use-synced-drag";
-import useScrollDirection from "@shared/hooks/use-scroll-direction";
 
 import NavigationFooter from "@shared/components/NavigationFooter";
 import NavigationInput from "@shared/components/NavigationInput";
+import useScrollDirection from "@shared/hooks/use-scroll-direction";
+import useSyncedDrag from "@shared/hooks/use-synced-drag";
 
+import ListComponent from "@app/components/List";
+import ListContentSetter from "@app/components/ListContentSetter";
+import { useListContext } from "@app/contexts/list-context";
 import {
   createItem,
   createList,
   removeList,
 } from "@app/services/instantdb/actions";
-import { useListContext } from "@app/contexts/list-context";
-import ListComponent from "@app/components/List";
-import ListContentSetter from "@app/components/ListContentSetter";
 
 const ICON_SIZE = 24;
 

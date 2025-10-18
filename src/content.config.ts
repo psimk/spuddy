@@ -1,6 +1,5 @@
-import { defineCollection, z } from "astro:content";
-
 import { file, glob } from "astro/loaders";
+import { defineCollection, z } from "astro:content";
 
 const products = defineCollection({
   loader: file("./src/content/products.json"),

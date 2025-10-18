@@ -1,10 +1,10 @@
+import { MotionConfig, motion } from "motion/react";
 import { Children, type ReactNode } from "react";
-import { motion, MotionConfig } from "motion/react";
 
 import {
-  TRANSITION_CONFIG,
   FOOTER_VARIANTS,
   NAV_VARIANTS,
+  TRANSITION_CONFIG,
 } from "@shared/components/NavigationFooter.motion";
 
 type Props = {

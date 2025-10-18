@@ -1,4 +1,5 @@
 import type { InstantRules } from "@instantdb/react";
+
 import type { Schema } from "./types";
 
 const rules = {

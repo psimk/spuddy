@@ -1,18 +1,18 @@
 import { useMemo } from "react";
 
-import db from "@app/services/instantdb/db";
-import { itemsQuery } from "@app/services/instantdb/queries";
+import orderSorter from "@shared/utils/order-sorter";
+
+import CollectedList from "@app/components/CollectedList";
+import ListTitleInput from "@app/components/ListTitleInput";
+import ToGetList from "@app/components/ToGetList";
 import {
   collectItem,
   removeItem,
   unCollectItem,
   updateItemPositions,
 } from "@app/services/instantdb/actions";
-import CollectedList from "@app/components/CollectedList";
-import ToGetList from "@app/components/ToGetList";
-import orderSorter from "@shared/utils/order-sorter";
-
-import ListTitleInput from "@app/components/ListTitleInput";
+import db from "@app/services/instantdb/db";
+import { itemsQuery } from "@app/services/instantdb/queries";
 
 type Props = {
   id: string;
