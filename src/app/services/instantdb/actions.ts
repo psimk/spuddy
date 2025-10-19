@@ -7,6 +7,22 @@ import invariant from "@shared/utils/invariant";
 import db from "./db";
 import type { Item } from "./types";
 
+export async function signOut() {
+  return db.auth.signOut();
+}
+
+export async function signInAsGuest() {
+  return db.auth.signInAsGuest();
+}
+
+export async function sendMagicCode(email: string) {
+  return db.auth.sendMagicCode({ email });
+}
+
+export async function signInWithMagicCode(email: string, code: string) {
+  return db.auth.signInWithMagicCode({ email, code });
+}
+
 export async function createList(title: string = "") {
   const userId = (await db.getAuth())?.id;
   invariant(userId, "User must be authenticated to create a list");

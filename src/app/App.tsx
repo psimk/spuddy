@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import ListLayout from "@app/layouts/ListLayout";
-import GuestLogin from "@app/routes/guest-login";
 import ListId from "@app/routes/list-id";
 import db from "@app/services/instantdb/db";
 
 import ListRedirect from "./routes/list-redirect";
+import Login from "./routes/login";
 
 export default function App() {
   return (
@@ -21,7 +21,7 @@ export default function App() {
         </BrowserRouter>
       </db.SignedIn>
       <db.SignedOut>
-        <GuestLogin />
+        <Login />
       </db.SignedOut>
     </>
   );
