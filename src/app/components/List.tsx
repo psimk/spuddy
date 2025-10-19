@@ -39,24 +39,26 @@ export default function List({ id, disableAutoScroll }: Props) {
 
   if (toGetItems.length === 0 && collectedItems.length === 0) {
     return (
-      <>
+      <div className="h-full">
         <ListTitleInput list={id} />
         <div className="grid h-full place-items-center text-center">
           <p className="text-base-content max-w-xs">
             Use the input below, to add some items.
           </p>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
     <>
-      <ListTitleInput list={id} />
       {toGetItems.length === 0 && collectedItems.length > 0 ? (
-        <div className="grid h-full place-items-center text-center">
-          <p className="text-base-content">All items have been collected.</p>
-        </div>
+        <>
+          <ListTitleInput list={id} />
+          <div className="grid h-full place-items-center text-center">
+            <p className="text-base-content">All items have been collected.</p>
+          </div>
+        </>
       ) : (
         <ToGetList
           disableAutoScroll={disableAutoScroll}
@@ -64,7 +66,11 @@ export default function List({ id, disableAutoScroll }: Props) {
           onReorder={updateItemPositions}
           onRemove={removeItem}
           onCollect={collectItem}
-        />
+        >
+          <li>
+            <ListTitleInput list={id} />
+          </li>
+        </ToGetList>
       )}
       {collectedItems.length > 0 && (
         <>
