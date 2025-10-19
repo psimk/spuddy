@@ -7,26 +7,9 @@ import type { Item, List } from "@app/services/instantdb/types";
 
 import ListSkeleton from "./ListSkeleton";
 
-export default function ListLayout() {
+function useActiveListIndex(lists: ReadonlyArray<List>) {
   let { listId } = useParams();
   const navigate = useNavigate();
-
-  const { data, isLoading, error } = useInstantLists();
-  const [listContent, setListContentState] = useState<
-    Record<string, ReadonlyArray<Item>>
-  >({});
-
-  const setListContent = useCallback(
-    (id: List["id"], items: ReadonlyArray<Item>) =>
-      setListContentState((prev) => ({ ...prev, [id]: items })),
-    [],
-  );
-
-  const lists = data?.lists ?? [];
-
-  useEffect(() => {
-    if (lists.length > 0) return;
-  }, [lists, listId, navigate]);
 
   const setActiveListIndex = useCallback(
     (index: number) => {
@@ -52,6 +35,31 @@ export default function ListLayout() {
 
     navigate("/", { replace: true });
   }, [activeListIndex, navigate, lists]);
+
+  return { activeListIndex, setActiveListIndex };
+}
+
+function useListContentState() {
+  const [listContent, setListContentState] = useState<
+    Record<string, ReadonlyArray<Item>>
+  >({});
+
+  const setListContent = useCallback(
+    (id: List["id"], items: ReadonlyArray<Item>) =>
+      setListContentState((prev) => ({ ...prev, [id]: items })),
+    [],
+  );
+
+  return { listContent, setListContent };
+}
+
+export default function ListLayout() {
+  const { data, isLoading, error } = useInstantLists();
+
+  const lists = data?.lists ?? [];
+
+  const { activeListIndex, setActiveListIndex } = useActiveListIndex(lists);
+  const { listContent, setListContent } = useListContentState();
 
   const activeList = lists[activeListIndex];
 
