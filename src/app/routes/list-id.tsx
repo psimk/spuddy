@@ -1,4 +1,11 @@
-import { ChevronLeft, ChevronRight, Minus, Plus, Share } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  LogOut,
+  Minus,
+  Plus,
+  Share,
+} from "lucide-react";
 import { type PanInfo, motion } from "motion/react";
 import { useCallback, useEffect } from "react";
 
@@ -14,7 +21,9 @@ import {
   createItem,
   createList,
   removeList,
+  signOut,
 } from "@app/services/instantdb/actions";
+import db from "@app/services/instantdb/db";
 
 const ICON_SIZE = 24;
 
@@ -151,55 +160,47 @@ export default function ListId() {
             ))}
           </motion.ul>
         }
-        buttons={[
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
-          >
-            <ChevronLeft size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
-          >
-            <ChevronRight size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
-            onClick={() => {
-              navigator.share?.({
-                title: document.title,
-                text: currentContentElement?.innerText,
-                url: window.location.href,
-              }) ?? alert("Share is not supported on this browser.");
-            }}
-          >
-            <Share size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            onClick={() => {
-              createList();
-            }}
-          >
-            <Plus size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            onClick={() => {
-              removeList(lists[activeListIndex].id);
-            }}
-          >
-            <Minus size={ICON_SIZE} />
-          </button>,
-        ]}
-      />
+      >
+        <NavigationFooterButtons />
+      </NavigationFooter>
     </div>
+  );
+}
+
+function NavigationFooterButtons() {
+  const { isLoading, error, user } = db.useAuth();
+
+  if (user?.isGuest) {
+    return (
+      <ul className="px-4 py-2 flex justify-between">
+        <li className="flex-1">
+          <button type="button" className="btn btn-ghost w-full ml-7" disabled>
+            Login with Email
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            className="btn btn-ghost not-disabled:text-neutral/75"
+            onClick={signOut}
+          >
+            <LogOut size={ICON_SIZE} />
+          </button>
+        </li>
+      </ul>
+    );
+  }
+
+  return (
+    <ul className="flex justify-center gap-4 px-8 pb-4">
+      <li>
+        <button
+          type="button"
+          className="btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
+        >
+          <Share size={ICON_SIZE} />
+        </button>
+      </li>
+    </ul>
   );
 }

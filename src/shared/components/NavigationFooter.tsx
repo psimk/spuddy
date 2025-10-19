@@ -1,5 +1,5 @@
 import { MotionConfig, motion } from "motion/react";
-import { Children, type ReactNode } from "react";
+import { Children, type PropsWithChildren, type ReactNode } from "react";
 
 import {
   FOOTER_VARIANTS,
@@ -16,8 +16,8 @@ type Props = {
 export default function NavigationFooter({
   animate = "up",
   inputs,
-  buttons,
-}: Props) {
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <MotionConfig transition={TRANSITION_CONFIG}>
       <motion.footer
@@ -33,11 +33,7 @@ export default function NavigationFooter({
           initial={false}
           className="mx-auto w-full max-w-2xl overflow-hidden"
         >
-          <ul className="flex justify-between gap-4 px-8 pb-4">
-            {Children.map(buttons, (button, index) => (
-              <li key={index}>{button}</li>
-            ))}
-          </ul>
+          {children}
         </motion.nav>
       </motion.footer>
     </MotionConfig>

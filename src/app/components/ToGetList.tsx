@@ -12,6 +12,7 @@ import { move } from "@dnd-kit/helpers";
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { Grip } from "lucide-react";
 import { AnimatePresence } from "motion/react";
+import type { PropsWithChildren } from "react";
 
 import ListItem from "@shared/components/ListItem";
 import SortableListItem from "@shared/components/SortableListItem";
@@ -36,7 +37,8 @@ export default function List({
   onCollect,
   onRemove,
   disableAutoScroll,
-}: Props) {
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <DragDropProvider
       plugins={
@@ -51,6 +53,7 @@ export default function List({
       }}
     >
       <ul className="list min-h-full">
+        {children}
         <li className="rounded-t-box bg-base-200 mt-auto grid w-full place-items-center shadow-md">
           <div className="divider my-2 w-1/2" />
         </li>

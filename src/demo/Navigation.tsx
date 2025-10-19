@@ -98,60 +98,71 @@ export default function Navigation({ posts }: Props) {
             ))}
           </motion.ul>
         }
-        buttons={[
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled={activeListIndex === 0}
-            onClick={() => {
-              const newPage = Math.max(0, activeListIndex - 1);
-              move(newPage, 0);
-              setActiveListIndex(newPage);
-            }}
-          >
-            <ChevronLeft size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled={activeListIndex === posts.length - 1}
-            onClick={() => {
-              const newPage = Math.min(posts.length - 1, activeListIndex + 1);
-              move(newPage, 0);
-              setActiveListIndex(newPage);
-            }}
-          >
-            <ChevronRight size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            onClick={() => {
-              navigator.share?.({
-                title: document.title,
-                text: currentContentElement?.innerText,
-                url: window.location.href,
-              }) ?? alert("Share is not supported on this browser.");
-            }}
-          >
-            <Share size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
-          >
-            <BookOpen size={ICON_SIZE} />
-          </button>,
-          <button
-            type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
-            disabled
-          >
-            <Copy size={ICON_SIZE} />
-          </button>,
-        ]}
-      />
+      >
+        <ul className="flex justify-between gap-4 px-8 pb-4">
+          <li>
+            <button
+              type="button"
+              className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
+              disabled={activeListIndex === 0}
+              onClick={() => {
+                const newPage = Math.max(0, activeListIndex - 1);
+                move(newPage, 0);
+                setActiveListIndex(newPage);
+              }}
+            >
+              <ChevronLeft size={ICON_SIZE} />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
+              disabled={activeListIndex === posts.length - 1}
+              onClick={() => {
+                const newPage = Math.min(posts.length - 1, activeListIndex + 1);
+                move(newPage, 0);
+                setActiveListIndex(newPage);
+              }}
+            >
+              <ChevronRight size={ICON_SIZE} />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
+              onClick={() => {
+                navigator.share?.({
+                  title: document.title,
+                  text: currentContentElement?.innerText,
+                  url: window.location.href,
+                }) ?? alert("Share is not supported on this browser.");
+              }}
+            >
+              <Share size={ICON_SIZE} />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
+              disabled
+            >
+              <BookOpen size={ICON_SIZE} />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="btn btn-ghost btn-circle not-disabled:text-primary/75 h-full w-full"
+              disabled
+            >
+              <Copy size={ICON_SIZE} />
+            </button>
+          </li>
+        </ul>
+      </NavigationFooter>
     </div>
   );
 }
