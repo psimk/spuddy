@@ -11,7 +11,7 @@ export default function App() {
   return (
     <>
       <db.SignedIn>
-        <BrowserRouter basename="/app">
+        <BrowserRouter>
           <Routes>
             <Route index element={<ListRedirect />} />
             <Route path=":listId" element={<ListLayout />}>
