@@ -22,6 +22,16 @@ export function listQuery(id: string) {
   });
 }
 
+export function userByEmailQuery(email: string) {
+  return query({
+    $users: {
+      $: {
+        where: { email },
+      },
+    },
+  });
+}
+
 export function itemsQuery({
   list,
   completed,

@@ -23,6 +23,14 @@ export default i.schema({
       forward: { on: "lists", has: "one", label: "owner", onDelete: "cascade" },
       reverse: { on: "$users", has: "many", label: "lists" },
     },
+    listCollaborators: {
+      forward: {
+        on: "lists",
+        has: "many",
+        label: "collaborators",
+      },
+      reverse: { on: "$users", has: "many", label: "collaboratingLists" },
+    },
     listItems: {
       forward: { on: "lists", has: "many", label: "items" },
       reverse: { on: "items", has: "one", label: "list" },

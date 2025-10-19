@@ -66,12 +66,20 @@ export default function ListLayout() {
   const value = useMemo(
     () => ({
       lists: data?.lists ?? [],
+      activeList,
       listContent,
       setListContent,
       activeListIndex,
       setActiveListIndex,
     }),
-    [data, listContent, setListContent, activeListIndex, setActiveListIndex],
+    [
+      data,
+      listContent,
+      activeList,
+      setListContent,
+      activeListIndex,
+      setActiveListIndex,
+    ],
   );
 
   useEffect(() => {

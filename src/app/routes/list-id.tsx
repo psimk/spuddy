@@ -7,13 +7,14 @@ import {
   Share,
 } from "lucide-react";
 import { type PanInfo, motion } from "motion/react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import NavigationFooter from "@shared/components/NavigationFooter";
 import NavigationInput from "@shared/components/NavigationInput";
 import useScrollDirection from "@shared/hooks/use-scroll-direction";
 import useSyncedDrag from "@shared/hooks/use-synced-drag";
 
+import EmailDialog from "@app/components/EmailDialog";
 import ListComponent from "@app/components/List";
 import ListContentSetter from "@app/components/ListContentSetter";
 import { useListContext } from "@app/contexts/list-context";
@@ -169,6 +170,7 @@ export default function ListId() {
 
 function NavigationFooterButtons() {
   const { isLoading, error, user } = db.useAuth();
+  const shareDialogRef = useRef<HTMLDialogElement>(null);
 
   if (user?.isGuest) {
     return (
@@ -192,15 +194,21 @@ function NavigationFooterButtons() {
   }
 
   return (
-    <ul className="flex justify-center gap-4 px-8 pb-4">
-      <li>
-        <button
-          type="button"
-          className="btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
-        >
-          <Share size={ICON_SIZE} />
-        </button>
-      </li>
-    </ul>
+    <>
+      <ul className="flex justify-center gap-4 px-8 pb-4">
+        <li>
+          <button
+            type="button"
+            className="btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
+            onClick={() => {
+              shareDialogRef.current?.showModal();
+            }}
+          >
+            <Share size={ICON_SIZE} />
+          </button>
+        </li>
+      </ul>
+      <EmailDialog ref={shareDialogRef} />
+    </>
   );
 }

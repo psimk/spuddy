@@ -9,23 +9,35 @@ const rules = {
     },
   },
   lists: {
-    bind: ["isOwner", "data.id in auth.ref('$user.lists.id')"],
+    bind: [
+      "isOwner",
+      "data.id in auth.ref('$user.lists.id')",
+      "isCollaborator",
+      "data.id in auth.ref('$user.collaboratingLists.id')",
+    ],
     allow: {
-      view: "isOwner",
-      update: "isOwner",
+      view: "isOwner || isCollaborator",
+      update: "isOwner || isCollaborator",
       delete: "isOwner",
     },
   },
   items: {
-    bind: ["isOwner", "data.id in auth.ref('$user.items.id')"],
+    bind: [
+      "isOwner",
+      "data.id in auth.ref('$user.items.id')",
+      "isCollaborator",
+      "data.ref('list.id')[0] in auth.ref('$user.collaboratingLists.id')",
+    ],
     allow: {
-      view: "isOwner",
-      update: "isOwner",
-      delete: "isOwner",
+      view: "isOwner || isCollaborator",
+      update: "isOwner || isCollaborator",
+      delete: "isOwner || isCollaborator",
     },
   },
   $users: {
-    allow: {},
+    allow: {
+      view: "true",
+    },
   },
 } satisfies InstantRules<Schema>;
 

@@ -8,6 +8,7 @@ type ListContextType = {
   lists: ReadonlyArray<List>;
   listContent: Record<string, ReadonlyArray<Item>>;
   activeListIndex: number;
+  activeList: List;
   setActiveListIndex: (index: number) => void;
   setListContent: (id: List["id"], items: ReadonlyArray<Item>) => void;
 };
