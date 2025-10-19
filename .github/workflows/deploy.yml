@@ -18,6 +18,8 @@ jobs:
         run: npm ci --no-fund --no-audit --no-progress
 
       - name: Build
+        env:
+          PUBLIC_INSTANT_APP_ID: ${{ vars.PUBLIC_INSTANT_APP_ID }}
         run: npm run build
 
       - name: Deploy
