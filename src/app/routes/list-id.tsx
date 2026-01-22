@@ -1,30 +1,16 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-  LogOut,
-  Minus,
-  Plus,
-  Share,
-} from "lucide-react";
+import { Plus, Share } from "lucide-react";
 import { type PanInfo, motion } from "motion/react";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 
 import NavigationFooter from "@shared/components/NavigationFooter";
 import NavigationInput from "@shared/components/NavigationInput";
 import useScrollDirection from "@shared/hooks/use-scroll-direction";
 import useSyncedDrag from "@shared/hooks/use-synced-drag";
 
-import EmailDialog from "@app/components/EmailDialog";
 import ListComponent from "@app/components/List";
 import ListContentSetter from "@app/components/ListContentSetter";
 import { useListContext } from "@app/contexts/list-context";
-import {
-  createItem,
-  createList,
-  removeList,
-  signOut,
-} from "@app/services/instantdb/actions";
-import db from "@app/services/instantdb/db";
+import { createItem } from "@app/services/instantdb/actions";
 
 const ICON_SIZE = 24;
 
@@ -169,46 +155,43 @@ export default function ListId() {
 }
 
 function NavigationFooterButtons() {
-  const { isLoading, error, user } = db.useAuth();
-  const shareDialogRef = useRef<HTMLDialogElement>(null);
-
-  if (user?.isGuest) {
-    return (
-      <ul className="px-4 py-2 flex justify-between">
-        <li className="flex-1">
-          <button type="button" className="btn btn-ghost w-full ml-7" disabled>
-            Login with Email
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="btn btn-ghost not-disabled:text-neutral/75"
-            onClick={signOut}
-          >
-            <LogOut size={ICON_SIZE} />
-          </button>
-        </li>
-      </ul>
-    );
-  }
+  const { activeList } = useListContext();
 
   return (
     <>
-      <ul className="flex justify-center gap-4 px-8 pb-4">
+      <ul className="flex justify-between gap-4 px-12 pb-4">
         <li>
           <button
             type="button"
-            className="btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
+            className="ml-auto btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
             onClick={() => {
-              shareDialogRef.current?.showModal();
+              navigator.share({
+                title: activeList.title,
+                text: `Check out my Spuddy list "${activeList.title}"`,
+                url: document.URL,
+              });
             }}
           >
             <Share size={ICON_SIZE} />
           </button>
         </li>
+
+        <li>
+          <button
+            type="button"
+            className="ml-auto btn btn-ghost btn-circle not-disabled:text-neutral/75 h-full w-full"
+            onClick={() => {
+              navigator.share({
+                title: activeList.title,
+                text: `Check out my Spuddy list "${activeList.title}"`,
+                url: document.URL,
+              });
+            }}
+          >
+            <Plus size={ICON_SIZE} />
+          </button>
+        </li>
       </ul>
-      <EmailDialog ref={shareDialogRef} />
     </>
   );
 }
