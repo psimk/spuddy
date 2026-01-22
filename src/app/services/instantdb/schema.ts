@@ -7,7 +7,6 @@ export default i.schema({
     }),
     items: i.entity({
       text: i.string(),
-      done: i.boolean(),
       createdAt: i.date(),
       updatedAt: i.date(),
       order: i.string().indexed(),

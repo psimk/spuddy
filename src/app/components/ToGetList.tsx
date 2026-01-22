@@ -1,13 +1,4 @@
-import {
-  Accessibility,
-  AutoScroller,
-  Cursor,
-  Feedback,
-  PreventSelection,
-  ScrollListener,
-  Scroller,
-  defaultPreset,
-} from "@dnd-kit/dom";
+import { AutoScroller, defaultPreset } from "@dnd-kit/dom";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { Grip } from "lucide-react";
@@ -16,7 +7,6 @@ import type { PropsWithChildren } from "react";
 
 import ListItem from "@shared/components/ListItem";
 import SortableListItem from "@shared/components/SortableListItem";
-import dragDropManager from "@shared/singletons/drag-drop-manager";
 
 import type { Item } from "@app/services/instantdb/types";
 
@@ -27,14 +17,12 @@ type Props = {
     event: Parameters<typeof move>[1],
   ) => void;
   onRemove: (id: string) => void;
-  onCollect: (id: string) => void;
   disableAutoScroll?: boolean;
 };
 
 export default function List({
   items,
   onReorder,
-  onCollect,
   onRemove,
   disableAutoScroll,
   children,
@@ -67,10 +55,10 @@ export default function List({
               index={index}
               defaultValue={item.text}
               onSwipeLeft={() => onRemove(item.id)}
-              onSwipeRight={() => onCollect(item.id)}
+              onSwipeRight={() => onRemove(item.id)}
             >
-              <li className="bg-error text-error-content rounded-l-sm">
-                remove
+              <li className="bg-success text-success-content rounded-l-sm">
+                collect
               </li>
               <li className="bg-success text-success-content rounded-r-sm">
                 collect

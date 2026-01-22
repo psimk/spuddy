@@ -65,7 +65,6 @@ export async function createItem(
     db.tx.items[itemId]
       .create({
         text: text,
-        done: false,
         updatedAt: new Date(),
         createdAt: new Date(),
         order: new IndexGenerator(
@@ -84,18 +83,6 @@ export async function createItem(
   });
 
   return promise;
-}
-
-export function collectItem(itemId: string) {
-  return db.transact(
-    db.tx.items[itemId].update({ done: true, updatedAt: new Date() }),
-  );
-}
-
-export function unCollectItem(itemId: string) {
-  return db.transact(
-    db.tx.items[itemId].update({ done: false, updatedAt: new Date() }),
-  );
 }
 
 export function removeItem(itemId: string) {

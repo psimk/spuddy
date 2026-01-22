@@ -2,13 +2,10 @@ import { useMemo } from "react";
 
 import orderSorter from "@shared/utils/order-sorter";
 
-import CollectedList from "@app/components/CollectedList";
 import ListTitleInput from "@app/components/ListTitleInput";
 import ToGetList from "@app/components/ToGetList";
 import {
-  collectItem,
   removeItem,
-  unCollectItem,
   updateItemPositions,
 } from "@app/services/instantdb/actions";
 import db from "@app/services/instantdb/db";
@@ -20,24 +17,14 @@ type Props = {
 };
 
 export default function List({ id, disableAutoScroll }: Props) {
-  const { data: toGetData } = db.useQuery(
-    itemsQuery({ list: id, completed: false }),
-  );
-  const { data: collectedData } = db.useQuery(
-    itemsQuery({ list: id, completed: true }),
-  );
+  const { data: toGetData } = db.useQuery(itemsQuery({ list: id }));
 
   const toGetItems = useMemo(
     () => toGetData?.items?.toSorted(orderSorter) ?? [],
     [toGetData],
   );
 
-  const collectedItems = useMemo(
-    () => collectedData?.items?.toSorted(orderSorter) ?? [],
-    [collectedData],
-  );
-
-  if (toGetItems.length === 0 && collectedItems.length === 0) {
+  if (toGetItems.length === 0) {
     return (
       <div className="h-full">
         <ListTitleInput list={id} />
@@ -52,7 +39,7 @@ export default function List({ id, disableAutoScroll }: Props) {
 
   return (
     <>
-      {toGetItems.length === 0 && collectedItems.length > 0 ? (
+      {toGetItems.length === 0 ? (
         <>
           <ListTitleInput list={id} />
           <div className="grid h-full place-items-center text-center">
@@ -65,22 +52,12 @@ export default function List({ id, disableAutoScroll }: Props) {
           items={toGetItems}
           onReorder={updateItemPositions}
           onRemove={removeItem}
-          onCollect={collectItem}
+          onCollect={removeItem}
         >
           <li>
             <ListTitleInput list={id} />
           </li>
         </ToGetList>
-      )}
-      {collectedItems.length > 0 && (
-        <>
-          <div className="divider text-base-content/30">collected</div>
-          <CollectedList
-            items={collectedItems}
-            onRemove={removeItem}
-            onUnCollect={unCollectItem}
-          />
-        </>
       )}
     </>
   );

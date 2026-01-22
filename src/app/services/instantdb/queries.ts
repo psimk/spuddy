@@ -32,17 +32,11 @@ export function userByEmailQuery(email: string) {
   });
 }
 
-export function itemsQuery({
-  list,
-  completed,
-}: {
-  list: string;
-  completed?: boolean;
-}) {
+export function itemsQuery({ list }: { list: string }) {
   return query({
     items: {
       $: {
-        where: { done: completed, list },
+        where: { list },
       },
     },
   });
