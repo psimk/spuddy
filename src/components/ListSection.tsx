@@ -1,13 +1,12 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { useSortable } from "@dnd-kit/react/sortable";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
-import { invariant } from "@utils/invariant";
-
-import useListData from "@hooks/useListData";
+import useSectionDocument from "@hooks/useSectionDocument";
 
 type Props = {
-  id: string;
+  id: AutomergeUrl;
   index: number;
 };
 
@@ -24,12 +23,8 @@ export default function ListSection({
     type: "section",
   });
 
-  const { sections } = useListData();
-
-  // can happen when switching between different lists
-  invariant(sections[id], `Section with id "${id}" does not exist`);
-
-  const { name } = sections[id];
+  const [section] = useSectionDocument(id);
+  const { name } = section;
 
   return (
     <ul className="list bg-base-100 rounded-box shadow-md" ref={ref}>

@@ -11,7 +11,7 @@ import ListSwitcher from "@components/ListSwitcher.tsx";
 import "./main.css";
 
 const Provider = composeProviders(
-  StrictMode,
+  // StrictMode,
   (props) => <Suspense {...props} fallback={<div>Loading documents...</div>} />,
   RepositoryProvider,
   ListsDocumentProvider,

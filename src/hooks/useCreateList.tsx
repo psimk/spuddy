@@ -1,6 +1,7 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { useRepo } from "@automerge/react";
 
-import type { Data, Positions } from "../types";
+import type { Data, Positions, Section } from "../types";
 import useListsDocument from "./useListsDocument";
 
 export default function useCreateList() {
@@ -13,20 +14,25 @@ export default function useCreateList() {
     const listId = `list-${Date.now()}`;
     const listName = `List ${listsDoc.lists.length + 1}`;
 
-    const sectionId = `section-${Date.now()}`;
+    // Create a new section document
+    const sectionHandle = repo.create<Section>();
+    const sectionUrl = sectionHandle.url;
+
+    sectionHandle.change((doc) => {
+      doc.id = sectionUrl;
+      doc.name = "Section 1";
+    });
 
     // Create new data document
     const dataHandle = repo.create<Data>({
-      items: {},
-      sections: {
-        [sectionId]: { id: "section-1", name: "Section 1" },
-      },
+      itemUrls: [],
+      sectionUrls: [sectionUrl],
     });
 
     // Create new positions document
     const positionsHandle = repo.create<Positions>({
-      sections: [sectionId] as ExtendedArray<string>,
-      items: { [sectionId]: [] as unknown as ExtendedArray<string> },
+      sections: [sectionUrl] as ExtendedArray<AutomergeUrl>,
+      items: { [sectionUrl]: [] as unknown as ExtendedArray<AutomergeUrl> },
     });
 
     // Add new list to lists document

@@ -1,19 +1,21 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
+
 export type Item = {
-  id: string;
+  id: AutomergeUrl; // The document URL is the ID
   text: string;
 };
 
 export type Section = {
-  id: string;
+  id: AutomergeUrl; // The document URL is the ID
   name: string;
 };
 
 export type Data = {
-  items: Record<string, Item>;
-  sections: Record<string, Section>;
+  itemUrls: Array<AutomergeUrl>; // Array of item document URLs
+  sectionUrls: Array<AutomergeUrl>; // Array of section document URLs
 };
 
 export type Positions = {
-  sections: ExtendedArray<string>;
-  items: Record<string, ExtendedArray<string>>;
+  sections: ExtendedArray<AutomergeUrl>;
+  items: Record<AutomergeUrl, ExtendedArray<AutomergeUrl>>;
 };

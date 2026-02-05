@@ -1,3 +1,4 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { move } from "@dnd-kit/helpers";
 import type { DragDropProvider } from "@dnd-kit/react";
 import { type ComponentProps, useEffect, useState } from "react";
@@ -16,8 +17,8 @@ type DragOverCallback = DragEvents["onDragOver"];
 type DragEndCallback = DragEvents["onDragEnd"];
 
 type PositionsState = {
-  sections: Array<string>;
-  items: Record<string, Array<string>>;
+  sections: Array<AutomergeUrl>;
+  items: Record<AutomergeUrl, Array<AutomergeUrl>>;
 };
 
 function clonePositions({
@@ -66,9 +67,10 @@ export default function useSortablePositions() {
       syncArrayChanges(doc.sections, state.sections);
 
       for (const [sectionId, itemIds] of Object.entries(state.items)) {
-        doc.items[sectionId] ??= [] as unknown as ExtendedArray<string>;
+        doc.items[sectionId as AutomergeUrl] ??=
+          [] as unknown as ExtendedArray<AutomergeUrl>;
 
-        syncArrayChanges(doc.items[sectionId], itemIds);
+        syncArrayChanges(doc.items[sectionId as AutomergeUrl], itemIds);
       }
     });
   };

@@ -1,52 +1,49 @@
-import type { Item, Section } from "../types";
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import useDataDocument from "./useDataDocument";
 
 export default function useListData() {
   const [dataDoc, changeData] = useDataDocument();
 
-  const updateItem = (itemId: string, updates: Partial<Item>) => {
+  const addItemUrl = (itemUrl: AutomergeUrl) => {
     changeData((doc) => {
-      if (doc.items[itemId]) {
-        Object.assign(doc.items[itemId], updates);
+      if (!doc.itemUrls.includes(itemUrl)) {
+        doc.itemUrls.push(itemUrl);
       }
     });
   };
 
-  const updateItemText = (itemId: string, text: string) => {
+  const removeItemUrl = (itemUrl: AutomergeUrl) => {
     changeData((doc) => {
-      if (!(itemId in doc.items)) return;
-
-      doc.items[itemId].text = text;
-    });
-  };
-
-  const updateSection = (sectionId: string, updates: Partial<Section>) => {
-    changeData((doc) => {
-      if (doc.sections[sectionId]) {
-        Object.assign(doc.sections[sectionId], updates);
+      const index = doc.itemUrls.indexOf(itemUrl);
+      if (index !== -1) {
+        doc.itemUrls.splice(index, 1);
       }
     });
   };
 
-  const addItem = (item: Item) => {
+  const addSectionUrl = (sectionUrl: AutomergeUrl) => {
     changeData((doc) => {
-      doc.items[item.id] = item;
+      if (!doc.sectionUrls.includes(sectionUrl)) {
+        doc.sectionUrls.push(sectionUrl);
+      }
     });
   };
 
-  const removeItem = (itemId: string) => {
+  const removeSectionUrl = (sectionUrl: AutomergeUrl) => {
     changeData((doc) => {
-      delete doc.items[itemId];
+      const index = doc.sectionUrls.indexOf(sectionUrl);
+      if (index !== -1) {
+        doc.sectionUrls.splice(index, 1);
+      }
     });
   };
 
   return {
     ...dataDoc,
-    updateItem,
-    updateItemText,
-    updateSection,
-    addItem,
-    removeItem,
+    addItemUrl,
+    removeItemUrl,
+    addSectionUrl,
+    removeSectionUrl,
     changeData,
   };
 }

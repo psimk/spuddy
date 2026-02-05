@@ -5,8 +5,7 @@ export default function syncArrayChanges(
   // Find differences and apply minimal changes
   if (target.length === 0 && source.length > 0) {
     // Initialize empty array
-    for (const item of source) {
-      target.push(item);
+    for (const item of source) { target.push(item);
     }
     return;
   }
