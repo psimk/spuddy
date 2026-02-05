@@ -1,18 +1,19 @@
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { useSortable } from "@dnd-kit/react/sortable";
+import type { PropsWithChildren } from "react";
+
 import type { Section } from "../types";
 
-import ListItem from "./ListItem";
+type Props = {
+  id: Section["id"];
+  index: number;
+};
 
 export default function ListSection({
   id,
-  items,
   index,
-}: {
-  index: number;
-  id: string;
-  items: Section;
-}) {
+  children,
+}: PropsWithChildren<Props>) {
   const { ref } = useSortable({
     accept: ["section", "item"],
     collisionPriority: CollisionPriority.Low,
@@ -23,15 +24,11 @@ export default function ListSection({
 
   return (
     <ul className="list bg-base-100 rounded-box shadow-md" ref={ref}>
-      <li
-        className={`p-4 ${items.length > 0 ? "pb-2" : ""} text-xs tracking-wide opacity-60`}
-      >
+      <li className={`p-4 pb-2 text-xs tracking-wide opacity-60`}>
         {id.toUpperCase()}
       </li>
 
-      {items.map((item, index) => (
-        <ListItem {...item} key={item.id} index={index} sectionId={id} />
-      ))}
+      {children}
     </ul>
   );
 }

@@ -1,22 +1,28 @@
 import { DragDropProvider } from "@dnd-kit/react";
 
-import ListSection from "./components/ListSection";
-import useSortableList from "./hooks/useSortableList";
+import useSortablePositions from "@hooks/useSortablePositions";
+
+import ListItem from "@components/ListItem";
+import ListSection from "@components/ListSection";
 
 function App() {
-  const { state, handlers } = useSortableList();
+  const { order, itemPositions, handlers } = useSortablePositions();
 
   return (
-    <main className="bg-base-300 min-h-screen p-4">
+    <main className=" bg-base-100 min-h-screen p-4 bg-base-300">
       <DragDropProvider {...handlers}>
         <div className="grid gap-4">
-          {state.order.map((sectionId, index) => (
-            <ListSection
-              items={state.sections[sectionId]}
-              key={sectionId}
-              id={sectionId}
-              index={index}
-            />
+          {order.map((sectionId, index) => (
+            <ListSection key={sectionId} id={sectionId} index={index}>
+              {itemPositions[sectionId].map((itemId, itemIndex) => (
+                <ListItem
+                  sectionId={sectionId}
+                  key={itemId}
+                  id={itemId}
+                  index={itemIndex}
+                />
+              ))}
+            </ListSection>
           ))}
         </div>
       </DragDropProvider>

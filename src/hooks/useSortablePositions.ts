@@ -1,15 +1,10 @@
-import { useState, useEffect, type ComponentProps } from "react";
-import { useDocument } from "@automerge/react";
 import { move } from "@dnd-kit/helpers";
-
 import type { DragDropProvider } from "@dnd-kit/react";
-import type {
-  DataDocument,
-  PositionsDocument,
-  ExtendedArray,
-  Sections,
-} from "../types";
-import { useDocumentUrls } from "../lib/automerge";
+import { type ComponentProps, useEffect, useState } from "react";
+
+import usePositionsDocument from "@hooks/usePositionsDocument";
+
+import type { ExtendedArray } from "../types";
 
 type DragDropProviderProps = ComponentProps<typeof DragDropProvider>;
 type DragEvents = Pick<
@@ -20,25 +15,15 @@ type DragEvents = Pick<
 type DragOverCallback = DragEvents["onDragOver"];
 type DragEndCallback = DragEvents["onDragEnd"];
 
-// Convert Automerge documents to dnd-kit format
-function docsToState(dataDoc: DataDocument, positionsDoc: PositionsDocument) {
-  const sections: Sections = {};
-
-  for (const sectionId of positionsDoc.sectionOrder) {
-    const itemIds = positionsDoc.itemPositions[sectionId] || [];
-    sections[sectionId] = itemIds.map((itemId) => dataDoc.items[itemId]);
-  }
-
-  return {
-    sections,
-    order: positionsDoc.sectionOrder,
-  };
-}
+type PositionState = {
+  order: Array<string>;
+  itemPositions: Record<string, Array<string>>;
+};
 
 // Calculate differences and apply fine-grained updates to arrays
 function syncArrayChanges(
   target: ExtendedArray<string>,
-  source: ExtendedArray<string>,
+  source: Array<string>,
 ) {
   // Find differences and apply minimal changes
   if (target.length === 0 && source.length > 0) {
@@ -70,28 +55,34 @@ function syncArrayChanges(
   }
 }
 
-export default function useSortableList() {
-  const { dataUrl, positionsUrl } = useDocumentUrls();
+function clonePositions(
+  positionsDoc: ReturnType<typeof usePositionsDocument>[0],
+) {
+  return {
+    order: [...positionsDoc.sectionOrder],
+    itemPositions: Object.fromEntries(
+      Object.entries(positionsDoc.itemPositions).map(([key, value]) => [
+        key,
+        [...value],
+      ]),
+    ),
+  };
+}
 
-  // Two separate documents
-  const [dataDoc] = useDocument<DataDocument>(dataUrl, { suspense: true });
-  const [positionsDoc, changePositions] = useDocument<PositionsDocument>(
-    positionsUrl,
-    { suspense: true }
+export default function useSortablePositions() {
+  const [positionsDoc, changePositions] = usePositionsDocument();
+
+  const [state, setState] = useState<PositionState>(() =>
+    clonePositions(positionsDoc),
   );
 
-  // Convert Automerge documents to dnd-kit format for UI
-  const [state, setState] = useState(() => docsToState(dataDoc, positionsDoc));
-
-  // Load from Automerge when either document changes
-  useEffect(() => {
-    setState(docsToState(dataDoc, positionsDoc));
-  }, [dataDoc, positionsDoc]);
+  // Deep copy to avoid direct mutations on Automerge arrays
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setState(clonePositions(positionsDoc)), [positionsDoc]);
 
   const onDragOver: DragOverCallback = (event) => {
     const { source } = event.operation;
 
-    // Use dnd-kit's move function as-is on the UI state
     if (source?.type === "section") {
       setState((previous) => ({
         ...previous,
@@ -102,7 +93,7 @@ export default function useSortableList() {
 
     setState((previous) => ({
       ...previous,
-      sections: move(previous.sections, event),
+      itemPositions: move(previous.itemPositions, event),
     }));
   };
 
@@ -111,15 +102,13 @@ export default function useSortableList() {
 
     if (canceled) return;
 
-    // Only update positions document (data document unchanged)
+    // Only update positions document
     changePositions((doc) => {
       // Sync section order array
       syncArrayChanges(doc.sectionOrder, state.order);
 
       // Sync item positions for each section
-      for (const [sectionId, items] of Object.entries(state.sections)) {
-        const itemIds = items.map((item) => item.id) as ExtendedArray<string>;
-
+      for (const [sectionId, itemIds] of Object.entries(state.itemPositions)) {
         if (!doc.itemPositions[sectionId]) {
           doc.itemPositions[sectionId] = [] as unknown as ExtendedArray<string>;
         }
@@ -130,7 +119,7 @@ export default function useSortableList() {
   };
 
   return {
-    state,
+    ...state,
     handlers: {
       onDragOver,
       onDragEnd,

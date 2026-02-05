@@ -1,5 +1,3 @@
-import type { Doc } from "@automerge/automerge";
-
 export type Item = {
   id: string;
   text?: string; // Metadata that changes frequently
@@ -29,7 +27,7 @@ export type DataDocumentState = {
   sections: SectionsMap;
 };
 
-export type DataDocument = Doc<DataDocumentState>;
+export type DataDocument = DataDocumentState;
 
 // DOCUMENT 2: Positions (ordering only)
 export type PositionsDocumentState = {
@@ -37,7 +35,7 @@ export type PositionsDocumentState = {
   itemPositions: ItemPositions;
 };
 
-export type PositionsDocument = Doc<PositionsDocumentState>;
+export type PositionsDocument = PositionsDocumentState;
 
 // Legacy types for backward compatibility
 export type Sections = Record<string, Array<Item>>;

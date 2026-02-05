@@ -1,12 +1,16 @@
 import { useSortable } from "@dnd-kit/react/sortable";
-import type { Item } from "../types";
-import PlayIcon from "./PlayIcon";
 
-export default function ListItem({
-  id,
-  index,
-  sectionId,
-}: Item & { index: number; sectionId: string }) {
+import PlayIcon from "@components/PlayIcon";
+
+import type { Item } from "../types";
+
+type Props = {
+  id: Item["id"];
+  index: number;
+  sectionId: string;
+};
+
+export default function ListItem({ id, index, sectionId }: Props) {
   const { ref, isDragging } = useSortable({
     id,
     index,

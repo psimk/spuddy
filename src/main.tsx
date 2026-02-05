@@ -1,21 +1,25 @@
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App.tsx";
-import { AutomergeProvider } from "./lib/automerge.tsx";
-import { INITIAL_DATA, INITIAL_POSITIONS } from "./constants.ts";
+import DataDocumentProvider from "@providers/DataDocumentProvider.tsx";
+import PositionsDocumentProvider from "@providers/PositionsDocumentProvider.tsx";
+import RepositoryProvider from "@providers/RepositoryProvider.tsx";
 
+import composeProviders from "@utils/compose-providers.tsx";
+
+import App from "./App.tsx";
 import "./main.css";
 
+const Provider = composeProviders(
+  StrictMode,
+  (props) => <Suspense {...props} fallback={<div>Loading documents...</div>} />,
+  RepositoryProvider,
+  DataDocumentProvider,
+  PositionsDocumentProvider,
+);
+
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Suspense fallback={<div>Loading documents...</div>}>
-      <AutomergeProvider
-        initialData={INITIAL_DATA}
-        initialPositions={INITIAL_POSITIONS}
-      >
-        <App />
-      </AutomergeProvider>
-    </Suspense>
-  </StrictMode>,
+  <Provider>
+    <App />
+  </Provider>,
 );
