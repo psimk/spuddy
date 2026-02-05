@@ -8,20 +8,28 @@ import { Repo } from "@automerge/automerge-repo";
 import { BroadcastChannelNetworkAdapter, RepoContext } from "@automerge/react";
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
-import type { AutomergeSortableState } from "../types";
+import type { DataDocumentState, PositionsDocumentState } from "../types";
 
-const DOCUMENT_URL_KEY = "spuddy-automerge-doc-url-v2";
+const DATA_DOC_URL_KEY = "spuddy-data-doc-url";
+const POSITIONS_DOC_URL_KEY = "spuddy-positions-doc-url";
 
-const DocumentUrlContext = createContext<AutomergeUrl | null>(null);
+interface DocumentUrls {
+  dataUrl: AutomergeUrl;
+  positionsUrl: AutomergeUrl;
+}
+
+const DocumentUrlsContext = createContext<DocumentUrls | null>(null);
 
 interface AutomergeProviderProps {
   children: ReactNode;
-  initialData: AutomergeSortableState;
+  initialData: DataDocumentState;
+  initialPositions: PositionsDocumentState;
 }
 
 export function AutomergeProvider({
   children,
   initialData,
+  initialPositions,
 }: AutomergeProviderProps) {
   const repo = useMemo(() => {
     return new Repo({
@@ -30,43 +38,58 @@ export function AutomergeProvider({
     });
   }, []);
 
-  const docUrl = useMemo(() => {
-    const storedUrl = localStorage.getItem(DOCUMENT_URL_KEY);
+  const docUrls = useMemo(() => {
+    const storedDataUrl = localStorage.getItem(DATA_DOC_URL_KEY);
+    const storedPositionsUrl = localStorage.getItem(POSITIONS_DOC_URL_KEY);
 
-    if (storedUrl) {
+    if (storedDataUrl && storedPositionsUrl) {
       if (import.meta.env.DEV) {
-        console.log("Using existing document:", storedUrl);
+        console.log("Using existing documents:", {
+          data: storedDataUrl,
+          positions: storedPositionsUrl,
+        });
       }
-      return storedUrl as AutomergeUrl;
+      return {
+        dataUrl: storedDataUrl as AutomergeUrl,
+        positionsUrl: storedPositionsUrl as AutomergeUrl,
+      };
     }
 
-    // Create new document
-    const handle = repo.create(initialData);
+    // Create new documents
+    const dataHandle = repo.create(initialData);
+    const positionsHandle = repo.create(initialPositions);
 
-    localStorage.setItem(DOCUMENT_URL_KEY, handle.url);
+    localStorage.setItem(DATA_DOC_URL_KEY, dataHandle.url);
+    localStorage.setItem(POSITIONS_DOC_URL_KEY, positionsHandle.url);
 
     if (import.meta.env.DEV) {
-      console.log("Created new document:", handle.url);
+      console.log("Created new documents:", {
+        data: dataHandle.url,
+        positions: positionsHandle.url,
+      });
     }
 
-    return handle.url;
-  }, [repo, initialData]);
+    return {
+      dataUrl: dataHandle.url,
+      positionsUrl: positionsHandle.url,
+    };
+  }, [repo, initialData, initialPositions]);
 
   return (
     <RepoContext.Provider value={repo}>
-      <DocumentUrlContext.Provider value={docUrl}>
+      <DocumentUrlsContext.Provider value={docUrls}>
         {children}
-      </DocumentUrlContext.Provider>
+      </DocumentUrlsContext.Provider>
     </RepoContext.Provider>
   );
 }
 
-export function useDocumentUrl(): AutomergeUrl {
-  const docUrl = useContext(DocumentUrlContext);
+export function useDocumentUrls(): DocumentUrls {
+  const docUrls = useContext(DocumentUrlsContext);
 
-  if (!docUrl) {
-    throw new Error("useDocumentUrl must be used within AutomergeProvider");
+  if (!docUrls) {
+    throw new Error("useDocumentUrls must be used within AutomergeProvider");
   }
 
-  return docUrl;
+  return docUrls;
 }

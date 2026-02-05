@@ -3,8 +3,13 @@ import { useDocument } from "@automerge/react";
 import { move } from "@dnd-kit/helpers";
 
 import type { DragDropProvider } from "@dnd-kit/react";
-import type { AutomergeDoc, ExtendedArray, Sections } from "../types";
-import { useDocumentUrl } from "../lib/automerge";
+import type {
+  DataDocument,
+  PositionsDocument,
+  ExtendedArray,
+  Sections,
+} from "../types";
+import { useDocumentUrls } from "../lib/automerge";
 
 type DragDropProviderProps = ComponentProps<typeof DragDropProvider>;
 type DragEvents = Pick<
@@ -15,18 +20,18 @@ type DragEvents = Pick<
 type DragOverCallback = DragEvents["onDragOver"];
 type DragEndCallback = DragEvents["onDragEnd"];
 
-// Convert Automerge structure to dnd-kit format
-function docToState(doc: AutomergeDoc) {
+// Convert Automerge documents to dnd-kit format
+function docsToState(dataDoc: DataDocument, positionsDoc: PositionsDocument) {
   const sections: Sections = {};
 
-  for (const sectionId of doc.sectionOrder) {
-    const itemIds = doc.itemPositions[sectionId] || [];
-    sections[sectionId] = itemIds.map((itemId) => doc.items[itemId]);
+  for (const sectionId of positionsDoc.sectionOrder) {
+    const itemIds = positionsDoc.itemPositions[sectionId] || [];
+    sections[sectionId] = itemIds.map((itemId) => dataDoc.items[itemId]);
   }
 
   return {
     sections,
-    order: doc.sectionOrder,
+    order: positionsDoc.sectionOrder,
   };
 }
 
@@ -66,18 +71,22 @@ function syncArrayChanges(
 }
 
 export default function useSortableList() {
-  const docUrl = useDocumentUrl();
-  const [doc, changeDoc] = useDocument<AutomergeDoc>(docUrl, {
-    suspense: true,
-  });
+  const { dataUrl, positionsUrl } = useDocumentUrls();
 
-  // Convert Automerge doc to dnd-kit format for UI
-  const [state, setState] = useState(() => docToState(doc));
+  // Two separate documents
+  const [dataDoc] = useDocument<DataDocument>(dataUrl, { suspense: true });
+  const [positionsDoc, changePositions] = useDocument<PositionsDocument>(
+    positionsUrl,
+    { suspense: true }
+  );
 
-  // Load from Automerge when doc changes
+  // Convert Automerge documents to dnd-kit format for UI
+  const [state, setState] = useState(() => docsToState(dataDoc, positionsDoc));
+
+  // Load from Automerge when either document changes
   useEffect(() => {
-    setState(docToState(doc));
-  }, [doc]);
+    setState(docsToState(dataDoc, positionsDoc));
+  }, [dataDoc, positionsDoc]);
 
   const onDragOver: DragOverCallback = (event) => {
     const { source } = event.operation;
@@ -102,8 +111,8 @@ export default function useSortableList() {
 
     if (canceled) return;
 
-    // Apply fine-grained updates to Automerge (best practice from docs)
-    changeDoc((doc) => {
+    // Only update positions document (data document unchanged)
+    changePositions((doc) => {
       // Sync section order array
       syncArrayChanges(doc.sectionOrder, state.order);
 

@@ -1,27 +1,28 @@
-import type { AutomergeSortableState } from "./types";
+import type { DataDocumentState, PositionsDocumentState } from "./types";
 
-export const INITIAL_STATE: AutomergeSortableState = {
-  // Items as a map
+// DOCUMENT 1: Data (items & sections with metadata)
+export const INITIAL_DATA: DataDocumentState = {
   items: {
-    "item-1": { id: "item-1" },
-    "item-2": { id: "item-2" },
-    "item-3": { id: "item-3" },
-    "item-4": { id: "item-4" },
-    "item-5": { id: "item-5" },
-    "item-6": { id: "item-6" },
-    "item-7": { id: "item-7" },
-    "item-8": { id: "item-8" },
-    "item-9": { id: "item-9" },
-    "item-10": { id: "item-10" },
+    "item-1": { id: "item-1", text: "Milk" },
+    "item-2": { id: "item-2", text: "Cheese" },
+    "item-3": { id: "item-3", text: "Butter" },
+    "item-4": { id: "item-4", text: "Yogurt" },
+    "item-5": { id: "item-5", text: "Cream" },
+    "item-6": { id: "item-6", text: "Carrots" },
+    "item-7": { id: "item-7", text: "Broccoli" },
+    "item-8": { id: "item-8", text: "Spinach" },
+    "item-9": { id: "item-9", text: "Tomatoes" },
+    "item-10": { id: "item-10", text: "Lettuce" },
   },
-  // Sections as a map
   sections: {
-    Dairy: { id: "Dairy" },
-    Vegetables: { id: "Vegetables" },
+    Dairy: { id: "Dairy", name: "Dairy" },
+    Vegetables: { id: "Vegetables", name: "Vegetables" },
   },
-  // Order of sections
+};
+
+// DOCUMENT 2: Positions (ordering only)
+export const INITIAL_POSITIONS: PositionsDocumentState = {
   sectionOrder: ["Dairy", "Vegetables"],
-  // Position of items within each section
   itemPositions: {
     Dairy: ["item-1", "item-2", "item-3", "item-4", "item-5"],
     Vegetables: ["item-6", "item-7", "item-8", "item-9", "item-10"],
