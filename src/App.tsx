@@ -11,8 +11,8 @@ function App() {
   const { sections, items, handlers } = useSortablePositions();
 
   return (
-    <main className=" min-h-screen  bg-base-300">
-      <div className="p-4">
+    <div className="flex flex-col flex-1">
+      <div className="p-4 mt-auto">
         <DragDropProvider {...handlers}>
           <div className="grid gap-4">
             {sections.map((sectionId, index) => (
@@ -33,7 +33,7 @@ function App() {
         </DragDropProvider>
       </div>
       <AddItemForm />
-    </main>
+    </div>
   );
 }
 

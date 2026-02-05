@@ -11,7 +11,7 @@ type Props = {
 };
 
 type State = {
-  error: Error | null;
+  error: Nullable<Error>;
 };
 
 export default class ErrorBoundary extends Component<

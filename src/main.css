@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  themes: dark --default;
+  themes: cupcake --default;
 }
 
 @theme {
   --font-sans: var(--font-geist), sans-serif;
 }
+

@@ -15,19 +15,21 @@ export default function AddItemForm() {
   };
 
   return (
-    <form
-      action={handleSubmit}
-      className="sticky bottom-0 bg-base-100 p-4 shadow-lg"
-    >
-      <div className="flex gap-2">
-        <input
-          type="text"
-          name="text"
-          placeholder="Add new item..."
-          className="input input-bordered flex-1"
-          autoFocus
-        />
-      </div>
-    </form>
+    <footer className="sticky bottom-0 p-4 pt-0">
+      <form
+        action={handleSubmit}
+        className="bg-base-100 rounded-box drop-shadow-xl/30 p-2"
+      >
+        <div className="flex">
+          <input
+            type="text"
+            name="text"
+            placeholder="Add new item..."
+            className="input input-ghost flex-1 rounded-xl"
+            autoFocus
+          />
+        </div>
+      </form>
+    </footer>
   );
 }
