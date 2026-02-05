@@ -3,6 +3,7 @@ import { DragDropProvider } from "@dnd-kit/react";
 import useSortablePositions from "@hooks/useSortablePositions";
 
 import AddItemForm from "@components/AddItemForm";
+import ErrorBoundary from "@components/ErrorBoundary";
 import ListItem from "@components/ListItem";
 import ListSection from "@components/ListSection";
 
@@ -15,16 +16,18 @@ function App() {
         <DragDropProvider {...handlers}>
           <div className="grid gap-4">
             {sections.map((sectionId, index) => (
-              <ListSection key={sectionId} id={sectionId} index={index}>
-                {items[sectionId].map((itemId, itemIndex) => (
-                  <ListItem
-                    sectionId={sectionId}
-                    key={itemId}
-                    id={itemId}
-                    index={itemIndex}
-                  />
-                ))}
-              </ListSection>
+              <ErrorBoundary key={sectionId} ignore>
+                <ListSection id={sectionId} index={index}>
+                  {items[sectionId].map((itemId, itemIndex) => (
+                    <ListItem
+                      sectionId={sectionId}
+                      key={itemId}
+                      id={itemId}
+                      index={itemIndex}
+                    />
+                  ))}
+                </ListSection>
+              </ErrorBoundary>
             ))}
           </div>
         </DragDropProvider>

@@ -3,6 +3,7 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import type { PropsWithChildren } from "react";
 
 import useListData from "@hooks/useListData";
+import { invariant } from "@utils/invariant";
 
 type Props = {
   id: string;
@@ -23,6 +24,10 @@ export default function ListSection({
   });
 
   const { sections } = useListData();
+
+  // can happen when switching between different lists
+  invariant(sections[id], `Section with id "${id}" does not exist`);
+
   const { name } = sections[id];
 
   return (
