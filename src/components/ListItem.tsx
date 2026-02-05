@@ -30,7 +30,7 @@ export default function ListItem({
         />
       </div>
       <div>
-        <div>Dio Lupa</div>
+        <div>{id}</div>
         <div className="text-xs font-semibold uppercase opacity-60">
           Remaining Reason
         </div>

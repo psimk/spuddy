@@ -1,11 +1,10 @@
 import { DragDropProvider } from "@dnd-kit/react";
 
-import { SECTIONED_LIST } from "./constants";
 import ListSection from "./components/ListSection";
 import useSortableList from "./hooks/useSortableList";
 
 function App() {
-  const { state, handlers } = useSortableList(SECTIONED_LIST);
+  const { state, handlers } = useSortableList();
 
   return (
     <main className="bg-base-300 min-h-screen p-4">
