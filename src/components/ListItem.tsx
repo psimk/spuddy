@@ -1,11 +1,11 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 
+import useListData from "@hooks/useListData";
+
 import PlayIcon from "@components/PlayIcon";
 
-import type { Item } from "../types";
-
 type Props = {
-  id: Item["id"];
+  id: string;
   index: number;
   sectionId: string;
 };
@@ -21,6 +21,9 @@ export default function ListItem({ id, index, sectionId }: Props) {
     feedback: "clone",
   });
 
+  const { items } = useListData();
+  const { text } = items[id];
+
   return (
     <li
       className="list-row"
@@ -34,7 +37,7 @@ export default function ListItem({ id, index, sectionId }: Props) {
         />
       </div>
       <div>
-        <div>{id}</div>
+        <div>{text}</div>
         <div className="text-xs font-semibold uppercase opacity-60">
           Remaining Reason
         </div>

@@ -2,9 +2,10 @@ import { useDocument } from "@automerge/react";
 import { useContext } from "react";
 
 import PositionsDocumentContext from "@contexts/PositionsDocumentContext";
+
 import { invariant } from "@utils/invariant";
 
-import type { PositionsDocument } from "../types";
+import { type Positions } from "../types";
 
 export default function usePositionsDocument() {
   const url = useContext(PositionsDocumentContext);
@@ -14,5 +15,5 @@ export default function usePositionsDocument() {
     "usePositionsDocument must be used within PositionsDocumentProvider",
   );
 
-  return useDocument<PositionsDocument>(url, { suspense: true });
+  return useDocument<Positions>(url, { suspense: true });
 }

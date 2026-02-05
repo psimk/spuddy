@@ -12,8 +12,8 @@ export default function PositionsDocumentProvider(props: PropsWithChildren) {
     <PositionsDocumentContext.Provider
       {...props}
       value={getLocalAutomergeUrl(repo, "spuddy-positions-doc-url", {
-        sectionOrder: ["Dairy", "Vegetables"],
-        itemPositions: {
+        sections: ["Dairy", "Vegetables"],
+        items: {
           Dairy: ["item-1", "item-2", "item-3", "item-4", "item-5"],
           Vegetables: ["item-6", "item-7", "item-8", "item-9", "item-10"],
         },

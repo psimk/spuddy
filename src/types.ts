@@ -1,41 +1,19 @@
 export type Item = {
   id: string;
-  text?: string; // Metadata that changes frequently
+  text: string;
 };
 
 export type Section = {
   id: string;
-  name?: string;
+  name: string;
 };
 
-// Maps for entity storage
-export type ItemsMap = Record<string, Item>;
-export type SectionsMap = Record<string, Section>;
-
-export type ExtendedArray<T> = Array<T> & {
-  insertAt(index: number, ...args: Array<T>): ExtendedArray<T>;
-  deleteAt(index: number, numDelete?: number): ExtendedArray<T>;
+export type Data = {
+  items: Record<string, Item>;
+  sections: Record<string, Section>;
 };
 
-// Position arrays (only IDs)
-export type SectionOrder = ExtendedArray<string>;
-export type ItemPositions = Record<string, ExtendedArray<string>>;
-
-// DOCUMENT 1: Data (items & sections with metadata)
-export type DataDocumentState = {
-  items: ItemsMap;
-  sections: SectionsMap;
+export type Positions = {
+  sections: ExtendedArray<string>;
+  items: Record<string, ExtendedArray<string>>;
 };
-
-export type DataDocument = DataDocumentState;
-
-// DOCUMENT 2: Positions (ordering only)
-export type PositionsDocumentState = {
-  sectionOrder: SectionOrder;
-  itemPositions: ItemPositions;
-};
-
-export type PositionsDocument = PositionsDocumentState;
-
-// Legacy types for backward compatibility
-export type Sections = Record<string, Array<Item>>;

@@ -1,4 +1,3 @@
-
 import type { Item, Section } from "../types";
 import useDataDocument from "./useDataDocument";
 
@@ -34,9 +33,7 @@ export default function useListData() {
   };
 
   return {
-    dataDoc,
-    items: dataDoc.items,
-    sections: dataDoc.sections,
+    ...dataDoc,
     updateItem,
     updateSection,
     addItem,
