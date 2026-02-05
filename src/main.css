@@ -8,3 +8,6 @@
   --font-sans: var(--font-geist), sans-serif;
 }
 
+html {
+  @apply bg-base-300;
+}

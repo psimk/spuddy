@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import DataDocumentProvider from "@providers/DataDocumentProvider";
 import PositionsDocumentProvider from "@providers/PositionsDocumentProvider";
 
@@ -5,6 +7,7 @@ import useCreateList from "@hooks/useCreateList";
 import useListsDocument from "@hooks/useListsDocument";
 
 import App from "../App";
+import AddItemForm from "./AddItemForm";
 import ListNavigation from "./ListNavigation";
 
 export default function ListSwitcher() {
@@ -34,7 +37,17 @@ export default function ListSwitcher() {
       <ListNavigation />
       <DataDocumentProvider value={currentList.dataDocUrl}>
         <PositionsDocumentProvider value={currentList.positionsDocUrl}>
-          <App />
+          <Suspense
+            fallback={
+              <div className="flex flex-col flex-1">
+                <div className="p-4 mt-auto"></div>
+
+                <AddItemForm disabled />
+              </div>
+            }
+          >
+            <App />
+          </Suspense>
         </PositionsDocumentProvider>
       </DataDocumentProvider>
     </main>

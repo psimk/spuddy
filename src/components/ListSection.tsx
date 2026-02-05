@@ -2,8 +2,9 @@ import { CollisionPriority } from "@dnd-kit/abstract";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { PropsWithChildren } from "react";
 
-import useListData from "@hooks/useListData";
 import { invariant } from "@utils/invariant";
+
+import useListData from "@hooks/useListData";
 
 type Props = {
   id: string;

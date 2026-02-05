@@ -1,5 +1,8 @@
 import { DragDropProvider } from "@dnd-kit/react";
 
+import scrollToBottom from "@utils/scroll-to-bottom";
+
+import useAddItem from "@hooks/useAddItem";
 import useSortablePositions from "@hooks/useSortablePositions";
 
 import AddItemForm from "@components/AddItemForm";
@@ -9,6 +12,17 @@ import ListSection from "@components/ListSection";
 
 function App() {
   const { sections, items, handlers } = useSortablePositions();
+
+  const addItem = useAddItem();
+
+  const handleSubmit = (formData: FormData) => {
+    const text = formData.get("text")?.toString().trim();
+
+    if (!text) return;
+
+    addItem(text.trim());
+    scrollToBottom();
+  };
 
   return (
     <div className="flex flex-col flex-1">
@@ -32,7 +46,7 @@ function App() {
           </div>
         </DragDropProvider>
       </div>
-      <AddItemForm />
+      <AddItemForm action={handleSubmit} />
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import { useSortable } from "@dnd-kit/react/sortable";
+import { useState } from "react";
 
 import useListData from "@hooks/useListData";
 
 import PlayIcon from "@components/PlayIcon";
+
+import AutoHeightTextArea from "./AutoHeightTextArea";
+import DotsGridIcon from "./DotsGridIcon";
 
 type Props = {
   id: string;
@@ -11,7 +15,7 @@ type Props = {
 };
 
 export default function ListItem({ id, index, sectionId }: Props) {
-  const { ref, isDragging } = useSortable({
+  const { ref, isDragging, handleRef } = useSortable({
     id,
     index,
     group: sectionId,
@@ -24,27 +28,26 @@ export default function ListItem({ id, index, sectionId }: Props) {
   const { items } = useListData();
   const { text } = items[id];
 
+  const [state, setState] = useState(text);
+
   return (
     <li
-      className="list-row"
+      className="list-row p-4 flex"
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
-      <div>
-        <img
-          className="rounded-box size-10"
-          src="https://img.daisyui.com/images/profile/demo/1@94.webp"
-        />
-      </div>
-      <div>
-        <div>{text}</div>
-        <div className="text-xs font-semibold uppercase opacity-60">
-          Remaining Reason
-        </div>
-      </div>
-      <button className="btn btn-square btn-ghost">
-        <PlayIcon />
-      </button>
+      <span
+        ref={handleRef}
+        className="h-full absolute right-0 top-0 p-4 flex items-center justify-center cursor-move"
+      >
+        <DotsGridIcon />
+      </span>
+      <AutoHeightTextArea
+        id={id}
+        className="textarea rounded-xl overflow-y-hidden list-col-grow textarea-ghost min-h-3.5 w-full touch-pan-y resize-none leading-normal whitespace-pre disabled:opacity-50 outline-none py-0 px-2 m-0 border-0"
+        onChange={setState}
+        value={state}
+      />
     </li>
   );
 }
