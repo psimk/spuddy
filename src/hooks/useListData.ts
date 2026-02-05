@@ -12,6 +12,14 @@ export default function useListData() {
     });
   };
 
+  const updateItemText = (itemId: string, text: string) => {
+    changeData((doc) => {
+      if (!(itemId in doc.items)) return;
+
+      doc.items[itemId].text = text;
+    });
+  };
+
   const updateSection = (sectionId: string, updates: Partial<Section>) => {
     changeData((doc) => {
       if (doc.sections[sectionId]) {
@@ -35,6 +43,7 @@ export default function useListData() {
   return {
     ...dataDoc,
     updateItem,
+    updateItemText,
     updateSection,
     addItem,
     removeItem,

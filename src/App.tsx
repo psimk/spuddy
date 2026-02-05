@@ -10,9 +10,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import ListItem from "@components/ListItem";
 import ListSection from "@components/ListSection";
 
-function App() {
-  const { sections, items, handlers } = useSortablePositions();
-
+function AddItemFormWithAction() {
   const addItem = useAddItem();
 
   const handleSubmit = (formData: FormData) => {
@@ -23,6 +21,12 @@ function App() {
     addItem(text.trim());
     scrollToBottom();
   };
+
+  return <AddItemForm action={handleSubmit} />;
+}
+
+function App() {
+  const { sections, items, handlers } = useSortablePositions();
 
   return (
     <div className="flex flex-col flex-1">
@@ -46,7 +50,7 @@ function App() {
           </div>
         </DragDropProvider>
       </div>
-      <AddItemForm action={handleSubmit} />
+      <AddItemFormWithAction />
     </div>
   );
 }
