@@ -62,7 +62,7 @@ function ListItem({
         currentTarget.nextElementSibling?.classList.remove("rounded-t-box");
       }}
       className={cn(
-        "list-row p-4 flex after:hidden focus-within:my-2 group bg-base-100 focus-within:shadow-2xl focus-within:rounded-box  focus-within:z-10 transition-all relative rounded-none",
+        "list-row group relative flex rounded-none bg-base-100 p-4 transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
         className,
       )}
       ref={ref}
@@ -70,7 +70,7 @@ function ListItem({
       {!hideHandle && (
         <span
           ref={handleRef}
-          className="h-full absolute right-0 top-0 p-4 flex items-center justify-center cursor-move text-base-content group-focus-within:opacity-0 transition-opacity group-focus-within:pointer-events-none"
+          className="absolute top-0 right-0 flex h-full cursor-move items-center justify-center p-4 text-base-content transition-opacity group-focus-within:pointer-events-none group-focus-within:opacity-0"
         >
           <DotsGridIcon />
         </span>
@@ -78,7 +78,7 @@ function ListItem({
       <Suspense
         fallback={
           <AutoHeightTextArea
-            className="textarea p-0 bg-transparent mr-10 group-focus-within:mr-0 rounded-none list-col-grow textarea-ghost min-h-3.5 w-full touch-pan-y resize-none whitespace-pre disabled:opacity-50 outline-none text-base m-0 border-0"
+            className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
             value="..."
             disabled
           />
@@ -87,7 +87,7 @@ function ListItem({
         <ComposedAutoHeightTextArea
           id={id}
           disabled={disabled}
-          className="textarea p-0 bg-transparent mr-10 group-focus-within:mr-0 rounded-none list-col-grow textarea-ghost min-h-3.5 w-full touch-pan-y resize-none whitespace-pre disabled:opacity-50 outline-none m-0 text-base border-0"
+          className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
         />
       </Suspense>
     </li>
@@ -133,7 +133,7 @@ const ComposedListItem = Object.assign(ListItem, {
         handleRef={handleRef}
         hideHandle={isDragging}
         className={
-          isDragging ? cn(className, "bg-transparent my-2") : className
+          isDragging ? cn(className, "my-2 bg-transparent") : className
         }
         disabled={isDragging}
       />

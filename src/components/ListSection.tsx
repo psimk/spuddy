@@ -28,7 +28,7 @@ export default function ListSection({
 
   return (
     <ul className="list rounded-box drop-shadow-xl" ref={ref}>
-      <li className="p-4 text-xs bg-base-100 tracking-wide text-base-content/60 rounded-t-box">
+      <li className="rounded-t-box bg-base-100 p-4 text-xs tracking-wide text-base-content/60">
         {name}
       </li>
 

@@ -8,7 +8,7 @@ export default function AddItemForm({ action, disabled }: Props) {
     <footer className="sticky bottom-0 p-4 pt-0">
       <form
         action={action}
-        className="bg-base-100 rounded-box drop-shadow-xl/30 p-2"
+        className="rounded-box bg-base-100 p-2 drop-shadow-xl/30"
       >
         <div className="flex">
           <input
@@ -16,7 +16,7 @@ export default function AddItemForm({ action, disabled }: Props) {
             name="text"
             disabled={disabled}
             placeholder="Add new item..."
-            className="input input-ghost flex-1 rounded-xl"
+            className="input flex-1 rounded-xl input-ghost"
             autoFocus
           />
         </div>

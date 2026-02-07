@@ -16,7 +16,7 @@ export default function ListSwitcher() {
 
   if (!listsDoc?.lists || listsDoc.lists.length === 0) {
     return (
-      <div className="min-h-screen bg-base-300 flex items-center justify-center p-4">
+      <div className="flex min-h-screen items-center justify-center bg-base-300 p-4">
         <button className="btn btn-lg btn-primary" onClick={createList}>
           + Create New List
         </button>
@@ -33,14 +33,14 @@ export default function ListSwitcher() {
   }
 
   return (
-    <main className="bg-base-300 min-h-screen flex flex-col">
+    <main className="flex min-h-screen flex-col bg-base-300">
       <ListNavigation />
       <DataDocumentProvider value={currentList.dataDocUrl}>
         <PositionsDocumentProvider value={currentList.positionsDocUrl}>
           <Suspense
             fallback={
-              <div className="flex flex-col flex-1">
-                <div className="p-4 mt-auto"></div>
+              <div className="flex flex-1 flex-col">
+                <div className="mt-auto p-4"></div>
 
                 <AddItemForm disabled />
               </div>
