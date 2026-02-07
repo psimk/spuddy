@@ -1,4 +1,6 @@
-import { DragDropProvider } from "@dnd-kit/react";
+import type { AutomergeUrl } from "@automerge/automerge-repo";
+import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
+import { Suspense } from "react";
 
 import scrollToBottom from "@utils/scroll-to-bottom";
 
@@ -6,10 +8,8 @@ import useAddItem from "@hooks/useAddItem";
 import useSortablePositions from "@hooks/useSortablePositions";
 
 import AddItemForm from "@components/AddItemForm";
-import ErrorBoundary from "@components/ErrorBoundary";
 import ListItem from "@components/ListItem";
 import ListSection from "@components/ListSection";
-import { Suspense } from "react";
 
 function AddItemFormWithAction() {
   const addItem = useAddItem();
@@ -38,7 +38,12 @@ function App() {
               <ListSection key={sectionId} id={sectionId} index={index}>
                 {items[sectionId].map((itemId, itemIndex) => (
                   <Suspense fallback={null}>
-                    <ListItem
+                    <ListItem.Sortable
+                      className={
+                        items[sectionId].length - 1 === itemIndex
+                          ? "rounded-b-xl"
+                          : undefined
+                      }
                       sectionId={sectionId}
                       key={itemId}
                       id={itemId}
@@ -49,6 +54,16 @@ function App() {
               </ListSection>
             ))}
           </div>
+          <DragOverlay disabled={(source) => source?.type === "section"}>
+            {({ id, type }) =>
+              type === "section" ? null : (
+                <ListItem
+                  className="rounded-xl shadow-2xl"
+                  id={id as AutomergeUrl}
+                />
+              )
+            }
+          </DragOverlay>
         </DragDropProvider>
       </div>
       <AddItemFormWithAction />

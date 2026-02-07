@@ -27,8 +27,10 @@ export default function ListSection({
   const { name } = section;
 
   return (
-    <ul className="list bg-base-100 rounded-box shadow-md" ref={ref}>
-      <li className={`p-4 pb-2 text-xs tracking-wide opacity-60`}>{name}</li>
+    <ul className="list rounded-box drop-shadow-xl" ref={ref}>
+      <li className="p-4 text-xs bg-base-100 tracking-wide text-base-content/60 rounded-t-box">
+        {name}
+      </li>
 
       {children}
     </ul>
