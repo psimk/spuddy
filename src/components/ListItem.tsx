@@ -1,11 +1,19 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { useSortable } from "@dnd-kit/react/sortable";
+import {
+  type PanInfo,
+  animate,
+  motion,
+  useMotionValue,
+  useTransform,
+} from "motion/react";
 import { type ComponentProps, type Ref, Suspense } from "react";
 
 import { cn } from "@utils/cn";
 import toggleSiblingRounding from "@utils/toggle-sibling-rounding";
 
 import useItemDocument from "@hooks/useItemDocument";
+import useRemoveItem from "@hooks/useRemoveItem";
 
 import AutoHeightTextArea from "./AutoHeightTextArea";
 import DotsGridIcon from "./DotsGridIcon";
@@ -42,6 +50,14 @@ type Props = {
   handleRef?: Ref<HTMLSpanElement>;
   disabled?: boolean;
   hideHandle?: boolean;
+  hideActions?: boolean;
+};
+
+const ACTION_WIDTH = 100;
+const ANIMATION_CONFIG = {
+  type: "spring" as const,
+  stiffness: 300,
+  damping: 30,
 };
 
 function ListItem({
@@ -50,42 +66,74 @@ function ListItem({
   ref,
   handleRef,
   hideHandle = false,
+  hideActions = false,
   disabled = false,
 }: Props) {
+  const x = useMotionValue(0);
+  const removeItem = useRemoveItem();
+
+  const handleDragEnd = (_: unknown, { velocity }: PanInfo) => {
+    if (x.get() > ACTION_WIDTH || velocity.x > 800) removeItem(id);
+    else if (x.get() < -ACTION_WIDTH || velocity.x < -800) removeItem(id);
+    else animate(x, 0, ANIMATION_CONFIG);
+  };
+
+  const actionX = useTransform(x, (latest) => -latest);
+
   return (
-    <li
+    <motion.li
+      className="group relative list-none"
       onFocus={(event) => toggleSiblingRounding(event.currentTarget, "on")}
       onBlur={(event) => toggleSiblingRounding(event.currentTarget, "off")}
-      className={cn(
-        "list-row group relative flex rounded-none bg-base-100/90 p-4 backdrop-blur-2xl transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
-        className,
-      )}
       ref={ref}
+      drag="x"
+      onDragEnd={handleDragEnd}
+      style={{ x }}
+      exit={{ opacity: 0 }}
+      dragDirectionLock
+      dragConstraints={{ left: -ACTION_WIDTH, right: ACTION_WIDTH }}
+      dragElastic={0.5}
     >
-      {!hideHandle && (
-        <span
-          ref={handleRef}
-          className="absolute top-0 right-0 flex h-full cursor-move items-center justify-center p-4 text-base-content transition-opacity group-focus-within:pointer-events-none group-focus-within:opacity-0"
-        >
-          <DotsGridIcon />
-        </span>
-      )}
-      <Suspense
-        fallback={
-          <AutoHeightTextArea
-            className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
-            value="..."
-            disabled
-          />
-        }
+      <div
+        className={cn(
+          "flex rounded-none bg-base-100 p-4 transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
+          className,
+        )}
       >
-        <ComposedAutoHeightTextArea
-          id={id}
-          disabled={disabled}
-          className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
-        />
-      </Suspense>
-    </li>
+        {!hideHandle && (
+          <span
+            ref={handleRef}
+            className="absolute top-0 right-0 flex h-full cursor-move items-center justify-center p-4 text-base-content transition-opacity group-focus-within:pointer-events-none group-focus-within:opacity-0"
+          >
+            <DotsGridIcon />
+          </span>
+        )}
+        <Suspense
+          fallback={
+            <AutoHeightTextArea
+              className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
+              value="..."
+              disabled
+            />
+          }
+        >
+          <ComposedAutoHeightTextArea
+            id={id}
+            disabled={disabled}
+            className="list-col-grow textarea m-0 mr-10 min-h-3.5 w-full touch-pan-y resize-none rounded-none border-0 textarea-ghost bg-transparent p-0 text-base whitespace-pre outline-none group-focus-within:mr-0 disabled:opacity-50"
+          />
+        </Suspense>
+      </div>
+      {!hideActions && (
+        <motion.div
+          style={{ x: actionX }}
+          className="absolute inset-0 -z-1 flex items-center justify-between px-4"
+        >
+          <span className="font-bold text-success-content uppercase">Done</span>
+          <span className="font-bold text-success-content uppercase">Done</span>
+        </motion.div>
+      )}
+    </motion.li>
   );
 }
 
@@ -123,6 +171,7 @@ const ComposedListItem = Object.assign(ListItem, {
         }}
         handleRef={handleRef}
         hideHandle={isDragging}
+        hideActions={isDragging}
         className={
           isDragging ? cn(className, "my-2 bg-transparent") : className
         }

@@ -7,11 +7,11 @@ export default function toggleSiblingRounding(
   if (!(previousElementSibling && nextElementSibling)) return;
 
   if (state === "on") {
-    nextElementSibling.classList.add("rounded-t-box");
-    previousElementSibling.classList.add("rounded-b-box");
+    nextElementSibling.firstElementChild?.classList.add("rounded-t-box");
+    previousElementSibling.firstElementChild?.classList.add("rounded-b-box");
     return;
   }
 
-  nextElementSibling.classList.remove("rounded-t-box");
-  previousElementSibling.classList.remove("rounded-b-box");
+  nextElementSibling.firstElementChild?.classList.remove("rounded-t-box");
+  previousElementSibling.firstElementChild?.classList.remove("rounded-b-box");
 }

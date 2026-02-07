@@ -35,7 +35,7 @@ export default function ListSection({
       <li
         className={cn(
           noChildren ? "rounded-box" : "rounded-t-box",
-          "bg-base-100/90 p-4 text-xs tracking-wide text-base-content/60 backdrop-blur-2xl",
+          "bg-base-100 p-4 text-xs tracking-wide text-base-content/60",
         )}
       >
         {name}
