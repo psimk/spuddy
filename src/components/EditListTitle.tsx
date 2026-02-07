@@ -1,7 +1,9 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
+
 import useListDocument from "@hooks/useListDocument";
 
 type Props = {
-  listUrl: string;
+  listUrl: AutomergeUrl;
 };
 
 export default function EditListTitle({ listUrl }: Props) {
