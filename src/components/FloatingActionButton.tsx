@@ -1,6 +1,10 @@
 import { MODAL } from "@constants";
 
+import useShareList from "@hooks/useShareList";
+
 export default function FloatingActionButton() {
+  const shareList = useShareList();
+
   return (
     <div className="fab absolute">
       <div
@@ -21,6 +25,13 @@ export default function FloatingActionButton() {
           />
         </svg>
       </div>
+
+      <button
+        onClick={shareList}
+        className="btn h-full rounded-box bg-base-100/90 p-4 btn-ghost drop-shadow-xl backdrop-blur-2xl"
+      >
+        Share List
+      </button>
 
       <label
         htmlFor={MODAL.new_section}
