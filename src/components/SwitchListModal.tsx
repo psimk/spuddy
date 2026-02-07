@@ -1,22 +1,45 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { MODAL } from "@constants";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 
+import useListDocument from "@hooks/useListDocument";
 import useListsDocument from "@hooks/useListsDocument";
 
 const ID = MODAL.switch_list;
+
+function ListButton({
+  listUrl,
+  isSelected,
+  onClick,
+}: {
+  listUrl: AutomergeUrl;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  const [listDoc] = useListDocument(listUrl);
+
+  return (
+    <button
+      className={`btn rounded-box ${isSelected ? "btn-neutral" : "btn-ghost"}`}
+      onClick={onClick}
+    >
+      {listDoc.name}
+    </button>
+  );
+}
 
 export default function SwitchListModal() {
   const ref = useRef<HTMLInputElement>(null);
 
   const [listsDoc, changeListsDoc] = useListsDocument();
 
-  const handleListChange = (listId: string) => {
+  const handleListChange = (listUrl: AutomergeUrl) => {
     if (!ref.current) return;
 
     ref.current.checked = false;
 
     changeListsDoc((doc) => {
-      doc.selectedListId = listId;
+      doc.selectedListUrl = listUrl;
     });
   };
 
@@ -26,18 +49,17 @@ export default function SwitchListModal() {
       <div className="modal" role="dialog">
         <div className="modal-box">
           <ul className="flex flex-col gap-2">
-            {listsDoc?.lists.map((list) => (
-              <button
-                key={list.id}
-                className={`btn rounded-box ${
-                  list.id === listsDoc.selectedListId
-                    ? "btn-neutral"
-                    : "btn-ghost"
-                }`}
-                onClick={() => handleListChange(list.id)}
+            {listsDoc.listUrls.map((listUrl) => (
+              <Suspense
+                key={listUrl}
+                fallback={<div className="btn btn-ghost">Loading...</div>}
               >
-                {list.name}
-              </button>
+                <ListButton
+                  listUrl={listUrl}
+                  isSelected={listUrl === listsDoc.selectedListUrl}
+                  onClick={() => handleListChange(listUrl)}
+                />
+              </Suspense>
             ))}
           </ul>
         </div>

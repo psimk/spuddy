@@ -1,22 +1,17 @@
 import { useContext } from "react";
 
-import DataDocumentContext from "@contexts/DataDocumentContext";
+import CurrentListContext from "@contexts/CurrentListContext";
 
 import { invariant } from "@utils/invariant";
 
 export default function useShareList() {
-  const dataDocUrl = useContext(DataDocumentContext);
+  const listUrl = useContext(CurrentListContext);
 
-  invariant(
-    dataDocUrl,
-    "useShareList must be used within DataDocumentProvider",
-  );
+  invariant(listUrl, "useShareList must be used within CurrentListProvider");
 
   const shareList = async () => {
-    const url = new URL(
-      `${encodeURIComponent(dataDocUrl)}`,
-      new URL("share/", window.location.origin),
-    );
+    const url = new URL("/share", window.location.origin);
+    url.searchParams.set("list", listUrl);
 
     await navigator.share({
       title: "Share List",

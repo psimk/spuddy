@@ -1,7 +1,7 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { useRepo } from "@automerge/react";
 
-import type { Data, Positions, Section } from "../types";
+import type { Data, ListDocument, Positions, Section } from "../types";
 import useListsDocument from "./useListsDocument";
 
 export default function useCreateList() {
@@ -10,8 +10,6 @@ export default function useCreateList() {
 
   const createList = (name: string) => {
     if (!listsDoc) return;
-
-    const listId = `list-${Date.now()}`;
 
     // Create a new section document
     const sectionHandle = repo.create<Section>();
@@ -34,15 +32,21 @@ export default function useCreateList() {
       items: { [sectionUrl]: [] as unknown as ExtendedArray<AutomergeUrl> },
     });
 
-    // Add new list to lists document
+    // Create new list document
+    const listHandle = repo.create<ListDocument>();
+    const listUrl = listHandle.url;
+
+    listHandle.change((doc) => {
+      doc.id = listUrl;
+      doc.name = name;
+      doc.dataDocUrl = dataHandle.url;
+      doc.positionsDocUrl = positionsHandle.url;
+    });
+
+    // Add new list URL to lists document
     changeListsDoc((doc) => {
-      doc.lists.push({
-        id: listId,
-        name,
-        dataDocUrl: dataHandle.url,
-        positionsDocUrl: positionsHandle.url,
-      });
-      doc.selectedListId = listId;
+      doc.listUrls.push(listUrl);
+      doc.selectedListUrl = listUrl;
     });
   };
 

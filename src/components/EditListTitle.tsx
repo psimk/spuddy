@@ -1,30 +1,22 @@
-import { invariant } from "@utils/invariant";
+import useListDocument from "@hooks/useListDocument";
 
-import useListsDocument from "@hooks/useListsDocument";
+type Props = {
+  listUrl: string;
+};
 
-export default function EditListTitle() {
-  const [listsDoc, changeListsDoc] = useListsDocument();
-
-  const currentList = listsDoc.lists.find(
-    (list) => list.id === listsDoc.selectedListId,
-  );
-
-  invariant(currentList, "Selected list not found in lists document");
+export default function EditListTitle({ listUrl }: Props) {
+  const [listDoc, changeListDoc] = useListDocument(listUrl);
 
   return (
     <div className="flex grow rounded-box bg-base-100/90 p-4 drop-shadow-xl/30 backdrop-blur-2xl">
       <input
         type="text"
         className="h-6 grow outline-none"
-        value={currentList.name}
+        value={listDoc.name}
         placeholder="Enter list name..."
         onChange={({ currentTarget: { value } }) => {
-          changeListsDoc((doc) => {
-            const list = doc.lists.find((l) => l.id === doc.selectedListId);
-
-            invariant(list, "Selected list not found");
-
-            list.name = value;
+          changeListDoc((doc) => {
+            doc.name = value;
           });
         }}
       />

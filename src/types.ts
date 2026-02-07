@@ -19,3 +19,15 @@ export type Positions = {
   sections: ExtendedArray<AutomergeUrl>;
   items: Record<AutomergeUrl, ExtendedArray<AutomergeUrl>>;
 };
+
+export type ListDocument = {
+  id: AutomergeUrl; // The document URL is the ID
+  name: string;
+  dataDocUrl: AutomergeUrl;
+  positionsDocUrl: AutomergeUrl;
+};
+
+export type ListsDocument = {
+  listUrls: Array<AutomergeUrl>; // Array of list document URLs
+  selectedListUrl: AutomergeUrl;
+};

@@ -12,8 +12,8 @@ export default function ListsDocumentProvider(props: PropsWithChildren) {
     <ListsDocumentContext.Provider
       {...props}
       value={getLocalAutomergeUrl(repo, "spuddy-lists-doc-url", {
-        lists: [],
-        selectedListId: null,
+        listUrls: [],
+        selectedListUrl: null,
       })}
     />
   );

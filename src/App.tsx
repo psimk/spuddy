@@ -1,12 +1,16 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { Suspense } from "react";
 
+import CurrentListProvider from "@providers/CurrentListProvider";
 import DataDocumentProvider from "@providers/DataDocumentProvider";
 import PositionsDocumentProvider from "@providers/PositionsDocumentProvider";
 
 import { invariant } from "@utils/invariant";
 
 import useCreateList from "@hooks/useCreateList";
+import useListDocument from "@hooks/useListDocument";
 import useListsDocument from "@hooks/useListsDocument";
+import useSharedListHandler from "@hooks/useSharedListHandler";
 
 import AddItemForm from "@components/AddItemForm";
 import EditListTitle from "@components/EditListTitle";
@@ -19,7 +23,10 @@ export default function App() {
   const [listsDoc] = useListsDocument();
   const createList = useCreateList();
 
-  if (listsDoc.lists.length === 0) {
+  // Handle shared lists from URL
+  useSharedListHandler();
+
+  if (listsDoc.listUrls.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-base-300 p-4">
         <button
@@ -32,37 +39,51 @@ export default function App() {
     );
   }
 
-  const currentList = listsDoc.lists.find(
-    (list) => list.id === listsDoc.selectedListId,
-  );
-
-  invariant(currentList, "Selected list not found in lists document");
+  invariant(listsDoc.selectedListUrl, "No list selected");
 
   return (
-    <main className="flex min-h-screen flex-col bg-base-300">
-      <header className="sticky top-0 z-10 flex gap-4 p-4">
-        <EditListTitle />
-      </header>
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-base-300">
+          Loading...
+        </div>
+      }
+    >
+      <AppContent listUrl={listsDoc.selectedListUrl} />
+    </Suspense>
+  );
+}
 
-      <DataDocumentProvider value={currentList.dataDocUrl}>
-        <PositionsDocumentProvider value={currentList.positionsDocUrl}>
-          <Suspense
-            fallback={
-              <div className="flex flex-1 flex-col">
-                <div className="mt-auto p-4"></div>
+function AppContent({ listUrl }: { listUrl: AutomergeUrl }) {
+  const [listDoc] = useListDocument(listUrl);
 
-                <AddItemForm />
-              </div>
-            }
-          >
-            <List />
-          </Suspense>
+  return (
+    <CurrentListProvider value={listUrl}>
+      <main className="flex min-h-screen flex-col bg-base-300">
+        <header className="sticky top-0 z-10 flex gap-4 p-4">
+          <EditListTitle listUrl={listUrl} />
+        </header>
 
-          <NewSectionModal />
-        </PositionsDocumentProvider>
-      </DataDocumentProvider>
-      <NewListModal />
-      <SwitchListModal />
-    </main>
+        <DataDocumentProvider value={listDoc.dataDocUrl}>
+          <PositionsDocumentProvider value={listDoc.positionsDocUrl}>
+            <Suspense
+              fallback={
+                <div className="flex flex-1 flex-col">
+                  <div className="mt-auto p-4"></div>
+
+                  <AddItemForm />
+                </div>
+              }
+            >
+              <List />
+            </Suspense>
+
+            <NewSectionModal />
+          </PositionsDocumentProvider>
+        </DataDocumentProvider>
+        <NewListModal />
+        <SwitchListModal />
+      </main>
+    </CurrentListProvider>
   );
 }
