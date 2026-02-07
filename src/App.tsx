@@ -8,12 +8,12 @@ import useAddItem from "@hooks/useAddItem";
 import useSortablePositions from "@hooks/useSortablePositions";
 
 import AddItemForm from "@components/AddItemForm";
+import FloatingActionButton from "@components/FloatingActionButton";
 import ListItem from "@components/ListItem";
 import ListSection from "@components/ListSection";
 
 function AddItemFormWithAction() {
   const addItem = useAddItem();
-
   const handleSubmit = (formData: FormData) => {
     const text = formData.get("text")?.toString().trim();
 
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="mt-auto p-4">
+      <div className="mt-auto px-4">
         <DragDropProvider {...handlers}>
           <div className="grid gap-4">
             {sections.map((sectionId, index) => (
@@ -66,7 +66,11 @@ function App() {
           </DragOverlay>
         </DragDropProvider>
       </div>
-      <AddItemFormWithAction />
+
+      <div className="sticky bottom-0 flex gap-4 p-4">
+        <AddItemFormWithAction />
+        <FloatingActionButton />
+      </div>
     </div>
   );
 }

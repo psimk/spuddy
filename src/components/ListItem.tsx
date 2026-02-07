@@ -57,7 +57,7 @@ function ListItem({
       onFocus={(event) => toggleSiblingRounding(event.currentTarget, "on")}
       onBlur={(event) => toggleSiblingRounding(event.currentTarget, "off")}
       className={cn(
-        "list-row group relative flex rounded-none bg-base-100 p-4 transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
+        "list-row group relative flex rounded-none bg-base-100/90 p-4 backdrop-blur-2xl transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
         className,
       )}
       ref={ref}

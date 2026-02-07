@@ -5,22 +5,20 @@ type Props = {
 
 export default function AddItemForm({ action, disabled }: Props) {
   return (
-    <footer className="sticky bottom-0 p-4 pt-0">
-      <form
-        action={action}
-        className="rounded-box bg-base-100 p-4 drop-shadow-xl/30"
-      >
-        <div className="flex">
-          <input
-            type="text"
-            name="text"
-            disabled={disabled}
-            placeholder="Add new item..."
-            className="flex-1 outline-none h-6"
-            autoFocus
-          />
-        </div>
-      </form>
-    </footer>
+    <form
+      action={action}
+      className="mr-18 grow rounded-box bg-base-100/90 p-4 drop-shadow-xl/30 backdrop-blur-2xl"
+    >
+      <div className="flex">
+        <input
+          type="text"
+          name="text"
+          disabled={disabled}
+          placeholder="Add new item..."
+          className="h-6 flex-1 outline-none"
+          autoFocus
+        />
+      </div>
+    </form>
   );
 }

@@ -3,6 +3,8 @@ import { CollisionPriority } from "@dnd-kit/abstract";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { type PropsWithChildren } from "react";
 
+import { cn } from "@utils/cn";
+
 import useSectionDocument from "@hooks/useSectionDocument";
 
 type Props = {
@@ -26,9 +28,16 @@ export default function ListSection({
   const [section] = useSectionDocument(id);
   const { name } = section;
 
+  const noChildren = Array.isArray(children) && children.length === 0;
+
   return (
     <ul className="list rounded-box drop-shadow-xl" ref={ref}>
-      <li className="rounded-t-box bg-base-100 p-4 text-xs tracking-wide text-base-content/60">
+      <li
+        className={cn(
+          noChildren ? "rounded-box" : "rounded-t-box",
+          "bg-base-100/90 p-4 text-xs tracking-wide text-base-content/60 backdrop-blur-2xl",
+        )}
+      >
         {name}
       </li>
 

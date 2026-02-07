@@ -8,11 +8,10 @@ export default function useCreateList() {
   const repo = useRepo();
   const [listsDoc, changeListsDoc] = useListsDocument();
 
-  const createList = () => {
+  const createList = (name: string) => {
     if (!listsDoc) return;
 
     const listId = `list-${Date.now()}`;
-    const listName = `List ${listsDoc.lists.length + 1}`;
 
     // Create a new section document
     const sectionHandle = repo.create<Section>();
@@ -39,7 +38,7 @@ export default function useCreateList() {
     changeListsDoc((doc) => {
       doc.lists.push({
         id: listId,
-        name: listName,
+        name,
         dataDocUrl: dataHandle.url,
         positionsDocUrl: positionsHandle.url,
       });
