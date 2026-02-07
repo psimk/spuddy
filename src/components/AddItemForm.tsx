@@ -1,24 +1,27 @@
-type Props = {
-  action?: (formData: FormData) => void;
-  disabled?: boolean;
-};
+import scrollToBottom from "@utils/scroll-to-bottom";
 
-export default function AddItemForm({ action, disabled }: Props) {
+import useAddItem from "@hooks/useAddItem";
+
+import InputForm from "@components/InputForm";
+
+export default function AddItemForm() {
+  const addItem = useAddItem();
+  const handleSubmit = (formData: FormData) => {
+    const text = formData.get("text")?.toString().trim();
+
+    if (!text) return;
+
+    addItem(text.trim());
+    scrollToBottom();
+  };
+
   return (
-    <form
-      action={action}
-      className="mr-18 grow rounded-box bg-base-100/90 p-4 drop-shadow-xl/30 backdrop-blur-2xl"
-    >
-      <div className="flex">
-        <input
-          type="text"
-          name="text"
-          disabled={disabled}
-          placeholder="Add new item..."
-          className="h-6 flex-1 outline-none"
-          autoFocus
-        />
-      </div>
-    </form>
+    <InputForm
+      action={handleSubmit}
+      formClassName="mr-18 grow drop-shadow-xl/30"
+      name="text"
+      autoFocus
+      placeholder="..."
+    />
   );
 }

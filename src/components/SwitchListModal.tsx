@@ -1,9 +1,6 @@
 import { MODAL } from "@constants";
 import { useRef } from "react";
 
-import { invariant } from "@utils/invariant";
-
-import useCreateList from "@hooks/useCreateList";
 import useListsDocument from "@hooks/useListsDocument";
 
 const ID = MODAL.switch_list;

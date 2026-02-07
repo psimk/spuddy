@@ -26,5 +26,5 @@ export default function useListsDocument() {
     "useListsDocument must be used within a ListsDocumentProvider",
   );
 
-  return useDocument<ListsDocument>(url);
+  return useDocument<ListsDocument>(url, { suspense: true });
 }

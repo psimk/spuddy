@@ -2,29 +2,12 @@ import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { Suspense } from "react";
 
-import scrollToBottom from "@utils/scroll-to-bottom";
-
-import useAddItem from "@hooks/useAddItem";
 import useSortablePositions from "@hooks/useSortablePositions";
 
 import AddItemForm from "@components/AddItemForm";
 import FloatingActionButton from "@components/FloatingActionButton";
 import ListItem from "@components/ListItem";
 import ListSection from "@components/ListSection";
-
-function AddItemFormWithAction() {
-  const addItem = useAddItem();
-  const handleSubmit = (formData: FormData) => {
-    const text = formData.get("text")?.toString().trim();
-
-    if (!text) return;
-
-    addItem(text.trim());
-    scrollToBottom();
-  };
-
-  return <AddItemForm action={handleSubmit} />;
-}
 
 function App() {
   const { sections, items, handlers } = useSortablePositions();
@@ -68,7 +51,7 @@ function App() {
       </div>
 
       <div className="sticky bottom-0 flex gap-4 p-4">
-        <AddItemFormWithAction />
+        <AddItemForm />
         <FloatingActionButton />
       </div>
     </div>

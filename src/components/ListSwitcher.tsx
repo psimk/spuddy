@@ -9,7 +9,8 @@ import useCreateList from "@hooks/useCreateList";
 import useListsDocument from "@hooks/useListsDocument";
 
 import App from "../App";
-import AddItemForm from "./AddItemForm";
+import EditListTitle from "./EditListTitle";
+import AddItemForm from "./InputForm";
 import NewListModal from "./NewListModal";
 import NewSectionModal from "./NewSectionModal";
 import SwitchListModal from "./SwitchListModal";
@@ -18,7 +19,7 @@ export default function ListSwitcher() {
   const [listsDoc] = useListsDocument();
   const createList = useCreateList();
 
-  if (!listsDoc?.lists || listsDoc.lists.length === 0) {
+  if (listsDoc.lists.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-base-300 p-4">
         <button
@@ -40,9 +41,7 @@ export default function ListSwitcher() {
   return (
     <main className="flex min-h-screen flex-col bg-base-300">
       <header className="sticky top-0 z-10 flex gap-4 p-4">
-        <span className="grow rounded-box bg-base-100/90 p-4 drop-shadow-xl backdrop-blur-2xl">
-          {currentList.name}
-        </span>
+        <EditListTitle />
       </header>
 
       <DataDocumentProvider value={currentList.dataDocUrl}>
