@@ -3,6 +3,7 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import { type ComponentProps, type Ref, Suspense } from "react";
 
 import { cn } from "@utils/cn";
+import toggleSiblingRounding from "@utils/toggle-sibling-rounding";
 
 import useItemDocument from "@hooks/useItemDocument";
 
@@ -53,14 +54,8 @@ function ListItem({
 }: Props) {
   return (
     <li
-      onFocus={({ currentTarget }) => {
-        currentTarget.previousElementSibling?.classList.add("rounded-b-box");
-        currentTarget.nextElementSibling?.classList.add("rounded-t-box");
-      }}
-      onBlur={({ currentTarget }) => {
-        currentTarget.previousElementSibling?.classList.remove("rounded-b-box");
-        currentTarget.nextElementSibling?.classList.remove("rounded-t-box");
-      }}
+      onFocus={(event) => toggleSiblingRounding(event.currentTarget, "on")}
+      onBlur={(event) => toggleSiblingRounding(event.currentTarget, "off")}
       className={cn(
         "list-row group relative flex rounded-none bg-base-100 p-4 transition-all after:hidden focus-within:z-10 focus-within:my-2 focus-within:rounded-box focus-within:shadow-2xl",
         className,
@@ -120,12 +115,8 @@ const ComposedListItem = Object.assign(ListItem, {
       <ListItem
         id={id}
         ref={(element) => {
-          if (isDragging && element) {
-            element.nextElementSibling?.classList.toggle("rounded-t-box");
-            element.previousElementSibling?.classList.toggle("rounded-b-box");
-          } else if (!isDragging && element) {
-            element.nextElementSibling?.classList.remove("rounded-t-box");
-            element.previousElementSibling?.classList.remove("rounded-b-box");
+          if (element) {
+            toggleSiblingRounding(element, isDragging ? "on" : "off");
           }
 
           return ref(element);
