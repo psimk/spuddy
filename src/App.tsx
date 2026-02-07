@@ -1,61 +1,68 @@
-import type { AutomergeUrl } from "@automerge/automerge-repo";
-import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { Suspense } from "react";
 
-import useSortablePositions from "@hooks/useSortablePositions";
+import DataDocumentProvider from "@providers/DataDocumentProvider";
+import PositionsDocumentProvider from "@providers/PositionsDocumentProvider";
+
+import { invariant } from "@utils/invariant";
+
+import useCreateList from "@hooks/useCreateList";
+import useListsDocument from "@hooks/useListsDocument";
 
 import AddItemForm from "@components/AddItemForm";
-import FloatingActionButton from "@components/FloatingActionButton";
-import ListItem from "@components/ListItem";
-import ListSection from "@components/ListSection";
+import EditListTitle from "@components/EditListTitle";
+import List from "@components/List";
+import NewListModal from "@components/NewListModal";
+import NewSectionModal from "@components/NewSectionModal";
+import SwitchListModal from "@components/SwitchListModal";
 
-function App() {
-  const { sections, items, handlers } = useSortablePositions();
+export default function App() {
+  const [listsDoc] = useListsDocument();
+  const createList = useCreateList();
+
+  if (listsDoc.lists.length === 0) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-base-300 p-4">
+        <button
+          className="btn btn-lg btn-primary"
+          onClick={() => createList("My First List")}
+        >
+          + Create New List
+        </button>
+      </div>
+    );
+  }
+
+  const currentList = listsDoc.lists.find(
+    (list) => list.id === listsDoc.selectedListId,
+  );
+
+  invariant(currentList, "Selected list not found in lists document");
 
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="mt-auto px-4">
-        <DragDropProvider {...handlers}>
-          <div className="grid gap-4">
-            {sections.map((sectionId, index) => (
-              <ListSection key={sectionId} id={sectionId} index={index}>
-                {items[sectionId].map((itemId, itemIndex) => (
-                  <Suspense fallback={null}>
-                    <ListItem.Sortable
-                      className={
-                        items[sectionId].length - 1 === itemIndex
-                          ? "rounded-b-xl"
-                          : undefined
-                      }
-                      sectionId={sectionId}
-                      key={itemId}
-                      id={itemId}
-                      index={itemIndex}
-                    />
-                  </Suspense>
-                ))}
-              </ListSection>
-            ))}
-          </div>
-          <DragOverlay disabled={(source) => source?.type === "section"}>
-            {({ id, type }) =>
-              type === "section" ? null : (
-                <ListItem
-                  className="rounded-xl shadow-2xl"
-                  id={id as AutomergeUrl}
-                />
-              )
-            }
-          </DragOverlay>
-        </DragDropProvider>
-      </div>
+    <main className="flex min-h-screen flex-col bg-base-300">
+      <header className="sticky top-0 z-10 flex gap-4 p-4">
+        <EditListTitle />
+      </header>
 
-      <div className="sticky bottom-0 flex gap-4 p-4">
-        <AddItemForm />
-        <FloatingActionButton />
-      </div>
-    </div>
+      <DataDocumentProvider value={currentList.dataDocUrl}>
+        <PositionsDocumentProvider value={currentList.positionsDocUrl}>
+          <Suspense
+            fallback={
+              <div className="flex flex-1 flex-col">
+                <div className="mt-auto p-4"></div>
+
+                <AddItemForm />
+              </div>
+            }
+          >
+            <List />
+          </Suspense>
+
+          <NewSectionModal />
+        </PositionsDocumentProvider>
+      </DataDocumentProvider>
+      <NewListModal />
+      <SwitchListModal />
+    </main>
   );
 }
-
-export default App;
