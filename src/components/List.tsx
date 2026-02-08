@@ -50,9 +50,11 @@ function List() {
         </DragDropProvider>
       </div>
 
-      <div className="sticky bottom-0 flex gap-4 p-4">
-        <AddItemForm />
-        <FloatingActionButton />
+      <div className="sticky bottom-0 p-4">
+        <div className="relative flex gap-4 rounded-box bg-base-100/90 drop-shadow-xl backdrop-blur-2xl">
+          <AddItemForm />
+          <FloatingActionButton />
+        </div>
       </div>
     </div>
   );

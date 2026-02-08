@@ -14,13 +14,7 @@ export default function InputForm({
   ...props
 }: Props) {
   return (
-    <form
-      action={action}
-      className={cn(
-        "rounded-box bg-base-100/90 p-4 drop-shadow-xl backdrop-blur-2xl",
-        formClassName,
-      )}
-    >
+    <form action={action} className={cn("flex p-4", formClassName)}>
       <input
         type="text"
         className={cn(className, "h-6 flex-1 outline-none")}

@@ -6,11 +6,11 @@ export default function FloatingActionButton() {
   const shareList = useShareList();
 
   return (
-    <div className="fab absolute">
+    <div className="fab right-0 bottom-0">
       <div
         tabIndex={0}
         role="button"
-        className="btn h-full rounded-box bg-base-100/90 p-4 btn-ghost drop-shadow-xl/30 backdrop-blur-2xl"
+        className="btn h-full rounded-box p-4 btn-ghost"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

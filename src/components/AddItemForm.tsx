@@ -18,7 +18,7 @@ export default function AddItemForm() {
   return (
     <InputForm
       action={handleSubmit}
-      formClassName="mr-18 grow drop-shadow-xl/30"
+      formClassName="mr-10 grow"
       name="text"
       autoFocus
       placeholder="..."
